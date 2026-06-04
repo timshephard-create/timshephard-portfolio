@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tim Shephard — Creative Director</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,700;0,900;1,700;1,900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/shared/styles.css">
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-82B9C9WGMG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-82B9C9WGMG');
+  </script>
+  <style>
+/* ── CURSOR ── */
+#cursor {
+  position: fixed;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--orange);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease, width 0.3s var(--ease), height 0.3s var(--ease), background 0.3s ease;
+  mix-blend-mode: normal;
+}
+#cursor.expanded {
+  width: 48px; height: 48px;
+  background: transparent;
+  border: 1.5px solid var(--orange);
+}
+
+/* ── GRID OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(248,247,244,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(248,247,244,0.04) 1px, transparent 1px);
+  background-size: 52px 52px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── MAIN SPLIT ── */
+.split-container {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  bottom: 90px; /* leave room for the third strip */
+  display: flex;
+  z-index: 9000;
+}
+
+/* ── THIRD STRIP: WHAT I'M BUILDING ── */
+.third-strip {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 90px;
+  background: var(--ink);
+  border-top: 1px solid rgba(248,247,244,0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 9100;
+  overflow: hidden;
+  animation: fadeIn 0.8s ease 0.4s both;
+  transition: background 0.3s var(--ease);
+}
+.third-strip::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--orange);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.4s var(--ease);
+}
+.third-strip:hover { background: var(--ink2); }
+.third-strip:hover::before { transform: scaleY(1); }
+
+.strip-label {
+  font-family: var(--font-mono);
+  font-size: 0.69rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(248,247,244,0.38);
+}
+.strip-divider {
+  width: 1px;
+  height: 20px;
+  background: rgba(248,247,244,0.12);
+  flex-shrink: 0;
+}
+.strip-headline {
+  font-family: var(--font-disp);
+  font-weight: 900;
+  font-style: italic;
+  font-size: clamp(1.5rem, 2.2vw, 2.25rem);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--white);
+  text-transform: uppercase;
+}
+.strip-cta {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--orange);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.strip-arrow {
+  display: inline-block;
+  transition: transform 0.3s var(--ease);
+}
+.third-strip:hover .strip-arrow { transform: translateX(5px); }
+
+/* ── DIVIDER ── */
+.divider {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: rgba(232,66,10,0.4);
+  z-index: 10;
+  transform: translateX(-50%);
+  transition: left 0.7s var(--ease);
+  pointer-events: none;
+}
+.divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--orange);
+  box-shadow: 0 0 0 4px rgba(232,66,10,0.15);
+  transition: box-shadow 0.3s ease;
+}
+
+/* ── CENTER TIEBREAKER CTA ── */
+/* REST (50/50): two stacked, full-bleed copies clipped at a STATIC 50% seam —
+   white over the dark Work half, orange over the light Story half. The clip does
+   not move at rest. mix-blend-mode is gone (it inverted to near-black on the warm
+   white panel and vanished).
+   HOVER: the divide shifts to 58/42 and — at this headline width — the CTA crosses
+   the new seam (measured: "START HERE." ≈330px, the seam only moves ~8% from center,
+   so it clears only above ~2200px wide). So rather than track a moving clip we DROP
+   the split and paint the whole CTA a single color. Orange #e8420a is legible on
+   BOTH panels, so either hover → all orange. (White-on-dark lives only at rest.) */
+.center-cta {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;            /* panels keep their own hover/click */
+  animation: fadeIn 0.9s ease 0.5s both;
+}
+.cc-copy {
+  position: absolute;
+  inset: 0;
+  transition: clip-path 0.25s ease, opacity 0.25s ease;
+}
+.cc-onDark  { clip-path: inset(0 50% 0 0); }   /* left half — over dark Work panel */
+.cc-onLight { clip-path: inset(0 0 0 50%); }   /* right half — over light Story panel */
+.cc-onDark  .center-cta-head,
+.cc-onDark  .center-cta-sub  { color: var(--white); }
+.cc-onLight .center-cta-head { color: var(--orange); }
+.cc-onLight .center-cta-sub  { color: var(--ink); }   /* rest: ink on warm white (~16:1, AA). Orange (~3.8:1) failed at 11px. */
+
+/* hover either panel → single orange CTA: hide the white copy, unclip the orange one.
+   The sub-line goes back to orange so it stays readable when the orange copy sits
+   over the dark panel (hover-Work); orange-on-light is acceptable for the transient hover. */
+.split-container:has(.panel-show:hover) .cc-onDark,
+.split-container:has(.panel-tell:hover) .cc-onDark  { opacity: 0; }
+.split-container:has(.panel-show:hover) .cc-onLight,
+.split-container:has(.panel-tell:hover) .cc-onLight { clip-path: inset(0 0 0 0); }
+.split-container:has(.panel-show:hover) .cc-onLight .center-cta-sub,
+.split-container:has(.panel-tell:hover) .cc-onLight .center-cta-sub { color: var(--orange); }
+
+.center-cta-head,
+.center-cta-sub {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  text-align: center;
+}
+.center-cta-head {
+  bottom: calc(50% + 24px);        /* just above the divider dot */
+  font-family: var(--font-disp);
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+  line-height: 0.88;
+  font-size: clamp(2.5rem, 4.5vw, 4.5rem);
+}
+.center-cta-sub {
+  top: calc(50% + 24px);           /* just below the divider dot */
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.cc-hit {                          /* clickable target over the text */
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(80vw, 360px);
+  height: 140px;
+  pointer-events: auto;
+  cursor: pointer;
+}
+.center-cta:hover .center-cta-sub { gap: 16px; }
+
+/* ── PANEL BASE ── */
+.panel {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 60px 56px 64px;
+  transition: flex 0.7s var(--ease);
+  cursor: none;
+}
+
+/* ── LEFT: DARK / SHOW ── */
+.panel-show {
+  background: var(--ink);
+  flex: 1;
+}
+.split-container:has(.panel-show:hover) .panel-show { flex: 1.4; }
+.split-container:has(.panel-show:hover) .panel-tell { flex: 0.6; }
+.split-container:has(.panel-show:hover) .divider { left: 58%; }
+
+/* ── RIGHT: LIGHT / TELL ── */
+.panel-tell {
+  background: var(--white);
+  flex: 1;
+}
+.split-container:has(.panel-tell:hover) .panel-tell { flex: 1.4; }
+.split-container:has(.panel-tell:hover) .panel-show { flex: 0.6; }
+.split-container:has(.panel-tell:hover) .divider { left: 42%; }
+
+/* ── GHOST TYPE (BIG BG TEXT) ── */
+.panel-ghost {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-disp);
+  font-size: clamp(10rem, 22vw, 22rem);
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 0.85;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: opacity 0.5s ease, transform 0.7s var(--ease);
+  user-select: none;
+}
+.panel-show .panel-ghost {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(248,247,244,0.07);
+  transform: translate(-50%, -50%) translateX(0px);
+}
+.panel-show:hover .panel-ghost {
+  -webkit-text-stroke: 1.5px rgba(248,247,244,0.12);
+  transform: translate(-50%, -50%) translateX(-20px);
+}
+.panel-tell .panel-ghost {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(10,9,8,0.06);
+  transform: translate(-50%, -50%) translateX(0px);
+}
+.panel-tell:hover .panel-ghost {
+  -webkit-text-stroke: 1.5px rgba(10,9,8,0.11);
+  transform: translate(-50%, -50%) translateX(20px);
+}
+
+/* ── CORNER INDEX ── */
+
+
+/* ── ORANGE TOP BAR ── */
+.panel::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--orange);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s var(--ease);
+}
+.panel:hover::after { transform: scaleX(1); }
+
+/* ── CONTENT BLOCK ── */
+.panel-content {
+  position: relative;
+  z-index: 5;
+}
+.panel-headline {
+  font-family: var(--font-disp);
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+  line-height: 0.88;
+  font-size: clamp(3.5rem, 6vw, 7.5rem);
+  margin-bottom: 28px;
+  transition: transform 0.5s var(--ease);
+}
+.panel-show .panel-headline { color: var(--white); }
+.panel-tell .panel-headline { color: var(--ink); }
+.panel:hover .panel-headline { transform: translateX(6px); }
+
+/* ── CTA BUTTON ── */
+.panel-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: none;
+  padding: 12px 24px;
+  position: relative;
+  overflow: hidden;
+  transition: gap 0.3s var(--ease);
+  border-radius: 0;
+}
+.panel-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  transition: transform 0.4s var(--ease);
+  z-index: -1;
+}
+.panel-cta:hover { gap: 20px; }
+.panel-cta:hover::before { transform: translateX(0); }
+
+.panel-show .panel-cta {
+  color: var(--white);
+  border: 1.5px solid rgba(248,247,244,0.25);
+}
+.panel-show .panel-cta::before { background: var(--orange); }
+.panel-show .panel-cta:hover { border-color: var(--orange); }
+
+.panel-tell .panel-cta {
+  color: var(--ink);
+  border: 1.5px solid rgba(10,9,8,0.2);
+}
+.panel-tell .panel-cta::before { background: var(--ink); }
+.panel-tell .panel-cta:hover { color: var(--white); border-color: var(--ink); }
+
+.cta-arrow {
+  display: inline-block;
+  transition: transform 0.35s var(--ease);
+}
+.panel-cta:hover .cta-arrow { transform: translateX(4px); }
+
+/* ── INTRO ANIMATION ── */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideLeft  { from { opacity: 0; transform: translateX(-24px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes slideRight { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: translateX(0); } }
+
+.panel-show { animation: slideLeft  0.9s var(--ease) 0.15s both; }
+.panel-tell  { animation: slideRight 0.9s var(--ease) 0.25s both; }
+
+/* ── MOBILE ── */
+@media (max-width: 700px) {
+  .split-container { flex-direction: column; bottom: 72px; }
+  .panel { padding: 40px 28px 48px; }
+  .panel-stat { display: none; }
+  .divider { top: 50%; left: 0; right: 0; bottom: auto; width: 100%; height: 1px; transform: none; }
+  .divider::after { top: 50%; left: 50%; }
+  /* stacked panels → two-tone clipped top/bottom; the divide doesn't move here, so
+     keep the rest split stable and don't apply the desktop orange-on-hover swap */
+  .cc-onDark,
+  .split-container:has(.panel-show:hover) .cc-onDark,
+  .split-container:has(.panel-tell:hover) .cc-onDark { clip-path: inset(0 0 50% 0); opacity: 1; }   /* top — dark Work */
+  .cc-onLight,
+  .split-container:has(.panel-show:hover) .cc-onLight,
+  .split-container:has(.panel-tell:hover) .cc-onLight { clip-path: inset(50% 0 0 0); }              /* bottom — light Story */
+  /* divide doesn't move on mobile, so keep the bottom sub-line ink (don't flip to orange on touch) */
+  .split-container:has(.panel-show:hover) .cc-onLight .center-cta-sub,
+  .split-container:has(.panel-tell:hover) .cc-onLight .center-cta-sub { color: var(--ink); }
+  .split-container:has(.panel-show:hover) .divider,
+  .split-container:has(.panel-tell:hover) .divider { left: 0; top: 50%; }
+  .panel-headline { font-size: clamp(3rem, 10vw, 5rem); }
+  .third-strip { height: 72px; gap: 16px; }
+  .strip-label, .strip-divider:first-of-type { display: none; }
+}
+  </style>
+</head>
+<body>
+<div id="cursor"></div>
+
+
+
+<div class="split-container" id="ts-split">
+
+  <div class="divider"></div>
+
+  <!-- CENTER TIEBREAKER CTA — rest: two-tone clipped at a static 50% seam (white over
+       the dark Work half, orange over the light Story half). hover: see styles. -->
+  <div class="center-cta" id="center-cta">
+    <div class="cc-copy cc-onDark">
+      <span class="center-cta-head">Start Here.</span>
+      <span class="center-cta-sub">not sure where to go? →</span>
+    </div>
+    <div class="cc-copy cc-onLight">
+      <span class="center-cta-head">Start Here.</span>
+      <span class="center-cta-sub">not sure where to go? →</span>
+    </div>
+    <a href="/explore/" class="cc-hit" aria-label="Start here — not sure where to go? Explore interactively."></a>
+  </div>
+
+  <!-- LEFT: SHOW / THE WORK -->
+  <div class="panel panel-show" onclick="window.location.href='/work/'">
+    <span class="panel-ghost">Work</span>
+
+    <div class="panel-content">
+      <h2 class="panel-headline">My<br>Work.</h2>
+      <a href="/work/" class="panel-cta">
+        show me <span class="cta-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="panel panel-tell" onclick="window.location.href='/about/'">
+    <span class="panel-ghost">Story</span>
+
+    <div class="panel-content">
+      <h2 class="panel-headline">My<br>Story.</h2>
+      <a href="/about/" class="panel-cta">
+        tell me <span class="cta-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<!-- THIRD STRIP: WHAT I'M BUILDING -->
+<a href="/projects/" class="third-strip" id="third-strip">
+  <span class="strip-label">// currently shipping</span>
+  <span class="strip-divider"></span>
+  <span class="strip-headline">What I'm Building.</span>
+  <span class="strip-divider"></span>
+  <span class="strip-cta">take a look <span class="strip-arrow">→</span></span>
+</a>
+
+<script>
+const cursor = document.getElementById('cursor');
+let mx = 0, my = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx + 'px';
+  cursor.style.top  = my + 'px';
+});
+document.querySelectorAll('.panel, .panel-cta, .nav-logo, .third-strip').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('expanded'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('expanded'));
+});
+
+document.querySelectorAll('.panel-cta').forEach(btn => {
+  btn.addEventListener('click', e => { e.stopPropagation(); });
+});
+</script>
+</body>
+</html>

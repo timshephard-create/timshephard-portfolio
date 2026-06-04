@@ -1,0 +1,86 @@
+/* ── CYOA + Decade Toggle experience ──────────────────────────────
+   Scoped entirely under #ts-adventure-root so it never collides with
+   shared/styles.css. Fonts (Barlow Condensed + DM Mono) are loaded by
+   the page <head> font <link>; no @import here. */
+
+#ts-adventure-root {
+  --ink: #0a0908;
+  --white: #f8f7f4;
+  --orange: #e8420a;
+  --orange-hi: #ff5520;
+  --acc-recruiter: #e8420a;
+  --acc-brand: #00d4ff;
+  --acc-agency: #7b2fff;
+  --acc-curious: #2dba6a;
+  font-family: 'DM Mono', monospace;
+  position: relative;
+}
+#ts-adventure-root * { box-sizing: border-box; }
+.tsa-display { font-family: 'Barlow Condensed', sans-serif; font-style: italic; font-weight: 900; }
+.tsa-label { font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.16em; }
+
+/* ── shared stage ── */
+.tsa-stage { min-height: 600px; position: relative; overflow: hidden; }
+
+/* ── CURRENT ERA (real site tokens) ── */
+.tsa-now { background: var(--white); color: var(--ink); padding: 56px 40px 120px; min-height: 600px; }
+.tsa-now .kicker { font-size: 12px; color: rgba(10,9,8,0.4); margin-bottom: 28px; }
+.tsa-now h1 { font-size: clamp(48px, 9vw, 96px); line-height: 0.92; margin: 0 0 36px; color: var(--ink); }
+.tsa-now h1 .em { color: var(--orange); }
+.tsa-now .lede { font-size: 16px; line-height: 1.7; color: rgba(10,9,8,0.6); max-width: 460px; margin-bottom: 56px; }
+.tsa-path-list { display: flex; flex-direction: column; }
+.tsa-path { display: flex; align-items: baseline; gap: 20px; padding: 22px 0; border-top: 1px solid rgba(10,9,8,0.12); background: none; border-left: none; border-right: none; border-bottom: none; cursor: pointer; text-align: left; width: 100%; transition: padding-left 0.25s ease; color: var(--ink); }
+.tsa-path:last-child { border-bottom: 1px solid rgba(10,9,8,0.12); }
+.tsa-path:hover { padding-left: 16px; }
+.tsa-path .num { font-size: 12px; color: rgba(10,9,8,0.3); min-width: 26px; transition: color 0.25s; }
+.tsa-path .ptext { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: clamp(22px, 3.5vw, 34px); line-height: 1; transition: color 0.25s; }
+.tsa-path:hover .ptext, .tsa-path:hover .num { color: var(--orange); }
+.tsa-skip { margin-top: 40px; padding-top: 22px; border-top: 1px solid rgba(10,9,8,0.12); }
+.tsa-skip button { background: none; border: none; color: rgba(10,9,8,0.35); font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.14em; font-size: 12px; cursor: pointer; padding: 0; }
+.tsa-skip button:hover { color: var(--orange); }
+
+.tsa-now .q2-kicker { color: var(--orange); font-size: 12px; margin-bottom: 22px; }
+.tsa-now h2 { font-family: 'Barlow Condensed', sans-serif; font-style: italic; font-weight: 900; font-size: clamp(36px, 6vw, 64px); line-height: 0.95; margin: 0 0 44px; }
+
+/* reveal */
+.tsa-reveal-kicker { color: var(--orange); font-size: 11px; margin-bottom: 18px; }
+.tsa-now .headline { font-family: 'Barlow Condensed', sans-serif; font-style: italic; font-weight: 900; font-size: clamp(40px, 7vw, 72px); line-height: 0.95; margin: 0 0 28px; }
+.tsa-intro { font-size: 17px; line-height: 1.75; color: rgba(10,9,8,0.72); max-width: 600px; margin-bottom: 64px; min-height: 90px; }
+.tsa-intro .cursor { color: var(--orange); }
+.tsa-work { display: flex; flex-direction: column; }
+.tsa-work-item { padding: 26px 0; border-top: 1px solid rgba(10,9,8,0.12); cursor: pointer; transition: padding-left 0.3s ease; }
+.tsa-work-item:last-child { border-bottom: 1px solid rgba(10,9,8,0.12); }
+.tsa-work-item:hover { padding-left: 18px; }
+.tsa-wi-row { display: flex; justify-content: space-between; gap: 24px; align-items: flex-start; }
+.tsa-wi-tag { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(10,9,8,0.4); margin-bottom: 9px; transition: color 0.3s; }
+.tsa-wi-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: clamp(22px, 3vw, 30px); line-height: 1; color: var(--ink); transition: color 0.3s; }
+.tsa-wi-desc { font-size: 14px; line-height: 1.6; color: rgba(10,9,8,0.55); max-height: 0; overflow: hidden; opacity: 0; transition: all 0.3s ease; margin-top: 0; }
+.tsa-work-item:hover .tsa-wi-desc { max-height: 90px; opacity: 1; margin-top: 12px; }
+.tsa-work-item:hover .tsa-wi-tag { color: var(--orange); }
+.tsa-wi-stats { text-align: right; flex-shrink: 0; }
+.tsa-wi-stats span { display: block; font-size: 11px; color: rgba(10,9,8,0.35); letter-spacing: 0.06em; line-height: 1.9; transition: color 0.3s; }
+.tsa-work-item:hover .tsa-wi-stats span { color: var(--orange); }
+.tsa-cta { margin-top: 64px; padding-top: 40px; border-top: 1px solid rgba(10,9,8,0.12); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
+.tsa-cta .big { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 26px; }
+.tsa-cta .mail { font-size: 14px; color: rgba(10,9,8,0.5); margin-top: 4px; }
+.tsa-cta a { display: inline-block; padding: 14px 30px; background: var(--orange); color: var(--white); text-decoration: none; font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.14em; font-size: 12px; transition: background 0.2s; }
+.tsa-cta a:hover { background: var(--orange-hi); }
+
+.tsa-gen { padding: 140px 40px; text-align: center; }
+.tsa-gen .dot { font-size: 13px; color: var(--orange); letter-spacing: 0.2em; text-transform: uppercase; animation: tsa-pulse 1.4s ease infinite; }
+@keyframes tsa-pulse { 0%,100%{opacity:0.3;} 50%{opacity:1;} }
+
+/* ── decade toggle pill ── */
+.tsa-toggle { position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%); z-index: 9999; background: rgba(10,9,8,0.9); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.12); border-radius: 40px; padding: 5px 6px; display: flex; gap: 3px; align-items: center; box-shadow: 0 8px 30px rgba(0,0,0,0.5); }
+.tsa-toggle button { background: transparent; border: 1px solid rgba(255,255,255,0.14); color: rgba(255,255,255,0.5); padding: 7px 15px; font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.05em; cursor: pointer; border-radius: 32px; transition: all 0.2s; white-space: nowrap; }
+.tsa-toggle button.active { color: var(--ink); }
+.tsa-toggle .sub { font-size: 9px; color: rgba(255,255,255,0.3); letter-spacing: 0.1em; padding: 0 8px 0 4px; text-transform: uppercase; }
+
+/* flash */
+.tsa-flash { position: fixed; inset: 0; z-index: 9998; pointer-events: none; opacity: 0; transition: opacity 0.32s ease; }
+
+/* retro stages reuse inline styles in JS */
+@media (max-width: 600px) {
+  .tsa-now { padding: 40px 22px 120px; }
+  .tsa-wi-stats { display: none; }
+}

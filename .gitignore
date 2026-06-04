@@ -1,0 +1,14 @@
+# Dependencies
+node_modules/
+
+# Environment / secrets — never commit (ANTHROPIC_API_KEY lives in Vercel env vars)
+.env
+.env.*
+*.local
+
+# Vercel
+.vercel/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db

@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech — Tim Shephard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Share+Tech+Mono&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/shared/styles.css">
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-82B9C9WGMG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-82B9C9WGMG');
+  </script>
+  <style>
+:root {
+  --bg:#f7f8fa;--bg2:#f0f2f5;--bg3:#e8eaee;--bg4:#dfe2e8;
+  --ink:#0d0f14;--ink2:#1e2330;--ink3:#2e3342;
+  --muted:rgba(13,15,20,0.65);--muted2:rgba(13,15,20,0.42);--muted3:rgba(13,15,20,0.24);
+  --cyan:#00aed4;--cyan-hi:#00d4ff;--cyan-lo:rgba(0,174,212,0.08);--cyan-mid:rgba(0,174,212,0.18);
+  --cyan-border:rgba(0,174,212,0.25);
+  --orange:#e8420a;
+  --border:rgba(13,15,20,0.10);--border-hi:rgba(0,174,212,0.35);
+  --grid-color:rgba(13,15,20,0.045);
+  --font-display:'Syne',sans-serif;
+  --font-mono:'Share Tech Mono',monospace;
+  --font-body:'DM Sans',sans-serif;
+  --font-nav:'Syne',sans-serif;
+  --ease:cubic-bezier(0.16,1,0.3,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:1rem;line-height:1.65;overflow-x:hidden;}
+
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:
+    linear-gradient(var(--grid-color) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid-color) 1px,transparent 1px);
+  background-size:32px 32px;
+  pointer-events:none;z-index:0;
+}
+body::after{
+  content:'';position:fixed;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent 0%,var(--cyan) 30%,var(--cyan-hi) 50%,var(--cyan) 70%,transparent 100%);
+  pointer-events:none;z-index:400;opacity:.7;
+}
+
+nav,section,footer{position:relative;z-index:2;}
+h1,h2,h3,h4{color:var(--ink)!important;}
+p{color:var(--ink)!important;}
+
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-d1{transition-delay:.08s;}.reveal-d2{transition-delay:.16s;}.reveal-d3{transition-delay:.24s;}.reveal-d4{transition-delay:.32s;}
+
+
+/* ── HERO ── */
+#hero{min-height:100dvh;display:flex;flex-direction:column;justify-content:center;padding:80px 48px 80px;position:relative;overflow:hidden;}
+.hero-bracket{position:absolute;width:32px;height:32px;opacity:.35;}
+.hero-bracket.tl{top:80px;left:48px;border-top:2px solid var(--cyan);border-left:2px solid var(--cyan);}
+.hero-bracket.tr{top:80px;right:48px;border-top:2px solid var(--cyan);border-right:2px solid var(--cyan);}
+.hero-bracket.bl{bottom:48px;left:48px;border-bottom:2px solid var(--cyan);border-left:2px solid var(--cyan);}
+.hero-bracket.br{bottom:48px;right:48px;border-bottom:2px solid var(--cyan);border-right:2px solid var(--cyan);}
+.hero-inner{max-width:1000px;}
+.boot-terminal{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.06em;color:var(--muted2)!important;margin-bottom:36px;line-height:2;opacity:0;animation:fadeIn .4s ease .3s forwards;}
+.boot-line{display:block;}
+.boot-line .prompt{color:var(--cyan)!important;}
+.boot-line .ok{color:#22c55e!important;}
+.boot-line .dim{color:var(--muted3)!important;}
+.hero-title{font-family:var(--font-display);font-size:clamp(3.8rem,9vw,9.5rem);font-weight:800;line-height:.88;letter-spacing:-.03em;color:var(--ink)!important;margin-bottom:28px;opacity:0;animation:fadeIn .8s var(--ease) .9s forwards;}
+.hero-title .accent{color:var(--cyan)!important;display:inline-block;}
+.hero-tagline{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.12em;color:var(--muted)!important;margin-bottom:48px;opacity:0;animation:fadeIn .6s ease 1.2s forwards;display:flex;align-items:center;gap:12px;}
+.hero-tagline::after{content:'';flex:1;max-width:120px;height:1px;background:linear-gradient(90deg,var(--border),transparent);}
+.hero-specs{display:flex;flex-wrap:wrap;gap:8px;opacity:0;animation:fadeIn .6s ease 1.4s forwards;}
+.spec-pill{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.1em;color:var(--muted)!important;border:1px solid var(--border);padding:6px 14px;background:var(--bg2);display:flex;align-items:center;gap:6px;transition:all .25s;}
+.spec-pill:hover{border-color:var(--cyan-border);color:var(--cyan)!important;background:var(--cyan-lo);}
+.spec-pill .sp-dot{width:4px;height:4px;background:var(--cyan);flex-shrink:0;}
+
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.cursor{display:inline-block;width:8px;height:14px;background:var(--cyan);margin-left:2px;animation:blink 1s step-end infinite;vertical-align:middle;}
+
+/* ── DIVIDER ── */
+.section-divider{height:1px;background:var(--border);position:relative;z-index:2;}
+.section-divider::before{content:'';position:absolute;left:48px;top:-1px;width:64px;height:3px;background:var(--cyan);}
+
+/* ── SHARED ── */
+.section-label{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.18em;color:var(--cyan)!important;display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.section-label::before{content:'';width:20px;height:1px;background:var(--cyan);}
+.section-title{font-family:var(--font-display);font-size:clamp(2.6rem,5vw,5rem);font-weight:800;line-height:.9;letter-spacing:-.025em;color:var(--ink)!important;margin-bottom:8px;}
+.section-title .accent{color:var(--cyan)!important;}
+
+/* ── SCENE 01 — SPEC SHEET ── */
+#scene-01{padding:100px 48px;background:var(--bg);}
+.spec-wrap{max-width:1100px;margin:0 auto;}
+.spec-grid{display:grid;grid-template-columns:2fr 1px 1fr;gap:0;border:1px solid var(--border);margin-top:48px;}
+.spec-main{padding:48px 44px;}
+.spec-main p{font-family:var(--font-body);font-size:.97rem;font-weight:400;color:var(--muted)!important;line-height:1.85;margin-bottom:1.2em;}
+.spec-main p:last-child{margin-bottom:0;}
+.spec-main p strong{color:var(--ink)!important;font-weight:600;}
+.spec-main p em{color:var(--cyan)!important;font-style:normal;font-weight:500;}
+.spec-divider{background:var(--border);}
+.spec-sidebar{display:flex;flex-direction:column;}
+.req-block{padding:24px 28px;border-bottom:1px solid var(--border);transition:background .2s;}
+.req-block:last-child{border-bottom:none;}
+.req-block:hover{background:var(--bg2);}
+.req-label{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.16em;color:var(--muted2)!important;margin-bottom:6px;display:flex;align-items:center;gap:6px;}
+.req-label::before{content:'>';color:var(--cyan)!important;}
+.req-value{font-family:var(--font-display);font-size:1.05rem;font-weight:700;color:var(--ink)!important;line-height:1.2;}
+.req-note{font-family:var(--font-body);font-size:.78rem;color:var(--muted2)!important;margin-top:4px;line-height:1.5;}
+.case-callout{border:1px solid var(--cyan-border);background:var(--cyan-lo);padding:24px 28px;margin-top:28px;}
+.case-callout-label{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.16em;color:var(--cyan)!important;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+.case-callout-label::before{content:'[CASE]';background:var(--cyan);color:var(--bg)!important;padding:1px 6px;font-size:0.69rem;}
+.case-callout-title{font-family:var(--font-display);font-size:1.15rem;font-weight:700;color:var(--ink)!important;margin-bottom:6px;}
+.case-callout-body{font-family:var(--font-body);font-size:.85rem;color:var(--muted)!important;line-height:1.7;}
+.case-callout-body strong{color:var(--ink)!important;font-weight:600;}
+
+/* ── SCENE 01B — BEFORE / AFTER ── */
+#scene-01b{padding:100px 48px;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.ba-wrap{max-width:1100px;margin:0 auto;}
+.ba-intro{max-width:620px;margin-bottom:56px;}
+.ba-intro p{font-family:var(--font-body);font-size:.95rem;color:var(--muted)!important;line-height:1.85;margin-top:12px;}
+
+/* Slider component */
+.ba-slider-block{margin-bottom:48px;}
+.ba-slider-label{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.14em;color:var(--muted2)!important;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.ba-slider-label .ba-badge{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.1em;padding:2px 8px;border:1px solid var(--border);}
+.ba-badge.before{color:var(--orange)!important;border-color:rgba(232,66,10,0.3);background:rgba(232,66,10,0.06);}
+.ba-badge.after{color:#22c55e!important;border-color:rgba(34,197,94,0.3);background:rgba(34,197,94,0.06);}
+
+.slider-container{
+  position:relative;
+  width:100%;
+  height:520px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  cursor:col-resize;
+  user-select:none;
+  background:var(--bg3);
+}
+.slider-container img{
+  position:absolute;
+  top:0;left:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:top center;
+  display:block;
+}
+.slider-after{z-index:1;}
+.slider-before{z-index:2;clip-path:inset(0 50% 0 0);}
+
+.slider-divider{
+  position:absolute;top:0;bottom:0;
+  left:50%;
+  width:2px;
+  background:white;
+  z-index:10;
+  transform:translateX(-50%);
+  pointer-events:none;
+  box-shadow:0 0 12px rgba(0,0,0,0.3);
+}
+.slider-handle{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:44px;height:44px;
+  background:white;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 2px 16px rgba(0,0,0,0.25);
+  z-index:11;
+  pointer-events:none;
+}
+.slider-handle svg{width:20px;height:20px;fill:var(--ink3);}
+
+.slider-label-before,.slider-label-after{
+  position:absolute;
+  bottom:16px;
+  z-index:12;
+  font-family:var(--font-mono);
+  font-size:0.69rem;
+  letter-spacing:.12em;
+  padding:5px 12px;
+  pointer-events:none;
+}
+.slider-label-before{
+  left:16px;
+  background:rgba(232,66,10,0.9);
+  color:white!important;
+}
+.slider-label-after{
+  right:16px;
+  background:rgba(34,197,94,0.9);
+  color:white!important;
+}
+
+/* Work gallery grid */
+.ba-gallery-label{
+  font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.14em;
+  color:var(--cyan)!important;margin-bottom:20px;
+  display:flex;align-items:center;gap:10px;
+  margin-top:56px;
+}
+.ba-gallery-label::before{content:'';width:20px;height:1px;background:var(--cyan);}
+.ba-gallery-heading{
+  font-family:var(--font-display);font-size:clamp(1.6rem,3vw,2.4rem);
+  font-weight:800;letter-spacing:-.02em;color:var(--ink)!important;
+  margin-bottom:28px;line-height:1;
+}
+.ba-gallery-heading .accent{color:var(--cyan)!important;}
+
+.ba-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
+.ba-grid-item{
+  position:relative;overflow:hidden;background:var(--bg3);
+  aspect-ratio:4/3;transform-style:preserve-3d;will-change:transform;
+  box-shadow:0 2px 8px rgba(0,0,0,0.18);
+}
+.ba-grid-item:hover{box-shadow:0 20px 60px rgba(0,0,0,0.35),0 4px 16px rgba(0,0,0,0.20);}
+.ba-grid-item img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:top center;
+  display:block;
+  transition:transform .5s var(--ease);
+}
+.ba-grid-item:hover img{transform:scale(1.04);}
+.ba-grid-item-shine{
+  position:absolute;inset:-50%;width:200%;height:200%;z-index:2;
+  background:radial-gradient(circle at 50% 50%,rgba(255,255,255,0.10) 0%,transparent 60%);
+  opacity:0;transition:opacity .4s ease;pointer-events:none;
+}
+.ba-grid-item:hover .ba-grid-item-shine{opacity:1;}
+.ba-grid-item-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(13,15,20,0.75) 0%,transparent 55%);
+  opacity:0;transition:opacity .3s;z-index:1;
+}
+.ba-grid-item:hover .ba-grid-item-overlay{opacity:1;}
+.ba-grid-item-label{
+  position:absolute;bottom:14px;left:14px;right:14px;
+  font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.1em;
+  color:white!important;opacity:0;transition:opacity .3s;z-index:3;
+}
+.ba-grid-item:hover .ba-grid-item-label{opacity:1;}
+
+/* ── SCENE 02 — METRICS DASHBOARD ── */
+#scene-02{padding:100px 48px;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.dashboard-wrap{max-width:1100px;margin:0 auto;}
+.dashboard{border:1px solid var(--border);margin-top:48px;background:var(--bg);}
+.dashboard-header{background:var(--ink2);padding:10px 20px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,.06);}
+.db-dot{width:10px;height:10px;border-radius:50%;}
+.db-dot.red{background:#e85d4a;}.db-dot.yellow{background:#e8c14a;}.db-dot.green{background:#4ae86a;}
+.dashboard-title{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.1em;color:rgba(247,248,250,.35)!important;margin-left:8px;}
+.dashboard-ts{font-family:var(--font-mono);font-size:0.69rem;color:rgba(247,248,250,.2)!important;margin-left:auto;}
+.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:var(--border);}
+.metric-card{background:var(--bg);padding:28px 24px;transition:background .2s;position:relative;overflow:hidden;}
+.metric-card:hover{background:var(--bg2);}
+.metric-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--cyan);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);}
+.metric-card:hover::after{transform:scaleX(1);}
+.metric-label{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.14em;color:var(--muted2)!important;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+.metric-label .status{width:5px;height:5px;border-radius:50%;background:#22c55e;box-shadow:0 0 4px #22c55e;}
+.metric-value{font-family:var(--font-display);font-size:2.6rem;font-weight:800;color:var(--ink)!important;line-height:1;letter-spacing:-.03em;margin-bottom:4px;}
+.metric-unit{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.1em;color:var(--cyan)!important;}
+.metric-delta{font-family:var(--font-mono);font-size:0.69rem;color:#22c55e!important;margin-top:8px;}
+.metric-delta.neutral{color:var(--muted2)!important;}
+.metric-wide{display:grid;grid-template-columns:repeat(3,1fr);gap:0;background:var(--border);border-top:1px solid var(--border);}
+.metric-wide-cell{background:var(--bg2);padding:24px 28px;display:flex;align-items:center;gap:20px;}
+.mwc-num{font-family:var(--font-display);font-size:2rem;font-weight:800;color:var(--ink)!important;letter-spacing:-.02em;line-height:1;}
+.mwc-info{flex:1;}
+.mwc-label{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.14em;color:var(--muted2)!important;margin-bottom:3px;}
+.mwc-note{font-family:var(--font-body);font-size:.8rem;color:var(--muted)!important;line-height:1.4;}
+
+/* ── SCENE 03 — PIPELINE ── */
+#scene-03{padding:100px 48px;background:var(--bg);border-bottom:1px solid var(--border);}
+.pipeline-wrap{max-width:1100px;margin:0 auto;}
+.pipeline{margin-top:56px;display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative;}
+.pipeline::before{content:'';position:absolute;top:28px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--cyan-border),var(--cyan),var(--cyan-border),transparent);z-index:0;}
+.pipeline-step{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;padding:0 12px;}
+.step-node{width:56px;height:56px;border:2px solid var(--border);background:var(--bg);display:flex;align-items:center;justify-content:center;margin-bottom:16px;transition:all .3s;position:relative;}
+.step-node::before{content:'';position:absolute;inset:-4px;border:1px solid transparent;transition:border-color .3s;}
+.pipeline-step:hover .step-node{border-color:var(--cyan);background:var(--cyan-lo);}
+.pipeline-step:hover .step-node::before{border-color:var(--cyan-border);}
+.step-num{font-family:var(--font-mono);font-size:.7rem;color:var(--muted2)!important;transition:color .3s;}
+.pipeline-step:hover .step-num{color:var(--cyan)!important;}
+.step-label{font-family:var(--font-display);font-size:.8rem;font-weight:700;color:var(--ink)!important;text-align:center;margin-bottom:6px;line-height:1.2;}
+.step-desc{font-family:var(--font-body);font-size:.72rem;color:var(--muted)!important;text-align:center;line-height:1.55;}
+.pipeline-arrow{position:absolute;top:26px;right:-12px;width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:8px solid var(--cyan-border);z-index:2;}
+.pipeline-details{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:48px;}
+.pd-cell{background:var(--bg);padding:28px;transition:background .2s;}
+.pd-cell:hover{background:var(--bg2);}
+.pd-eyebrow{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.16em;color:var(--cyan)!important;margin-bottom:8px;}
+.pd-title{font-family:var(--font-display);font-size:1.05rem;font-weight:700;color:var(--ink)!important;margin-bottom:8px;line-height:1.15;}
+.pd-body{font-family:var(--font-body);font-size:.84rem;color:var(--muted)!important;line-height:1.7;}
+.pd-body strong{color:var(--ink)!important;font-weight:600;}
+
+/* ── SCENE 04 — MANIFEST ── */
+#scene-04{padding:100px 48px;background:var(--bg2);border-bottom:1px solid var(--border);}
+.manifest-wrap{max-width:1100px;margin:0 auto;}
+.manifest{margin-top:48px;border:1px solid var(--border);background:var(--bg);}
+.manifest-header{background:var(--bg3);padding:10px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
+.manifest-header-title{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.1em;color:var(--muted2)!important;}
+.manifest-header-file{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.08em;color:var(--cyan)!important;margin-left:auto;}
+.manifest-row{display:grid;grid-template-columns:180px 1fr auto;gap:0;border-bottom:1px solid var(--border);transition:background .2s;}
+.manifest-row:last-child{border-bottom:none;}
+.manifest-row:hover{background:var(--bg2);}
+.manifest-key{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.08em;color:var(--muted2)!important;padding:16px 20px;border-right:1px solid var(--border);display:flex;align-items:center;}
+.manifest-val{font-family:var(--font-body);font-size:.88rem;font-weight:500;color:var(--ink)!important;padding:16px 20px;display:flex;align-items:center;flex-wrap:wrap;gap:6px;}
+.manifest-tag{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.08em;color:var(--muted)!important;border:1px solid var(--border);padding:3px 10px;background:var(--bg2);transition:all .2s;}
+.manifest-row:hover .manifest-tag{border-color:var(--cyan-border);color:var(--cyan)!important;background:var(--cyan-lo);}
+.manifest-status{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.1em;padding:16px 20px;display:flex;align-items:center;border-left:1px solid var(--border);}
+.status-active{color:#22c55e!important;display:flex;align-items:center;gap:5px;}
+.status-active::before{content:'';width:5px;height:5px;border-radius:50%;background:#22c55e;box-shadow:0 0 4px #22c55e;}
+
+/* ── CTA ── */
+#cta{padding:140px 48px;text-align:center;background:var(--ink);position:relative;overflow:hidden;}
+#cta::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,174,212,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(0,174,212,0.06) 1px,transparent 1px);background-size:32px 32px;pointer-events:none;}
+.cta-label{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.2em;color:var(--cyan)!important;margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:10px;}
+.cta-label::before,.cta-label::after{content:'';width:32px;height:1px;background:var(--cyan-border);}
+.cta-title{font-family:var(--font-display);font-size:clamp(3.5rem,8vw,8rem);font-weight:800;letter-spacing:-.04em;line-height:.88;color:var(--bg)!important;margin-bottom:28px;}
+.cta-title .accent{color:var(--cyan)!important;}
+.cta-terminal{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.06em;color:rgba(247,248,250,.35)!important;max-width:480px;margin:0 auto 40px;line-height:2;}
+.cta-btn{display:inline-flex;align-items:center;gap:12px;padding:18px 52px;background:var(--cyan);color:var(--ink)!important;font-family:var(--font-display);font-size:.9rem;font-weight:700;letter-spacing:.08em;text-decoration:none;text-transform:uppercase;transition:all .3s var(--ease);position:relative;overflow:hidden;}
+.cta-btn::before{content:'';position:absolute;inset:0;background:var(--cyan-hi);transform:translateX(-100%);transition:transform .4s var(--ease);}
+.cta-btn:hover::before{transform:translateX(0);}
+.cta-btn span{position:relative;z-index:1;color:var(--ink)!important;}
+
+/* ── FOOTER ── */
+footer{background:#08090b;padding:28px 48px;display:flex;justify-content:space-between;align-items:center;border-top:3px solid var(--orange);position:relative;z-index:2;}
+.f-logo{font-family:var(--font-nav);font-size:1.1rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:rgba(247,248,250,.9)!important;text-decoration:none;}
+.f-links{display:flex;gap:24px;}
+.f-links a{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.08em;color:rgba(247,248,250,.3)!important;text-decoration:none;transition:color .2s;}
+.f-links a:hover{color:var(--orange)!important;}
+.f-copy{font-family:var(--font-mono);font-size:0.69rem;color:rgba(247,248,250,.2)!important;}
+
+@media(max-width:900px){
+  #hero,#scene-01,#scene-01b,#scene-02,#scene-03,#scene-04,#cta{padding:60px 24px;}
+  .spec-grid,.manifest-row{grid-template-columns:1fr;}
+  .spec-divider{display:none;}
+  .metrics-grid{grid-template-columns:1fr 1fr;}
+  .metric-wide{grid-template-columns:1fr;}
+  .pipeline{grid-template-columns:1fr 1fr;}
+  .pipeline::before{display:none;}
+  .pipeline-details{grid-template-columns:1fr;}
+  .manifest-row{grid-template-columns:1fr;}
+  .manifest-key{border-right:none;border-bottom:1px solid var(--border);padding:10px 16px;}
+  .manifest-status{border-left:none;border-top:1px solid var(--border);padding:10px 16px;}
+  .ba-grid{grid-template-columns:1fr 1fr;}
+  .slider-container{height:280px;}
+  footer{padding:22px 24px;flex-direction:column;gap:12px;text-align:center;}
+}
+  </style>
+</head>
+<body>
+  <header id="site-nav" data-page="Tech" data-theme="dark" data-nav="full"></header>
+<!-- NAV -->
+
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bracket tl"></div>
+  <div class="hero-bracket tr"></div>
+  <div class="hero-bracket bl"></div>
+  <div class="hero-bracket br"></div>
+  <div class="hero-inner">
+    <div class="boot-terminal">
+      <span class="boot-line"><span class="prompt">&#62;</span> loading profile: tim_shephard.cd <span class="ok">&#10003; OK</span></span>
+      <span class="boot-line"><span class="prompt">&#62;</span> vertical: tech_saas <span class="ok">&#10003; LOADED</span></span>
+      <span class="boot-line"><span class="prompt">&#62;</span> experience: 15yr_creative_direction <span class="ok">&#10003; VERIFIED</span></span>
+      <span class="boot-line"><span class="prompt">&#62;</span> challenge: european_saas &#8594; north_american_enterprise <span class="ok">&#10003; READY</span></span>
+    </div>
+    <h1 class="hero-title">Brand<br>Built for<br><span class="accent">Scale.</span></h1>
+    <div class="hero-tagline">// CREATIVE DIRECTION FOR TECH &amp; SAAS &nbsp;&mdash;&nbsp; GTM &nbsp;&mdash;&nbsp; REPOSITIONING &nbsp;&mdash;&nbsp; BRAND SYSTEMS<span class="cursor"></span></div>
+    <div class="hero-specs">
+      <div class="spec-pill"><span class="sp-dot"></span>SaaS GTM Strategy</div>
+      <div class="spec-pill"><span class="sp-dot"></span>Brand Architecture</div>
+      <div class="spec-pill"><span class="sp-dot"></span>North American Market Entry</div>
+      <div class="spec-pill"><span class="sp-dot"></span>Enterprise Positioning</div>
+      <div class="spec-pill"><span class="sp-dot"></span>Demand Generation</div>
+      <div class="spec-pill"><span class="sp-dot"></span>Design Systems</div>
+      <div class="spec-pill"><span class="sp-dot"></span>Communication Strategy</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SCENE 01 — SPEC SHEET -->
+<section id="scene-01">
+  <div class="spec-wrap">
+    <div class="reveal">
+      <div class="section-label">Module 01</div>
+      <h2 class="section-title">The <span class="accent">Ecrion</span> Case</h2>
+    </div>
+    <div class="spec-grid reveal reveal-d1">
+      <div class="spec-main">
+        <p>Ecrion Software had a strong product and a positioning problem. The software was built for North American enterprise buyers. The brand wasn’t.</p>
+        <p>As Marketing Director, I rebuilt the full go-to-market: brand identity, messaging architecture, web presence, and demand gen. The challenge wasn’t technical — it was perceptual. Making an unfamiliar name feel credible, trustworthy, and native to the North American enterprise market in eight seconds.</p>
+        <p>The result: a complete repositioning. New identity, new website, new messaging framework, and a content engine built around the buyer’s actual problems — not the product’s feature list.</p>
+        <p></p>
+        <div class="case-callout">
+          <div class="case-callout-label">Ecrion Software &mdash; GTM Rebuild</div>
+          <div class="case-callout-title">European SaaS &rarr; North American Enterprise</div>
+          <p class="case-callout-body">Brand identity, messaging architecture, digital presence, and demand gen rebuilt from zero for a new market, new buyer, and new competitive context.</p>
+        </div>
+      </div>
+      <div class="spec-divider"></div>
+      <div class="spec-sidebar">
+        <div class="req-block">
+          <div class="req-label">Engagement Type</div>
+          <div class="req-value">Marketing Director</div>
+          <div class="req-note">Full GTM ownership, 2015&ndash;2016</div>
+        </div>
+        <div class="req-block">
+          <div class="req-label">Market</div>
+          <div class="req-value">North America</div>
+          <div class="req-note">Enterprise SaaS entry from European base</div>
+        </div>
+        <div class="req-block">
+          <div class="req-label">Scope</div>
+          <div class="req-value">Full Stack</div>
+          <div class="req-note">Brand &rarr; Messaging &rarr; Digital &rarr; Demand Gen</div>
+        </div>
+        <div class="req-block">
+          <div class="req-label">Buyer Profile</div>
+          <div class="req-value">Enterprise</div>
+          <div class="req-note">Long-cycle, multi-stakeholder B2B evaluation</div>
+        </div>
+        <div class="req-block">
+          <div class="req-label">Context</div>
+          <div class="req-value">Greenfield</div>
+          <div class="req-note">Zero brand equity in target market on day one</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SCENE 01B — BEFORE / AFTER -->
+<section id="scene-01b">
+  <div class="ba-wrap">
+    <div class="reveal">
+      <div class="section-label">Module 02 &mdash; Work Samples</div>
+      <h2 class="section-title">Before <span class="accent">/</span> After</h2>
+      <div class="ba-intro">
+        <p>Day one, the Ecrion brand read as foreign and technically-focused in a market that rewards familiarity and trust. The before/after below shows the transformation across brand presence, content, and marketing collateral &mdash; drag the slider to compare.</p>
+      </div>
+    </div>
+
+    <!-- SLIDER 1: Website presence -->
+    <div class="ba-slider-block reveal reveal-d1">
+      <div class="ba-slider-label">
+        <span class="ba-badge before">BEFORE</span>
+        &nbsp;&#8594;&nbsp;
+        <span class="ba-badge after">AFTER</span>
+        &nbsp;&mdash;&nbsp; Website &amp; Brand Presence
+      </div>
+      <div class="slider-container" id="slider1">
+        <!-- AFTER (bottom layer, full width) -->
+        <img class="slider-after" style="object-position:center center;" src="https://images.squarespace-cdn.com/content/v1/55e18f35e4b09e18596261bb/1558019627215-XGTEVDND8MFR5G9QABON/ecrion+for+blog.png" alt="After: Ecrion brand content" onerror="this.src='https://images.squarespace-cdn.com/content/v1/55e18f35e4b09e18596261bb/1558019618316-ZK63ETI52B4QAZUTZDJ2/ecrion+for+blog.png'">
+        <!-- BEFORE (top layer, clipped) -->
+        <img class="slider-before" src="https://images.squarespace-cdn.com/content/v1/55e18f35e4b09e18596261bb/1557952686832-V560BYNI6LN8C4CSFCQ7/Screen+Shot+2015-12-07+at+10.31.49+AM.png" alt="Before: Ecrion old site">
+        <div class="slider-divider" id="div1">
+          <div class="slider-handle">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="stroke:#1e2330;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;"><path d="M8 5l-7 7 7 7M16 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+        <span class="slider-label-before">BEFORE</span>
+        <span class="slider-label-after">AFTER</span>
+      </div>
+    </div>
+
+    <!-- SLIDER 2: Marketing collateral -->
+    <div class="ba-slider-block reveal reveal-d2">
+      <div class="ba-slider-label">
+        <span class="ba-badge before">BEFORE</span>
+        &nbsp;&#8594;&nbsp;
+        <span class="ba-badge after">AFTER</span>
+        &nbsp;&mdash;&nbsp; Marketing Collateral &amp; Social Content
+      </div>
+      <div class="slider-container" id="slider2">
+        <img class="slider-after" src="https://images.squarespace-cdn.com/content/v1/55e18f35e4b09e18596261bb/1558019653097-BLCHG2UF2IFRE96XB9U0/testing+linked+in+champain.jpg" alt="After: LinkedIn campaign">
+        <img class="slider-before" src="https://images.squarespace-cdn.com/content/v1/55e18f35e4b09e18596261bb/1557952708649-HN8AKM3O3MHA8N725ONB/Screen+Shot+2015-12-07+at+10.32.05+AM.png" alt="Before: old collateral">
+        <div class="slider-divider" id="div2">
+          <div class="slider-handle">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="stroke:#1e2330;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;"><path d="M8 5l-7 7 7 7M16 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+        <span class="slider-label-before">BEFORE</span>
+        <span class="slider-label-after">AFTER</span>
+      </div>
+    </div>
+
+    <!-- GALLERY: After work -->
+    <div class="reveal reveal-d1">
+      <div class="ba-gallery-label">Post-Rebrand Output</div>
+      <h3 class="ba-gallery-heading">The <span class="accent">After</span> Work</h3>
+    </div>
+
+    <div class="ba-grid reveal reveal-d2">
+      <div class="ba-grid-item">
+        <img src="https://images.squarespace-cdn.com/content/v1/55e18f35e4b09e18596261bb/1558019827276-BMXOWCXIOQUG6I6DZ31H/schita.jpg" alt="Brand creative">
+        <div class="ba-grid-item-shine"></div>
+        <div class="ba-grid-item-overlay"></div>
+        <div class="ba-grid-item-label">Brand Creative</div>
+      </div>
+      <div class="ba-grid-item">
+        <img src="https://images.squarespace-cdn.com/content/v1/55e18f35e4b09e18596261bb/1558019850611-UPVRVX43U50VFXZC6X9E/Tachie+Lou+03.jpg" alt="Content marketing character">
+        <div class="ba-grid-item-shine"></div>
+        <div class="ba-grid-item-overlay"></div>
+        <div class="ba-grid-item-label">Content Marketing</div>
+      </div>
+      <div class="ba-grid-item">
+        <img src="https://images.squarespace-cdn.com/content/v1/55e18f35e4b09e18596261bb/1558019628215-XGTEVDND8MFR5G9QABON/Thanksgiving+comic+strip+black+%281%29.jpg" alt="Campaign comic strip">
+        <div class="ba-grid-item-shine"></div>
+        <div class="ba-grid-item-overlay"></div>
+        <div class="ba-grid-item-label">Campaign Content</div>
+      </div>
+      <div class="ba-grid-item">
+        <img src="https://images.squarespace-cdn.com/content/v1/55e18f35e4b09e18596261bb/1558019610092-ANKU736O0H2BQ1NHZMJQ/03-2.jpg" alt="Marketing materials">
+        <div class="ba-grid-item-shine"></div>
+        <div class="ba-grid-item-overlay"></div>
+        <div class="ba-grid-item-label">Marketing Materials</div>
+      </div>
+      <div class="ba-grid-item">
+        <img src="https://images.squarespace-cdn.com/content/v1/55e18f35e4b09e18596261bb/1558019924499-U49PQ7N59G7X3DB5F3J9/Techie+Lou+Blog.jpg" alt="Blog content">
+        <div class="ba-grid-item-shine"></div>
+        <div class="ba-grid-item-overlay"></div>
+        <div class="ba-grid-item-label">Blog &amp; Thought Leadership</div>
+      </div>
+      <div class="ba-grid-item">
+        <img src="https://images.squarespace-cdn.com/content/v1/55e18f35e4b09e18596261bb/1558019914169-ZSV8A7B4UOFVGGEZWF84/EOS-P+no+numbers.jpg" alt="Product marketing">
+        <div class="ba-grid-item-shine"></div>
+        <div class="ba-grid-item-overlay"></div>
+        <div class="ba-grid-item-label">Product Marketing</div>
+      </div>
+      <div class="ba-grid-item">
+        <img src="https://images.squarespace-cdn.com/content/v1/55e18f35e4b09e18596261bb/1558020708445-LO8PYXYGANCV2EM18O2Y/20161110_094839.jpg" alt="Events">
+        <div class="ba-grid-item-shine"></div>
+        <div class="ba-grid-item-overlay"></div>
+        <div class="ba-grid-item-label">Events &amp; Trade Shows</div>
+      </div>
+      <div class="ba-grid-item">
+        <img src="https://images.squarespace-cdn.com/content/v1/55e18f35e4b09e18596261bb/1558020067232-VVS2JOG63ESRWUJV5MBU/my+desk+now.jpg" alt="Workspace">
+        <div class="ba-grid-item-shine"></div>
+        <div class="ba-grid-item-overlay"></div>
+        <div class="ba-grid-item-label">Creative Operations</div>
+      </div>
+      <div class="ba-grid-item">
+        <img src="https://images.squarespace-cdn.com/content/v1/55e18f35e4b09e18596261bb/1558020081458-W148IT3LE4RVJLOHOJ2E/webinar.PNG" alt="Webinar program">
+        <div class="ba-grid-item-shine"></div>
+        <div class="ba-grid-item-overlay"></div>
+        <div class="ba-grid-item-label">Webinar Program</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SCENE 02 — METRICS (renumbered to 03 visually) -->
+<section id="scene-02">
+  <div class="dashboard-wrap">
+    <div class="reveal">
+      <div class="section-label">Module 03</div>
+      <h2 class="section-title">Creative at <span class="accent">Scale</span></h2>
+      <p style="font-family:var(--font-body);font-size:.95rem;color:var(--muted)!important;margin-top:8px;max-width:500px;line-height:1.75;">Cross-vertical impact data. What happens when brand discipline meets real budgets and real audiences.</p>
+    </div>
+    <div class="dashboard reveal reveal-d1">
+      <div class="dashboard-header">
+        <div class="db-dot red"></div><div class="db-dot yellow"></div><div class="db-dot green"></div>
+        <span class="dashboard-title">tim_shephard &mdash; creative_metrics.dashboard</span>
+        <span class="dashboard-ts">LIVE &nbsp;&#9679;&nbsp; ALL VERTICALS</span>
+      </div>
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-label"><span class="status"></span>Earned Media</div>
+          <div class="metric-value">$77.5M</div>
+          <div class="metric-unit">MEDIA VALUE</div>
+          <div class="metric-delta">&#8593; 160K+ TV airings</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label"><span class="status"></span>PSA Distribution</div>
+          <div class="metric-value">160K+</div>
+          <div class="metric-unit">NATIONAL TV AIRINGS</div>
+          <div class="metric-delta">&#8593; All 50 states</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label"><span class="status"></span>Movement Reach</div>
+          <div class="metric-value">11.9M</div>
+          <div class="metric-unit">PARTICIPANTS — ORG. SCALE</div>
+          <div class="metric-delta">&#8593; Single program year</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label"><span class="status"></span>Org. Economic Impact</div>
+          <div class="metric-value">$300M</div>
+          <div class="metric-unit">DOCUMENTED VALUE</div>
+          <div class="metric-delta neutral">KAB national program</div>
+        </div>
+      </div>
+      <div class="metric-wide">
+        <div class="metric-wide-cell">
+          <div class="mwc-num">15+</div>
+          <div class="mwc-info"><div class="mwc-label">Years Experience</div><div class="mwc-note">Creative direction across Tech, Nonprofit, Gov, Entertainment, Branding</div></div>
+        </div>
+        <div class="metric-wide-cell">
+          <div class="mwc-num">6</div>
+          <div class="mwc-info"><div class="mwc-label">Verticals</div><div class="mwc-note">Deep cross-sector brand and campaign expertise</div></div>
+        </div>
+        <div class="metric-wide-cell">
+          <div class="mwc-num">2</div>
+          <div class="mwc-info"><div class="mwc-label">National Awards</div><div class="mwc-note">NAGC First Place + Blue Pencil Award of Excellence</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SCENE 03 — PIPELINE -->
+<section id="scene-03">
+  <div class="pipeline-wrap">
+    <div class="reveal">
+      <div class="section-label">Module 04</div>
+      <h2 class="section-title">The <span class="accent">Process</span></h2>
+      <p style="font-family:var(--font-body);font-size:.95rem;color:var(--muted)!important;margin-top:8px;max-width:500px;line-height:1.75;">How a brief becomes a brand system. Every engagement runs this pipeline.</p>
+    </div>
+    <div class="pipeline reveal reveal-d1">
+      <div class="pipeline-step">
+        <div class="step-node"><span class="step-num">01</span></div>
+        <div class="step-label">Diagnose</div>
+        <div class="step-desc">Audit brand, audience, competitive context. Find the real problem.</div>
+        <div class="pipeline-arrow"></div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-node"><span class="step-num">02</span></div>
+        <div class="step-label">Position</div>
+        <div class="step-desc">Define the brand truth. Build the messaging architecture.</div>
+        <div class="pipeline-arrow"></div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-node"><span class="step-num">03</span></div>
+        <div class="step-label">Design</div>
+        <div class="step-desc">Visual identity, design system, and creative direction.</div>
+        <div class="pipeline-arrow"></div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-node"><span class="step-num">04</span></div>
+        <div class="step-label">Deploy</div>
+        <div class="step-desc">Campaign, digital, and distribution pipeline execution.</div>
+        <div class="pipeline-arrow"></div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-node"><span class="step-num">05</span></div>
+        <div class="step-label">Scale</div>
+        <div class="step-desc">Toolkits and systems that work without the CD in the room.</div>
+      </div>
+    </div>
+    <div class="pipeline-details">
+      <div class="pd-cell reveal">
+        <div class="pd-eyebrow">// INPUT</div>
+        <div class="pd-title">Brief &rarr; Strategy</div>
+        <p class="pd-body">Every engagement starts with diagnosis, not prescription. <strong>Communication strategy applied to brand</strong> &mdash; understand the adoption gap before designing the solution.</p>
+      </div>
+      <div class="pd-cell reveal reveal-d1">
+        <div class="pd-eyebrow">// THROUGHPUT</div>
+        <div class="pd-title">Creative Direction &rarr; System</div>
+        <p class="pd-body">Not just deliverables &mdash; a <strong>system that propagates</strong>. Brand guidelines, component libraries, messaging frameworks, and campaign toolkits that run at scale.</p>
+      </div>
+      <div class="pd-cell reveal reveal-d2">
+        <div class="pd-eyebrow">// OUTPUT</div>
+        <div class="pd-title">Launch &rarr; Measure</div>
+        <p class="pd-body">Creative that produces <strong>documented results</strong>. Not just aesthetics &mdash; behavior change, media value, market penetration, and pipeline contribution.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SCENE 04 — MANIFEST -->
+<section id="scene-04">
+  <div class="manifest-wrap">
+    <div class="reveal">
+      <div class="section-label">Module 05</div>
+      <h2 class="section-title">Capabilities <span class="accent">Manifest</span></h2>
+    </div>
+    <div class="manifest reveal reveal-d1">
+      <div class="manifest-header">
+        <span class="manifest-header-title">capabilities.manifest &mdash; Tim Shephard, Creative Director</span>
+        <span class="manifest-header-file">v15.0 &nbsp;&#9679;&nbsp; CURRENT</span>
+      </div>
+      <div class="manifest-row">
+        <div class="manifest-key">brand_strategy</div>
+        <div class="manifest-val"><span class="manifest-tag">Architecture</span><span class="manifest-tag">Positioning</span><span class="manifest-tag">Messaging Frameworks</span><span class="manifest-tag">Voice &amp; Tone</span><span class="manifest-tag">Identity Systems</span></div>
+        <div class="manifest-status"><span class="status-active">ACTIVE</span></div>
+      </div>
+      <div class="manifest-row">
+        <div class="manifest-key">campaign_creative</div>
+        <div class="manifest-val"><span class="manifest-tag">Concept Development</span><span class="manifest-tag">TV / Broadcast</span><span class="manifest-tag">Digital</span><span class="manifest-tag">OOH</span><span class="manifest-tag">Integrated Campaigns</span></div>
+        <div class="manifest-status"><span class="status-active">ACTIVE</span></div>
+      </div>
+      <div class="manifest-row">
+        <div class="manifest-key">digital_design</div>
+        <div class="manifest-val"><span class="manifest-tag">Web &amp; UX</span><span class="manifest-tag">Design Systems</span><span class="manifest-tag">Component Libraries</span><span class="manifest-tag">Motion</span></div>
+        <div class="manifest-status"><span class="status-active">ACTIVE</span></div>
+      </div>
+      <div class="manifest-row">
+        <div class="manifest-key">go_to_market</div>
+        <div class="manifest-val"><span class="manifest-tag">GTM Strategy</span><span class="manifest-tag">Market Entry</span><span class="manifest-tag">Demand Generation</span><span class="manifest-tag">Content Strategy</span></div>
+        <div class="manifest-status"><span class="status-active">ACTIVE</span></div>
+      </div>
+      <div class="manifest-row">
+        <div class="manifest-key">team_leadership</div>
+        <div class="manifest-val"><span class="manifest-tag">Creative Teams</span><span class="manifest-tag">Agency Management</span><span class="manifest-tag">Vendor Direction</span><span class="manifest-tag">Cross-functional</span></div>
+        <div class="manifest-status"><span class="status-active">ACTIVE</span></div>
+      </div>
+      <div class="manifest-row">
+        <div class="manifest-key">impl_science</div>
+        <div class="manifest-val"><span class="manifest-tag">Behavior Change</span><span class="manifest-tag">Adoption Frameworks</span><span class="manifest-tag">Audience Research</span><span class="manifest-tag">Measurement</span></div>
+        <div class="manifest-status"><span class="status-active">ACTIVE</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-label reveal">Ready to initialize</div>
+  <h2 class="cta-title reveal reveal-d1">Let&#8217;s<br><span class="accent">Deploy.</span></h2>
+  <div class="cta-terminal reveal reveal-d2">
+    <span style="display:block;"><span style="color:#22c55e!important;">&#10003;</span> brief received</span>
+    <span style="display:block;"><span style="color:#22c55e!important;">&#10003;</span> strategy compiled</span>
+    <span style="display:block;"><span style="color:#22c55e!important;">&#10003;</span> creative direction: ready</span>
+    <span style="display:block;"><span style="color:rgba(0,174,212,0.8)!important;">&#9654;</span> awaiting: your go-ahead<span class="cursor"></span></span>
+  </div>
+  <a href="/hire/" class="cta-btn reveal reveal-d3"><span>&#62;_ Start the Conversation</span></a>
+</section>
+
+<!-- FOOTER -->
+
+
+<script>
+// Nav scroll
+window.addEventListener('scroll',function(){
+  document.getElementById('main-nav').classList.toggle('scrolled',window.scrollY>60);
+},{passive:true});
+
+// Reveal on scroll
+(function(){
+  var io=new IntersectionObserver(function(e){
+    e.forEach(function(el){
+      if(el.isIntersecting){el.target.classList.add('visible');io.unobserve(el.target);}
+    });
+  },{threshold:.06});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+})();
+
+// Before/After sliders
+function initSlider(containerId) {
+  var container = document.getElementById(containerId);
+  if (!container) return;
+  var before = container.querySelector('.slider-before');
+  var divider = container.querySelector('.slider-divider');
+  var dragging = false;
+  var initialized = false;
+
+  function setPos(x) {
+    var rect = container.getBoundingClientRect();
+    var pct = Math.max(0, Math.min(100, ((x - rect.left) / rect.width) * 100));
+    before.style.clipPath = 'inset(0 ' + (100 - pct) + '% 0 0)';
+    divider.style.left = pct + '%';
+  }
+
+  function initCenter() {
+    if (initialized) return;
+    var rect = container.getBoundingClientRect();
+    if (rect.width > 0) {
+      setPos(rect.left + rect.width * 0.5);
+      initialized = true;
+    }
+  }
+
+  // Try on load, then again on scroll/resize as fallback
+  window.addEventListener('load', initCenter);
+  window.addEventListener('scroll', initCenter, {passive: true, once: true});
+  setTimeout(initCenter, 200);
+
+  container.addEventListener('mousedown', function(e) { initCenter(); dragging = true; setPos(e.clientX); e.preventDefault(); });
+  container.addEventListener('touchstart', function(e) { initCenter(); dragging = true; setPos(e.touches[0].clientX); }, {passive:true});
+  window.addEventListener('mousemove', function(e) { if (dragging) setPos(e.clientX); });
+  window.addEventListener('touchmove', function(e) { if (dragging) setPos(e.touches[0].clientX); }, {passive:true});
+  window.addEventListener('mouseup', function() { dragging = false; });
+  window.addEventListener('touchend', function() { dragging = false; });
+}
+
+initSlider('slider1');
+initSlider('slider2');
+</script>
+
+<script>
+// Gallery image 3D tilt effect — matches homepage work card pattern
+(function() {
+  if (window.matchMedia('(hover: none)').matches) return;
+  var MAX_TILT = 8;
+  var EASE = 0.18;
+
+  document.querySelectorAll('.ba-grid-item').forEach(function(card) {
+    var shine = card.querySelector('.ba-grid-item-shine');
+    var targetRX = 0, targetRY = 0;
+    var currentRX = 0, currentRY = 0;
+    var active = false, raf;
+
+    function tick() {
+      currentRX += (targetRX - currentRX) * EASE;
+      currentRY += (targetRY - currentRY) * EASE;
+
+      card.style.transform =
+        'rotateX(' + currentRX.toFixed(2) + 'deg) ' +
+        'rotateY(' + currentRY.toFixed(2) + 'deg) ' +
+        'scale(' + (active ? 1.025 : 1) + ')';
+
+      if (active || Math.abs(currentRX) > 0.05 || Math.abs(currentRY) > 0.05) {
+        raf = requestAnimationFrame(tick);
+      } else {
+        card.style.transform = '';
+        cancelAnimationFrame(raf);
+      }
+    }
+
+    card.addEventListener('mouseenter', function() {
+      active = true;
+      card.style.transition = 'box-shadow 0.4s ease';
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(tick);
+    });
+
+    card.addEventListener('mousemove', function(e) {
+      var rect = card.getBoundingClientRect();
+      var x = (e.clientX - rect.left) / rect.width;
+      var y = (e.clientY - rect.top)  / rect.height;
+
+      targetRY =  (x - 0.5) * MAX_TILT * 2;
+      targetRX = -(y - 0.5) * MAX_TILT * 2;
+
+      if (shine) {
+        shine.style.background =
+          'radial-gradient(circle at ' + (x * 100).toFixed(1) + '% ' + (y * 100).toFixed(1) + '%, rgba(255,255,255,0.13) 0%, transparent 55%)';
+      }
+    });
+
+    card.addEventListener('mouseleave', function() {
+      active = false;
+      targetRX = 0; targetRY = 0;
+      card.style.transition = 'box-shadow 0.4s ease, transform 0.6s cubic-bezier(0.16,1,0.3,1)';
+      setTimeout(function() { card.style.transition = ''; }, 650);
+    });
+  });
+})();
+</script>
+  <footer id="site-footer"></footer>
+  <script src="/shared/nav.js" defer></script>
+</body>
+</html>

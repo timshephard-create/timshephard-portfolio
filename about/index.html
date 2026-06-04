@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Tim Shephard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,700;0,800;0,900;1,700;1,800;1,900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Barlow:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/shared/styles.css">
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-82B9C9WGMG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-82B9C9WGMG');
+  </script>
+  <style>
+:root {
+  --white:    #f9f7f3;
+  --off:      #f2ede5;
+  --off2:     #e8e2d8;
+  --ink:      #0c0b09;
+  --ink2:     #211e19;
+  --ink3:     #3d3830;
+  --muted:    rgba(12,11,9,0.45);
+  --muted2:   rgba(12,11,9,0.25);
+  --orange:   #e8420a;
+  --orange-lo:rgba(232,66,10,0.06);
+  --orange-mid:rgba(232,66,10,0.16);
+  --border:   rgba(12,11,9,0.10);
+  --border-hi:rgba(12,11,9,0.20);
+  --font-disp: 'Barlow Condensed', sans-serif;
+  --font-ser:  'Playfair Display', serif;
+  --font-body: 'Barlow', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+h1,h2,h3,h4 { color: var(--ink) !important; }
+p { color: var(--ink) !important; }
+
+nav, section, footer { position: relative; z-index: 1; }
+
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-d1 { transition-delay: 0.1s; }
+.reveal-d2 { transition-delay: 0.2s; }
+.reveal-d3 { transition-delay: 0.3s; }
+
+
+/* ── HERO — editorial cover ── */
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 54px;
+  border-bottom: 2px solid var(--ink);
+}
+
+/* Photo column */
+.hero-photo-col {
+  position: relative;
+  background: var(--off2);
+  overflow: hidden;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.photo-card-wrapper {
+  width: 55%;
+  max-width: 340px;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  box-shadow: 0 12px 48px rgba(12,11,9,0.22);
+  margin-bottom: 56px;
+}
+.hero-photo-card {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.photo-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--off2);
+}
+/* When a real photo is placed, it fills this container */
+.hero-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.photo-placeholder-text {
+  font-family: var(--font-mono);
+  font-size:0.69rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted2) !important;
+  text-align: center;
+}
+/* Caption bar at bottom of photo */
+.photo-caption {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 16px 24px;
+  background: rgba(12,11,9,0.75);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.photo-caption-name {
+  font-family: var(--font-mono);
+  font-size:0.69rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(249,247,243,0.9) !important;
+}
+.photo-caption-title {
+  font-family: var(--font-mono);
+  font-size:0.69rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--orange) !important;
+}
+
+/* Text column */
+.hero-text-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 64px 56px 48px;
+  border-left: 1px solid var(--border-hi);
+  position: relative;
+}
+.hero-issue {
+  position: absolute;
+  top: 32px; right: 48px;
+  font-family: var(--font-mono);
+  font-size:0.69rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted2) !important;
+  text-align: right;
+  opacity: 0;
+  animation: fadeIn 0.6s ease 0.4s forwards;
+}
+.hero-label {
+  font-family: var(--font-mono);
+  font-size:0.69rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--orange) !important;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeUp 0.7s var(--ease) 0.2s forwards;
+}
+.hero-label::before { content: ''; width: 24px; height: 1px; background: var(--orange); }
+
+.hero-h1 {
+  font-family: var(--font-disp);
+  font-size: clamp(4rem, 7vw, 7.5rem);
+  font-weight: 900;
+  font-style: italic;
+  line-height: 0.88;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--ink) !important;
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeUp 0.9s var(--ease) 0.3s forwards;
+}
+.hero-h1 em { color: var(--orange) !important; font-style: italic; display: block; }
+
+.hero-lede {
+  font-family: var(--font-ser);
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--ink2) !important;
+  line-height: 1.65;
+  max-width: 460px;
+  margin-bottom: 40px;
+  border-left: 3px solid var(--orange);
+  padding-left: 20px;
+  opacity: 0;
+  animation: fadeUp 0.8s var(--ease) 0.5s forwards;
+}
+
+.hero-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  opacity: 0;
+  animation: fadeUp 0.7s var(--ease) 0.7s forwards;
+}
+.hero-chip {
+  font-family: var(--font-mono);
+  font-size:0.69rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink3) !important;
+  border: 1px solid var(--border-hi);
+  padding: 6px 14px;
+  background: var(--off);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── PROFILE SECTION — long-form editorial ── */
+#profile {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 100px 48px;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.profile-sidebar {}
+.profile-sidebar-label {
+  font-family: var(--font-mono);
+  font-size:0.69rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted) !important;
+  display: block;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-hi);
+}
+.profile-fact {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+.fact-key {
+  font-family: var(--font-mono);
+  font-size:0.69rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted) !important;
+  flex-shrink: 0;
+}
+.fact-val {
+  font-size: 0.9rem;
+  color: var(--ink2) !important;
+  text-align: right;
+  font-weight: 500;
+}
+.fact-val.orange { color: var(--orange) !important; }
+
+.profile-disciplines {
+  margin-top: 32px;
+}
+.disciplines-label {
+  font-family: var(--font-mono);
+  font-size:0.69rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted) !important;
+  display: block;
+  margin-bottom: 12px;
+}
+.discipline-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.88rem;
+  color: var(--ink2) !important;
+}
+.discipline-item::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--orange);
+  flex-shrink: 0;
+}
+
+.profile-body {}
+.profile-body-label {
+  font-family: var(--font-mono);
+  font-size:0.69rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--orange) !important;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.profile-body-label::before { content: ''; width: 20px; height: 1px; background: var(--orange); }
+
+.profile-body h2 {
+  font-family: var(--font-disp);
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  font-weight: 900;
+  font-style: italic;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--ink) !important;
+  margin-bottom: 36px;
+}
+
+.profile-text p {
+  font-size: 1.05rem;
+  color: rgba(12,11,9,0.72) !important;
+  line-height: 1.82;
+  margin-bottom: 22px;
+}
+.profile-text p strong { color: var(--ink) !important; font-weight: 600; }
+.profile-text p:last-child { margin-bottom: 0; }
+
+.profile-pull {
+  border-left: 3px solid var(--orange);
+  padding: 18px 22px;
+  background: var(--orange-lo);
+  margin: 32px 0;
+}
+.profile-pull p {
+  font-family: var(--font-ser);
+  font-size: 1.25rem !important;
+  font-style: italic;
+  color: var(--ink) !important;
+  line-height: 1.55;
+  margin: 0 !important;
+}
+
+/* ── TIMELINE ── */
+#timeline {
+  background: var(--ink);
+  padding: 100px 48px;
+}
+.timeline-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.timeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 72px;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.timeline-label {
+  font-family: var(--font-mono);
+  font-size:0.69rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--orange) !important;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.timeline-label::before { content: ''; width: 20px; height: 1px; background: var(--orange); }
+.timeline-h2 {
+  font-family: var(--font-disp);
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  font-weight: 900;
+  font-style: italic;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--white) !important;
+}
+.timeline-sub {
+  font-size: 0.9rem;
+  color: rgba(249,247,243,0.45) !important;
+  max-width: 300px;
+  line-height: 1.6;
+  text-align: right;
+}
+
+/* Vertical timeline */
+.timeline-track {
+  position: relative;
+  padding-left: 48px;
+}
+.timeline-track::before {
+  content: '';
+  position: absolute;
+  left: 6px; top: 8px; bottom: 0;
+  width: 1px;
+  background: rgba(249,247,243,0.1);
+}
+
+.timeline-entry {
+  position: relative;
+  margin-bottom: 56px;
+  padding-bottom: 56px;
+  border-bottom: 1px solid rgba(249,247,243,0.06);
+}
+.timeline-entry:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+
+/* Dot */
+.timeline-entry::before {
+  content: '';
+  position: absolute;
+  left: -42px;
+  top: 8px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid rgba(249,247,243,0.25);
+  background: var(--ink);
+  transition: border-color 0.3s, background 0.3s;
+}
+.timeline-entry:hover::before {
+  border-color: var(--orange);
+  background: var(--orange);
+}
+
+.entry-date {
+  font-family: var(--font-mono);
+  font-size:0.69rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--orange) !important;
+  display: block;
+  margin-bottom: 8px;
+}
+.entry-org {
+  font-family: var(--font-disp);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(249,247,243,0.4) !important;
+  display: block;
+  margin-bottom: 4px;
+}
+.entry-role {
+  font-family: var(--font-disp);
+  font-size: 1.8rem;
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--white) !important;
+  line-height: 1.05;
+  margin-bottom: 14px;
+  display: block;
+}
+.entry-desc {
+  font-size: 0.92rem;
+  color: rgba(249,247,243,0.55) !important;
+  line-height: 1.68;
+  max-width: 680px;
+}
+.entry-desc strong { color: rgba(249,247,243,0.85) !important; }
+.entry-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px;
+}
+.entry-tag {
+  font-family: var(--font-mono);
+  font-size:0.69rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(249,247,243,0.4) !important;
+  border: 1px solid rgba(249,247,243,0.1);
+  padding: 4px 10px;
+}
+
+/* ── PHILOSOPHY SECTION ── */
+#philosophy {
+  padding: 120px 48px;
+  background: var(--off);
+  border-top: 1px solid var(--border-hi);
+}
+.philosophy-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.phil-label {
+  font-family: var(--font-mono);
+  font-size:0.69rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--orange) !important;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.phil-label::before { content: ''; width: 20px; height: 1px; background: var(--orange); }
+.phil-h2 {
+  font-family: var(--font-disp);
+  font-size: clamp(2.8rem, 4.5vw, 4.5rem);
+  font-weight: 900;
+  font-style: italic;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--ink) !important;
+  margin-bottom: 56px;
+}
+.phil-h2 em { color: var(--orange) !important; font-style: italic; }
+
+.phil-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--border-hi);
+  margin-bottom: 56px;
+}
+.phil-cell {
+  background: var(--off);
+  padding: 36px 32px;
+  transition: background 0.3s;
+}
+.phil-cell:hover { background: var(--white); }
+.phil-cell-num {
+  font-family: var(--font-mono);
+  font-size:0.69rem;
+  letter-spacing: 0.14em;
+  color: var(--orange) !important;
+  display: block;
+  margin-bottom: 12px;
+}
+.phil-cell-title {
+  font-family: var(--font-disp);
+  font-size: 1.2rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink) !important;
+  margin-bottom: 10px;
+}
+.phil-cell-text {
+  font-size: 0.88rem;
+  color: var(--muted) !important;
+  line-height: 1.65;
+}
+
+/* Testimonial inline */
+.phil-testi {
+  background: var(--ink);
+  padding: 48px 52px;
+  position: relative;
+  overflow: hidden;
+}
+.phil-testi::before {
+  content: '"';
+  position: absolute;
+  top: -20px; left: 32px;
+  font-family: var(--font-disp);
+  font-size: 12rem;
+  font-weight: 900;
+  color: rgba(232,66,10,0.08);
+  line-height: 1;
+  pointer-events: none;
+}
+.phil-testi-quote {
+  font-family: var(--font-ser);
+  font-size: 1.3rem;
+  font-style: italic;
+  color: var(--white) !important;
+  line-height: 1.6;
+  max-width: 700px;
+  margin-bottom: 24px;
+  position: relative;
+}
+.phil-testi-attr {
+  font-family: var(--font-mono);
+  font-size:0.69rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange) !important;
+}
+.phil-testi-role {
+  font-family: var(--font-mono);
+  font-size:0.69rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(249,247,243,0.3) !important;
+  margin-top: 4px;
+}
+
+/* ── CTA STRIP ── */
+#about-cta {
+  padding: 80px 48px;
+  background: var(--white);
+  border-top: 1px solid var(--border-hi);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.about-cta-text {}
+.about-cta-h3 {
+  font-family: var(--font-disp);
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--ink) !important;
+  line-height: 0.95;
+  margin-bottom: 10px;
+}
+.about-cta-h3 em { color: var(--orange) !important; font-style: italic; }
+.about-cta-sub {
+  font-size: 0.92rem;
+  color: var(--muted) !important;
+  max-width: 420px;
+  line-height: 1.6;
+}
+.about-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 44px;
+  background: var(--ink);
+  color: var(--white) !important;
+  font-family: var(--font-disp);
+  font-size: 1.1rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background 0.3s;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.about-cta-btn:hover { background: var(--orange); }
+
+footer {
+  background: var(--ink);
+  padding: 28px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 3px solid var(--orange);
+}
+.footer-logo {
+  font-family: var(--font-disp);
+  font-size: 1.1rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--white) !important;
+  text-decoration: none;
+}
+.footer-links { display: flex; gap: 28px; }
+.footer-links a {
+  font-family: var(--font-mono);
+  font-size:0.69rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(249,247,243,0.35) !important;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--orange) !important; }
+.footer-copy {
+  font-family: var(--font-mono);
+  font-size:0.69rem;
+  letter-spacing: 0.08em;
+  color: rgba(249,247,243,0.25) !important;
+}
+
+@media (max-width: 900px) {
+  #hero { grid-template-columns: 1fr; }
+  .hero-photo-col { min-height: 420px; }
+  #profile { grid-template-columns: 1fr; gap: 48px; padding: 60px 24px; }
+  #timeline { padding: 80px 24px; }
+  #philosophy { padding: 80px 24px; }
+  .phil-grid { grid-template-columns: 1fr; }
+  #about-cta { padding: 60px 24px; flex-direction: column; align-items: flex-start; }
+  footer { padding: 22px 24px; flex-direction: column; gap: 16px; text-align: center; }
+  .hero-text-col { padding: 48px 32px 40px; }
+  .phil-testi { padding: 36px 32px; }
+}
+
+  /* readability overrides */
+  .hero-desc { color: rgba(12,11,9,0.72) !important; }
+  .hero-desc strong { color: var(--ink) !important; }
+  .profile-bio-text { font-size: 1rem !important; line-height: 1.7 !important; color: var(--ink) !important; }
+  </style>
+</head>
+<body>
+  <header id="site-nav" data-page="About" data-nav="full"></header>
+
+
+<!-- HERO — editorial spread -->
+<section id="hero">
+
+  <!-- LEFT: Photo -->
+  <div class="hero-photo-col">
+    <div class="photo-card-wrapper">
+      <img src="/public/images/tim-shephard.jpg" alt="Tim Shephard — Creative Director" class="hero-photo-card">
+    </div>
+    <div class="photo-caption">
+      <span class="photo-caption-name">Tim Shephard</span>
+      <span class="photo-caption-title">Creative Director</span>
+    </div>
+  </div>
+
+  <!-- RIGHT: Text -->
+  <div class="hero-text-col">
+    <div class="hero-issue">Profile // Creative Mind Ventures LLC<br>Dallas / Fort Worth, TX</div>
+    <div class="hero-label">About</div>
+    <h1 class="hero-h1">The<br>Creative<br><em>Director.</em></h1>
+    <p class="hero-lede">
+      Fifteen years translating the gap between what organizations build and what audiences believe — across five verticals, at national scale, with measurable results.
+    </p>
+    <div class="hero-chips">
+      <span class="hero-chip">Brand Strategy</span>
+      <span class="hero-chip">Creative Direction</span>
+      <span class="hero-chip">Mass Mobilization</span>
+      <span class="hero-chip">Section 508</span>
+      <span class="hero-chip">SaaS GTM</span>
+      <span class="hero-chip">Film & Broadcast</span>
+      <span class="hero-chip">Federal Comms</span>
+      <span class="hero-chip">Communication Strategy</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROFILE — long form -->
+<section id="profile">
+  <div class="profile-sidebar reveal">
+    <span class="profile-sidebar-label">// Fast Facts</span>
+    <div class="profile-fact">
+      <span class="fact-key">Location</span>
+      <span class="fact-val">Dallas / Fort Worth, TX</span>
+    </div>
+    <div class="profile-fact">
+      <span class="fact-key">Experience</span>
+      <span class="fact-val">15+ Years</span>
+    </div>
+    <div class="profile-fact">
+      <span class="fact-key">Availability</span>
+      <span class="fact-val orange">Full-Time + Fractional</span>
+    </div>
+    <div class="profile-fact">
+      <span class="fact-key">Industries</span>
+      <span class="fact-val">5 Verticals</span>
+    </div>
+    <div class="profile-fact">
+      <span class="fact-key">Impact</span>
+      <span class="fact-val">$300M+</span>
+    </div>
+    <div class="profile-fact">
+      <span class="fact-key">Mobilized</span>
+      <span class="fact-val">11.9M People</span>
+    </div>
+    <div class="profile-fact">
+      <span class="fact-key">Awards</span>
+      <span class="fact-val">NAGC — 2× Winner</span>
+    </div>
+    <div class="profile-fact">
+      <span class="fact-key">Entity</span>
+      <span class="fact-val">Creative Mind Ventures LLC</span>
+    </div>
+
+    <div class="profile-disciplines" style="margin-top:32px;">
+      <span class="disciplines-label">// Core Disciplines</span>
+      <div class="discipline-item">Creative Direction</div>
+      <div class="discipline-item">Brand Architecture</div>
+      <div class="discipline-item">Campaign Strategy</div>
+      <div class="discipline-item">Digital Transformation</div>
+      <div class="discipline-item">Team Leadership</div>
+      <div class="discipline-item">Federal Communications</div>
+      <div class="discipline-item">Communication Strategy</div>
+      <div class="discipline-item">Visual Storytelling</div>
+    </div>
+  </div>
+
+  <div class="profile-body reveal reveal-d1">
+    <div class="profile-body-label">The Profile</div>
+    <h2>Most Creative Directors Have a Lane.</h2>
+    <div class="profile-text">
+      <p>Most Creative Directors have a lane. I’ve built mine differently.</p>
+
+      <p>Fifteen years across nonprofit, federal government, tech, entertainment, and brand. Each one a completely different environment — different constraints, different audiences, different definitions of what success even looks like. The methodology is the same every time. The application never is.</p>
+
+      <div class="profile-pull">
+        <p>The best creative doesn’t just reach people. It changes what they do.</p>
+      </div>
+
+      <p>At <strong>Keep America Beautiful</strong>, that methodology supported a national movement — a complete organizational rebrand, a national PSA campaign I led directly with 160,000+ airings across all 50 states, and the digital infrastructure that made it all scalable. The organization mobilized 11.9 million participants and generated $300M in measurable economic impact through the efforts of volunteers, affiliates, and partners nationwide.</p>
+
+      <p>At the <strong>Department of Homeland Security</strong>, it produced federal communications that won First Place at the National Association of Government Communicators — proving that full Section 508 compliance and genuine creative ambition aren't in conflict.</p>
+
+      <p>At <strong>Ecrion Software</strong>, it rebuilt a global SaaS brand from the ground up — introducing a brand mascot system that was a first in the enterprise document automation category, and a conversion-architected web presence that changed how the company went to market.</p>
+
+      <p>I lead creative teams, manage cross-functional production pipelines, and build the systems that make great work repeatable — not just possible once. <strong>I'm currently available full-time and as a fractional Creative Director through Creative Mind Ventures LLC.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline">
+  <div class="timeline-inner">
+    <div class="timeline-header reveal">
+      <div>
+        <div class="timeline-label">Career Arc</div>
+        <h2 class="timeline-h2">The<br>Record.</h2>
+      </div>
+      <p class="timeline-sub">15+ years. Every role a different challenge. The same standard of work.</p>
+    </div>
+
+    <div class="timeline-track">
+
+      <div class="timeline-entry reveal">
+        <span class="entry-date">2015 — Present</span>
+        <span class="entry-org">IC-CS Group</span>
+        <span class="entry-role">Creative Director</span>
+        <p class="entry-desc">Cross-sector creative direction. Nonprofit, tech, government, entertainment. Communication strategy applied to brand — closing the gap between what organizations build and what their audiences actually believe.</p>
+        <div class="entry-tags">
+          <span class="entry-tag">Brand Strategy</span>
+          <span class="entry-tag">Creative Direction</span>
+          <span class="entry-tag">Fractional CD</span>
+          <span class="entry-tag">Communication Strategy</span>
+        </div>
+      </div>
+
+      <div class="timeline-entry reveal reveal-d1">
+        <span class="entry-date">2020 — 2023</span>
+        <span class="entry-org">Keep America Beautiful</span>
+        <span class="entry-role">Creative Director</span>
+        <p class="entry-desc">Led the complete rebrand of a 70-year-old national nonprofit. New identity, affiliate toolkits, digital infrastructure. The “Recycle Like Everyone’s Watching” PSA campaign earned 160,000+ airings across all 50 states. The organization mobilized 11.9M participants and generated $300M in documented economic impact that year.</p>
+        <div class="entry-tags">
+          <span class="entry-tag">National Rebrand</span>
+          <span class="entry-tag">PSA Campaign</span>
+          <span class="entry-tag">Mass Mobilization</span>
+          <span class="entry-tag">20,000+ Affiliates</span>
+        </div>
+      </div>
+
+      <div class="timeline-entry reveal reveal-d1">
+        <span class="entry-date">2017 — 2019</span>
+        <span class="entry-org">Loch Harbour Group // DHS S&T</span>
+        <span class="entry-role">Lead Creative Director</span>
+        <p class="entry-desc">Creative Director for DHS Science &amp; Technology. Led a 10-person team through federal communications, interactive digital experiences, and print — all cleared through a multi-tier compliance pipeline. NAGC First Place. Section 508. Both.</p>
+        <div class="entry-tags">
+          <span class="entry-tag">Federal Communications</span>
+          <span class="entry-tag">Section 508</span>
+          <span class="entry-tag">NAGC Award</span>
+          <span class="entry-tag">Team Leadership</span>
+        </div>
+      </div>
+
+      <div class="timeline-entry reveal reveal-d1">
+        <span class="entry-date">2015 — 2016</span>
+        <span class="entry-org">Ecrion Software</span>
+        <span class="entry-role">Marketing Director</span>
+        <p class="entry-desc">Full rebrand and GTM rebuild for a European enterprise SaaS company entering North America. New identity, messaging framework, web architecture, and demand gen from scratch — including a brand mascot system that was a first in the document automation category.</p>
+        <div class="entry-tags">
+          <span class="entry-tag">SaaS Rebrand</span>
+          <span class="entry-tag">GTM Strategy</span>
+          <span class="entry-tag">Brand Mascot</span>
+          <span class="entry-tag">Web Architecture</span>
+        </div>
+      </div>
+
+      <div class="timeline-entry reveal reveal-d1">
+        <span class="entry-date">2007 — 2015</span>
+        <span class="entry-org">Independent Creative Direction</span>
+        <span class="entry-role">Creative Director / Producer</span>
+        <p class="entry-desc">Camera crew on the Athens 2004 Olympic Games broadcast — one of the most-watched events in TV history. In-office at Icon Productions during the $40M Mel Gibson feature Apocalypto. Founded One Thousand Voices — eight years of documentary and advocacy creative for humanitarian organizations in the Middle East.</p>
+        <div class="entry-tags">
+          <span class="entry-tag">Film & Broadcast</span>
+          <span class="entry-tag">Olympics Coverage</span>
+          <span class="entry-tag">Documentary</span>
+          <span class="entry-tag">Independent</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section id="philosophy">
+  <div class="philosophy-inner">
+    <div class="reveal">
+      <div class="phil-label">Creative Philosophy</div>
+      <h2 class="phil-h2">How I<br>Think About<br><em>The Work.</em></h2>
+    </div>
+
+    <div class="phil-grid reveal reveal-d1">
+      <div class="phil-cell">
+        <span class="phil-cell-num">01 // Strategy</span>
+        <div class="phil-cell-title">Start With the Real Problem</div>
+        <p class="phil-cell-text">Most briefs describe what someone wants. The real work is figuring out what they actually need. Those are rarely the same thing. I spend more time on diagnosis than most teams spend on execution.</p>
+      </div>
+      <div class="phil-cell">
+        <span class="phil-cell-num">02 // Systems</span>
+        <div class="phil-cell-title">Build for the Field</div>
+        <p class="phil-cell-text">A brand system that only works at headquarters isn’t a brand system. I build for the worst case: no designer, no budget, ten minutes. If it holds there, it holds everywhere.</p>
+      </div>
+      <div class="phil-cell">
+        <span class="phil-cell-num">03 // Constraints</span>
+        <div class="phil-cell-title">Constraints Make Better Work</div>
+        <p class="phil-cell-text">Section 508 compliance. Federal approval pipelines. 20,000 affiliate partners. Every constraint I’ve worked inside has produced better work than the unconstrained version would have. Limitations force clarity.</p>
+      </div>
+      <div class="phil-cell">
+        <span class="phil-cell-num">04 // Proof</span>
+        <div class="phil-cell-title">Measure What Changes</div>
+        <p class="phil-cell-text">Impressions aren’t an outcome. The work isn’t done when it launches — it’s done when people change what they do. That’s the standard I hold myself to.</p>
+      </div>
+    </div>
+
+    <div class="phil-testi reveal reveal-d2">
+      <blockquote class="phil-testi-quote">
+        "Tim is one of the best creative directors I've ever worked with in my 13-year career. He does a great job of empowering his staff to explore creative solutions and push the boundaries beyond what clients often expect."
+      </blockquote>
+      <div class="phil-testi-attr">Isma'il Rashada</div>
+      <div class="phil-testi-role">Loch Harbour Group — DHS S&T Directorate</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA STRIP -->
+<div id="about-cta">
+  <div class="about-cta-text reveal">
+    <h3 class="about-cta-h3">Let’s Figure Out If We’re the Right Fit.</h3>
+    <p class="about-cta-sub">Full-time or fractional. Drop me a line and we’ll know in 20 minutes.</p>
+  </div>
+  <a href="/hire/" class="about-cta-btn reveal reveal-d2">Start the Conversation →</a>
+</div>
+
+
+
+<script>
+window.addEventListener('scroll', function() {
+  document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+(function() {
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
+})();
+</script>
+  <footer id="site-footer"></footer>
+  <script src="/shared/nav.js" defer></script>
+</body>
+</html>

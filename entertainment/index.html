@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Film &amp; TV — Tim Shephard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=DM+Mono:wght@400;500&family=Barlow+Condensed:ital,wght@0,700;0,900;1,900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/shared/styles.css">
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-82B9C9WGMG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-82B9C9WGMG');
+  </script>
+  <style>
+:root {
+  --bg:#0d0b08;--bg2:#151008;--bg3:#1c1508;--bg4:#231a08;
+  --paper:#f5ede0;--paper2:#e8dcc8;
+  --white:#f0e8d8;--white2:#c8b898;
+  --muted:rgba(240,232,216,0.82);--muted2:rgba(240,232,216,0.55);--muted3:rgba(240,232,216,0.35);
+  --amber:#c9922a;--amber-hi:#e8b84a;--amber-lo:rgba(201,146,42,0.10);--amber-mid:rgba(201,146,42,0.22);
+  --orange:#e8420a;
+  --border:rgba(201,146,42,0.14);--border-hi:rgba(201,146,42,0.32);
+  --font-title:'Cormorant Garamond',serif;
+  --font-mono:'DM Mono',monospace;
+  --font-nav:'Barlow Condensed',sans-serif;
+  --font-body:'Barlow',sans-serif;
+  --ease:cubic-bezier(0.16,1,0.3,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--white);font-family:var(--font-body);font-size:1rem;line-height:1.65;overflow-x:hidden;}
+
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E");background-size:256px 256px;pointer-events:none;z-index:200;opacity:0.7;}
+body::after{content:'';position:fixed;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,transparent,var(--amber),transparent);pointer-events:none;z-index:300;opacity:0.4;}
+
+nav,section,footer{position:relative;z-index:2;}
+h1,h2,h3,h4{color:var(--white)!important;}
+p{color:var(--white)!important;}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-d1{transition-delay:.1s;}.reveal-d2{transition-delay:.2s;}.reveal-d3{transition-delay:.3s;}.reveal-d4{transition-delay:.4s;}
+.reveal-fade{opacity:0;transition:opacity 1s var(--ease);}
+.reveal-fade.visible{opacity:1;}
+
+
+/* ── HERO ── */
+#hero{min-height:100dvh;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;overflow:hidden;text-align:center;}
+.letterbox-top{position:absolute;top:0;left:0;right:0;height:80px;background:linear-gradient(to bottom,rgba(0,0,0,0.9),transparent);z-index:1;}
+.letterbox-bot{position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(to top,rgba(0,0,0,0.9),transparent);z-index:1;}
+.hero-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,rgba(201,146,42,.10) 0%,transparent 65%);pointer-events:none;}
+.hero-frame{position:absolute;top:80px;bottom:80px;left:48px;right:48px;border:1px solid rgba(201,146,42,.12);pointer-events:none;}
+.hero-frame::before,.hero-frame::after{content:'';position:absolute;width:16px;height:16px;}
+.hero-frame::before{top:-1px;left:-1px;border-top:2px solid var(--amber);border-left:2px solid var(--amber);}
+.hero-frame::after{bottom:-1px;right:-1px;border-bottom:2px solid var(--amber);border-right:2px solid var(--amber);}
+.hero-content{position:relative;z-index:2;max-width:900px;padding:0 48px;}
+.hero-slate{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.28em;text-transform:uppercase;color:var(--amber)!important;margin-bottom:32px;opacity:0;animation:fadeIn 1s var(--ease) .4s forwards;display:flex;align-items:center;justify-content:center;gap:16px;}
+.hero-slate::before,.hero-slate::after{content:'';flex:1;max-width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--amber));}
+.hero-slate::after{background:linear-gradient(90deg,var(--amber),transparent);}
+.hero-title{font-family:var(--font-title);font-size:clamp(4.5rem,10vw,10rem);font-weight:300;font-style:italic;line-height:.85;letter-spacing:-.01em;color:var(--white)!important;margin-bottom:20px;opacity:0;animation:fadeIn 1.4s var(--ease) .6s forwards;text-shadow:0 0 80px rgba(201,146,42,.15);}
+.hero-title strong{font-weight:700;font-style:normal;display:block;color:var(--amber-hi)!important;font-size:.55em;letter-spacing:.12em;text-transform:uppercase;font-family:var(--font-nav);}
+.hero-tagline{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)!important;margin-bottom:48px;opacity:0;animation:fadeIn .8s var(--ease) 1s forwards;}
+.hero-stats{display:flex;justify-content:center;gap:48px;opacity:0;animation:fadeIn .8s var(--ease) 1.2s forwards;}
+.hero-stat{text-align:center;}
+.hero-stat-num{font-family:var(--font-title);font-size:2.8rem;font-weight:600;color:var(--amber-hi)!important;line-height:1;display:block;}
+.hero-stat-lbl{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted2)!important;margin-top:4px;display:block;}
+.hero-scroll{position:absolute;bottom:96px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeIn .8s var(--ease) 1.6s forwards;}
+.hero-scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--amber),transparent);}
+.hero-scroll-lbl{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted2)!important;}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* ── TICKER ── */
+#ticker{background:rgba(201,146,42,.08);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:10px 0;overflow:hidden;}
+.ticker-inner{display:flex;gap:56px;animation:ts 32s linear infinite;white-space:nowrap;width:max-content;}
+.t-item{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted2)!important;display:flex;align-items:center;gap:20px;}
+.t-item.hi{color:var(--amber)!important;}
+.t-item::after{content:'◆';font-size:0.69rem;opacity:.4;}
+@keyframes ts{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── SCENE LABELS / SHARED ── */
+.scene-label{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.22em;text-transform:uppercase;color:var(--amber)!important;display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+.scene-label::before{content:'';width:28px;height:1px;background:var(--amber);}
+.scene-num{font-family:var(--font-title);font-size:6rem;font-weight:300;font-style:italic;color:rgba(201,146,42,.08)!important;line-height:1;position:absolute;top:-20px;right:0;pointer-events:none;user-select:none;}
+.section-title{font-family:var(--font-title);font-size:clamp(3rem,5.5vw,5.5rem);font-weight:300;font-style:italic;line-height:.9;color:var(--white)!important;margin-bottom:8px;}
+.section-title strong{font-style:normal;font-weight:700;color:var(--amber-hi)!important;}
+
+/* ── SCENE 01 — VIDEO REEL ── */
+#scene-reel{padding:100px 48px;border-top:1px solid var(--border);}
+.reel-wrap{max-width:1200px;margin:0 auto;}
+
+.reel-intro{margin-bottom:52px;}
+.reel-sub{font-family:var(--font-body);font-size:.92rem;font-weight:300;color:var(--muted)!important;max-width:560px;line-height:1.7;margin-top:10px;}
+
+/* Video grid — 2 wide feature + 4 smaller */
+.reel-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;}
+.reel-grid-bottom{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;margin-top:3px;}
+
+.video-frame{position:relative;background:var(--bg2);border:1px solid var(--border);overflow:hidden;transition:border-color .3s;}
+.video-frame:hover{border-color:var(--border-hi);}
+
+/* Film perforations top */
+.vf-perfs{height:18px;background:var(--bg3);display:flex;align-items:center;gap:6px;padding:0 6px;border-bottom:1px solid var(--border);flex-shrink:0;}
+.vf-perf{width:12px;height:8px;border:1px solid rgba(201,146,42,.18);background:var(--bg);border-radius:1px;flex-shrink:0;}
+
+/* Video embed wrapper — responsive 16:9 */
+.vf-embed{position:relative;width:100%;padding-bottom:56.25%;background:#000;}
+.vf-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
+
+/* Label below */
+.vf-label{padding:10px 14px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);}
+.vf-title{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted2)!important;}
+.vf-badge{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;border:1px solid var(--border);}
+.vf-badge-yt{color:rgba(255,80,60,.7)!important;border-color:rgba(255,80,60,.2);}
+.vf-badge-vi{color:rgba(26,183,234,.7)!important;border-color:rgba(26,183,234,.2);}
+
+/* Bottom perfs */
+.vf-perfs-bot{height:18px;background:var(--bg3);display:flex;align-items:center;gap:6px;padding:0 6px;border-top:1px solid var(--border);}
+
+/* ── SCENE 02 — CASE STUDIES ── */
+#scene-01{padding:100px 48px;border-top:1px solid var(--border);}
+.press-kit{max-width:1200px;margin:0 auto;}
+.scene-card{display:grid;grid-template-columns:1fr 2fr;gap:0;border:1px solid var(--border);margin-bottom:2px;background:var(--bg2);transition:border-color .3s ease;}
+.scene-card:hover{border-color:var(--border-hi);}
+.scene-card-meta{padding:48px 40px;border-right:1px solid var(--border);display:flex;flex-direction:column;justify-content:space-between;background:var(--bg3);position:relative;overflow:hidden;}
+.scene-card-meta::after{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--amber),transparent);opacity:0;transition:opacity .3s;}
+.scene-card:hover .scene-card-meta::after{opacity:1;}
+.scene-card-num{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.18em;text-transform:uppercase;color:var(--amber)!important;margin-bottom:16px;}
+.scene-card-title{font-family:var(--font-title);font-size:2.4rem;font-weight:600;font-style:italic;line-height:1;color:var(--white)!important;margin-bottom:8px;}
+.scene-card-sub{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2)!important;}
+.scene-card-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px;}
+.scene-tag{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2)!important;border:1px solid var(--border);padding:3px 9px;}
+.scene-card-body{padding:48px 48px;}
+.scene-card-body p{font-family:var(--font-body);font-size:.97rem;font-weight:300;color:rgba(240,232,216,.88)!important;line-height:1.8;margin-bottom:14px;}
+.scene-card-body p:last-child{margin-bottom:0;}
+.scene-card-body strong{color:var(--white)!important;font-weight:500;}
+.scene-results{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);margin-top:24px;}
+.result-cell{background:var(--bg2);padding:16px;text-align:center;}
+.result-num{font-family:var(--font-title);font-size:2rem;font-weight:600;color:var(--amber-hi)!important;line-height:1;font-style:italic;}
+.result-lbl{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted2)!important;margin-top:3px;}
+
+/* ── SCENE 03 — FILM STRIP CREDENTIALS ── */
+#scene-02{padding:100px 0;border-top:1px solid var(--border);overflow:hidden;}
+.scene-02-header{padding:0 48px;margin-bottom:48px;}
+.filmstrip-wrap{position:relative;padding:0 48px;}
+.filmstrip{display:flex;gap:3px;overflow-x:auto;padding-bottom:20px;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;}
+.filmstrip::-webkit-scrollbar{height:3px;}
+.filmstrip::-webkit-scrollbar-track{background:var(--bg2);}
+.filmstrip::-webkit-scrollbar-thumb{background:var(--amber-mid);}
+.film-frame{flex-shrink:0;width:280px;background:var(--bg2);border:1px solid var(--border);position:relative;overflow:hidden;transition:all .3s ease;cursor:default;}
+.film-frame:hover{border-color:var(--border-hi);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.5);}
+.film-perfs{height:20px;background:var(--bg3);display:flex;align-items:center;gap:8px;padding:0 8px;border-bottom:1px solid var(--border);}
+.film-perf{width:14px;height:10px;border:1px solid rgba(201,146,42,.2);background:var(--bg);border-radius:1px;flex-shrink:0;}
+.film-content{padding:28px 24px;}
+.film-eyebrow{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.16em;text-transform:uppercase;color:var(--amber)!important;margin-bottom:12px;}
+.film-title{font-family:var(--font-title);font-size:1.6rem;font-weight:600;font-style:italic;color:var(--white)!important;line-height:1.1;margin-bottom:8px;}
+.film-body{font-family:var(--font-body);font-size:.84rem;font-weight:400;color:var(--muted)!important;line-height:1.65;}
+.film-body strong{color:var(--white)!important;font-weight:500;}
+.film-perfs-bot{height:20px;background:var(--bg3);display:flex;align-items:center;gap:8px;padding:0 8px;border-top:1px solid var(--border);margin-top:auto;}
+.filmstrip-nav{display:flex;gap:12px;margin-top:16px;padding:0 48px;}
+.filmstrip-btn{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2)!important;background:transparent;border:1px solid var(--border);padding:8px 20px;cursor:pointer;transition:all .25s;}
+.filmstrip-btn:hover{border-color:var(--amber);color:var(--amber)!important;}
+
+/* ── SCENE 04 — NLE TIMELINE ── */
+#scene-03{padding:100px 48px;border-top:1px solid var(--border);}
+.nle-wrap{max-width:1100px;margin:0 auto;}
+.nle-player{background:var(--bg2);border:1px solid var(--border);margin-top:48px;}
+.nle-screen{background:#000;height:200px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border);}
+.nle-scene-display{text-align:center;padding:24px;}
+.nle-scene-num-display{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber)!important;margin-bottom:8px;}
+.nle-scene-title-display{font-family:var(--font-title);font-size:2.2rem;font-weight:600;font-style:italic;color:var(--white)!important;line-height:1.1;margin-bottom:6px;}
+.nle-scene-role{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted2)!important;}
+.nle-scene-body-display{font-family:var(--font-body);font-size:.9rem;font-weight:400;color:var(--muted)!important;max-width:520px;margin:10px auto 0;line-height:1.65;}
+.nle-transport{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:16px;background:var(--bg3);}
+.nle-btn{width:32px;height:32px;background:transparent;border:1px solid var(--border);color:var(--amber)!important;font-size:.8rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .25s;font-family:var(--font-mono);}
+.nle-btn:hover,.nle-btn.active{background:var(--amber-mid);border-color:var(--amber);}
+.nle-timecode{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.1em;color:var(--muted2)!important;margin-left:auto;}
+.nle-timeline{padding:16px 20px;overflow-x:hidden;}
+.nle-track{display:flex;align-items:center;gap:12px;margin-bottom:8px;}
+.nle-track-label{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2)!important;min-width:80px;flex-shrink:0;}
+.nle-track-lane{flex:1;height:24px;background:var(--bg);border:1px solid var(--border);position:relative;overflow:hidden;}
+.nle-clip{position:absolute;top:2px;bottom:2px;background:var(--amber-mid);border:1px solid var(--border-hi);border-radius:1px;transition:background .3s;}
+.nle-clip.active{background:var(--amber);box-shadow:0 0 8px rgba(201,146,42,.4);}
+.nle-playhead{position:absolute;top:0;bottom:0;width:2px;background:var(--amber-hi);box-shadow:0 0 6px var(--amber);transition:left .4s var(--ease);z-index:2;}
+.nle-playhead::before{content:'';position:absolute;top:-6px;left:-5px;width:12px;height:8px;background:var(--amber-hi);clip-path:polygon(50% 100%,0 0,100% 0);}
+.nle-scrubber-wrap{padding:0 20px 14px;display:flex;align-items:center;gap:16px;}
+.nle-scrubber{flex:1;-webkit-appearance:none;height:4px;background:var(--bg);border-radius:2px;outline:none;cursor:pointer;}
+.nle-scrubber::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--amber-hi);border:2px solid var(--bg);box-shadow:0 0 8px rgba(201,146,42,.5);cursor:pointer;}
+.nle-scene-dots{display:flex;gap:8px;}
+.nle-dot{width:8px;height:8px;border-radius:50%;background:var(--bg3);border:1px solid var(--border);cursor:pointer;transition:all .25s;}
+.nle-dot.active{background:var(--amber);border-color:var(--amber);box-shadow:0 0 6px var(--amber);}
+
+/* ── SCENE 05 — APPROACH ── */
+#scene-04{padding:100px 48px;border-top:1px solid var(--border);background:var(--bg2);}
+.approach-grid{max-width:1100px;margin:48px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);}
+.approach-cell{background:var(--bg2);padding:40px 32px;position:relative;overflow:hidden;transition:background .3s;}
+.approach-cell:hover{background:var(--bg3);}
+.approach-cell::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--amber),transparent);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);}
+.approach-cell:hover::after{transform:scaleX(1);}
+.approach-n{font-family:var(--font-title);font-size:4rem;font-weight:300;font-style:italic;color:rgba(201,146,42,.12)!important;line-height:1;margin-bottom:16px;display:block;}
+.approach-title{font-family:var(--font-title);font-size:1.3rem;font-weight:600;color:var(--white)!important;margin-bottom:10px;line-height:1.1;}
+.approach-body{font-family:var(--font-body);font-size:.88rem;font-weight:400;color:var(--muted)!important;line-height:1.7;}
+.approach-body strong{color:var(--white)!important;font-weight:500;}
+
+/* ── CTA ── */
+#cta{padding:140px 48px;border-top:1px solid var(--border);text-align:center;position:relative;overflow:hidden;}
+.credits-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 100%,rgba(201,146,42,.08) 0%,transparent 60%);pointer-events:none;}
+.credits-rule{width:1px;height:60px;background:linear-gradient(to bottom,transparent,var(--amber),transparent);margin:0 auto 32px;}
+.credits-label{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.24em;text-transform:uppercase;color:var(--amber)!important;margin-bottom:20px;}
+.cta-title{font-family:var(--font-title);font-size:clamp(3.5rem,8vw,8rem);font-weight:300;font-style:italic;line-height:.88;color:var(--white)!important;margin-bottom:24px;position:relative;}
+.cta-title strong{font-style:normal;font-weight:700;display:block;font-size:.45em;letter-spacing:.12em;text-transform:uppercase;font-family:var(--font-nav);color:var(--amber-hi)!important;margin-bottom:8px;}
+.cta-sub{font-family:var(--font-body);font-size:1rem;font-weight:400;color:var(--muted)!important;max-width:420px;margin:0 auto 48px;line-height:1.7;position:relative;}
+.cta-sub strong{color:var(--white)!important;font-weight:500;}
+.cta-btn{display:inline-flex;align-items:center;gap:12px;padding:18px 52px;background:var(--amber);color:var(--bg)!important;font-family:var(--font-nav);font-size:.9rem;font-weight:700;letter-spacing:.12em;text-decoration:none;text-transform:uppercase;transition:all .3s var(--ease);position:relative;overflow:hidden;}
+.cta-btn::before{content:'';position:absolute;inset:0;background:var(--amber-hi);transform:translateX(-100%);transition:transform .4s var(--ease);}
+.cta-btn:hover::before{transform:translateX(0);}
+.cta-btn span{position:relative;z-index:1;color:var(--bg)!important;}
+.credits-divider{width:60px;height:1px;background:var(--border);margin:48px auto 0;}
+
+/* ── FOOTER ── */
+footer{background:#0a0908;padding:28px 48px;display:flex;justify-content:space-between;align-items:center;border-top:3px solid var(--orange);position:relative;z-index:2;}
+.f-logo{font-family:var(--font-nav);font-size:1.1rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:rgba(240,232,216,.9)!important;text-decoration:none;}
+.f-links{display:flex;gap:24px;}
+.f-links a{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,232,216,.3)!important;text-decoration:none;transition:color .2s;}
+.f-links a:hover{color:var(--orange)!important;}
+.f-copy{font-family:var(--font-mono);font-size:0.69rem;color:rgba(240,232,216,.2)!important;}
+
+@media(max-width:900px){
+  #hero,#scene-reel,#scene-01,#scene-02,#scene-03,#scene-04,#cta{padding:60px 24px;}
+  #scene-02{padding:60px 0;}
+  .scene-02-header,.filmstrip-nav{padding:0 24px;}
+  .scene-card{grid-template-columns:1fr;}
+  .scene-card-meta{border-right:none;border-bottom:1px solid var(--border);}
+  .approach-grid{grid-template-columns:1fr;}
+  .reel-grid,.reel-grid-bottom{grid-template-columns:1fr;}
+  footer{padding:22px 24px;flex-direction:column;gap:12px;text-align:center;}
+}
+  </style>
+</head>
+<body>
+  <header id="site-nav" data-page="Film &amp; TV" data-theme="dark" data-nav="full"></header>
+<!-- NAV -->
+
+
+<!-- HERO -->
+<section id="hero">
+  <div class="letterbox-top"></div>
+  <div class="letterbox-bot"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-frame"></div>
+  <div class="hero-content">
+    <div class="hero-slate">Film &amp; Entertainment &mdash; Creative Direction</div>
+    <h1 class="hero-title">
+      <strong>Tim Shephard</strong>
+      Directed<br>by<br><em>Experience.</em>
+    </h1>
+    <div class="hero-tagline">// Feature Film &nbsp;&bull;&nbsp; Global Broadcast &nbsp;&bull;&nbsp; National Campaigns</div>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="hero-stat-num">4B</span><span class="hero-stat-lbl">Broadcast Audience</span></div>
+      <div class="hero-stat"><span class="hero-stat-num">$40M</span><span class="hero-stat-lbl">Feature Film</span></div>
+      <div class="hero-stat"><span class="hero-stat-num">160K+</span><span class="hero-stat-lbl">Campaign Airings</span></div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span class="hero-scroll-lbl">Roll film</span>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div id="ticker">
+  <div class="ticker-inner">
+    <span class="t-item hi">Feature Film</span><span class="t-item">Broadcast Production</span><span class="t-item hi">Global Campaigns</span><span class="t-item">Creative Direction</span><span class="t-item hi">Visual Storytelling</span><span class="t-item">Athens 2004</span><span class="t-item hi">Apocalypto</span><span class="t-item">160K+ Airings</span>
+    <span class="t-item hi">Feature Film</span><span class="t-item">Broadcast Production</span><span class="t-item hi">Global Campaigns</span><span class="t-item">Creative Direction</span><span class="t-item hi">Visual Storytelling</span><span class="t-item">Athens 2004</span><span class="t-item hi">Apocalypto</span><span class="t-item">160K+ Airings</span>
+  </div>
+</div>
+
+<!-- ── SCENE 01 — VIDEO REEL ── -->
+<section id="scene-reel">
+  <div class="reel-wrap">
+    <div class="reel-intro reveal">
+      <div class="scene-label">Scene 01</div>
+      <h2 class="section-title">The <strong>Reel</strong></h2>
+      <p class="reel-sub">Campaign work, brand films, and highlights spanning nonprofit, federal, and entertainment verticals. From brief to final cut.</p>
+    </div>
+
+    <!-- Top row: 2 featured videos -->
+    <div class="reel-grid reveal reveal-d1">
+      <!-- Video 1: YouTube xPgRj_p5v7k -->
+      <div class="video-frame">
+        <div class="vf-perfs"><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div></div>
+        <div class="vf-embed">
+          <iframe src="https://www.youtube.com/embed/xPgRj_p5v7k?rel=0&modestbranding=1" title="Video 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="vf-label">
+          <span class="vf-title">Highlight Reel 01</span>
+          <span class="vf-badge vf-badge-yt">YouTube</span>
+        </div>
+        <div class="vf-perfs-bot"><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div></div>
+      </div>
+
+      <!-- Video 2: YouTube Q5xWiU6dN40 -->
+      <div class="video-frame">
+        <div class="vf-perfs"><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div></div>
+        <div class="vf-embed">
+          <iframe src="https://www.youtube.com/embed/Q5xWiU6dN40?rel=0&modestbranding=1" title="Video 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="vf-label">
+          <span class="vf-title">Highlight Reel 02</span>
+          <span class="vf-badge vf-badge-yt">YouTube</span>
+        </div>
+        <div class="vf-perfs-bot"><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div></div>
+      </div>
+    </div>
+
+    <!-- Bottom row: 4 smaller videos -->
+    <div class="reel-grid-bottom reveal reveal-d2">
+      <!-- Video 3: Vimeo 339746488 -->
+      <div class="video-frame">
+        <div class="vf-perfs"><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div></div>
+        <div class="vf-embed">
+          <iframe src="https://player.vimeo.com/video/339746488?title=0&byline=0&portrait=0&color=c9922a" title="Video 3" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="vf-label">
+          <span class="vf-title">Campaign Film 01</span>
+          <span class="vf-badge vf-badge-vi">Vimeo</span>
+        </div>
+        <div class="vf-perfs-bot"><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div></div>
+      </div>
+
+      <!-- Video 4: Vimeo 141295578 -->
+      <div class="video-frame">
+        <div class="vf-perfs"><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div></div>
+        <div class="vf-embed">
+          <iframe src="https://player.vimeo.com/video/141295578?title=0&byline=0&portrait=0&color=c9922a" title="Video 4" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="vf-label">
+          <span class="vf-title">Campaign Film 02</span>
+          <span class="vf-badge vf-badge-vi">Vimeo</span>
+        </div>
+        <div class="vf-perfs-bot"><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div></div>
+      </div>
+
+      <!-- Video 5: YouTube FVayqmVi5l8 -->
+      <div class="video-frame">
+        <div class="vf-perfs"><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div></div>
+        <div class="vf-embed">
+          <iframe src="https://www.youtube.com/embed/FVayqmVi5l8?rel=0&modestbranding=1" title="Video 5" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="vf-label">
+          <span class="vf-title">Highlight Reel 03</span>
+          <span class="vf-badge vf-badge-yt">YouTube</span>
+        </div>
+        <div class="vf-perfs-bot"><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div></div>
+      </div>
+
+      <!-- Video 6: YouTube SDYptuY49jA -->
+      <div class="video-frame">
+        <div class="vf-perfs"><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div></div>
+        <div class="vf-embed">
+          <iframe src="https://www.youtube.com/embed/SDYptuY49jA?rel=0&modestbranding=1" title="Video 6" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="vf-label">
+          <span class="vf-title">Highlight Reel 04</span>
+          <span class="vf-badge vf-badge-yt">YouTube</span>
+        </div>
+        <div class="vf-perfs-bot"><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div><div class="vf-perf"></div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── SCENE 02 — CASE STUDIES ── -->
+<section id="scene-01">
+  <div class="press-kit">
+    <div style="position:relative;margin-bottom:56px;" class="reveal">
+      <div class="scene-label">Scene 02</div>
+      <h2 class="section-title">The <strong>Record</strong></h2>
+      <span class="scene-num">02</span>
+    </div>
+
+    <div class="scene-card reveal">
+      <div class="scene-card-meta">
+        <div>
+          <div class="scene-card-num">// PROD-001 &mdash; Global Broadcast</div>
+          <div class="scene-card-title">Athens Olympics 2004</div>
+          <div class="scene-card-sub">Camera Crew &mdash; Live Events</div>
+        </div>
+        <div class="scene-card-tags">
+          <span class="scene-tag">Broadcast</span><span class="scene-tag">Live Events</span><span class="scene-tag">International</span><span class="scene-tag">4B Viewers</span>
+        </div>
+      </div>
+      <div class="scene-card-body">
+        <p>Part of the camera crew for the 2004 Athens Summer Olympics broadcast — one of the most-watched events in television history. Managed audio across simultaneous live events, coordinating with international broadcast teams under zero-failure conditions.</p>
+        <p>No retakes. No safety net. Every shot counted. That discipline lives in every project I’ve led since.</p>
+        <div class="scene-results">
+          <div class="result-cell"><span class="result-num">4B</span><div class="result-lbl">Global Viewers</div></div>
+          <div class="result-cell"><span class="result-num">200+</span><div class="result-lbl">Nations Broadcast</div></div>
+          <div class="result-cell"><span class="result-num">0</span><div class="result-lbl">Takes to Get It Right</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene-card reveal reveal-d1">
+      <div class="scene-card-meta">
+        <div>
+          <div class="scene-card-num">// PROD-002 &mdash; Feature Film</div>
+          <div class="scene-card-title">Apocalypto</div>
+          <div class="scene-card-sub">Icon Productions &mdash; Dir. Mel Gibson</div>
+        </div>
+        <div class="scene-card-tags">
+          <span class="scene-tag">Feature Film</span><span class="scene-tag">$40M Budget</span><span class="scene-tag">Icon Productions</span><span class="scene-tag">Hollywood</span>
+        </div>
+      </div>
+      <div class="scene-card-body">
+        <p>Worked in-office at Icon Productions during production of Mel Gibson’s Apocalypto — a $40M feature film. Front row to high-budget, high-pressure creative decision-making at the director and executive level.</p>
+        <p>Hollywood’s creative standards don’t stay in the building. They become the benchmark for everything after.</p>
+        <div class="scene-results">
+          <div class="result-cell"><span class="result-num">$40M</span><div class="result-lbl">Production Budget</div></div>
+          <div class="result-cell"><span class="result-num">Icon</span><div class="result-lbl">Productions</div></div>
+          <div class="result-cell"><span class="result-num">Dir.</span><div class="result-lbl">Mel Gibson</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene-card reveal reveal-d2">
+      <div class="scene-card-meta">
+        <div>
+          <div class="scene-card-num">// PROD-003 &mdash; National Campaign</div>
+          <div class="scene-card-title">National PSA &mdash; 160K Airings</div>
+          <div class="scene-card-sub">Keep America Beautiful &mdash; All 50 States</div>
+        </div>
+        <div class="scene-card-tags">
+          <span class="scene-tag">National TV</span><span class="scene-tag">50 States</span><span class="scene-tag">PSA</span><span class="scene-tag">Media Value $77.5M</span>
+        </div>
+      </div>
+      <div class="scene-card-body">
+        <p>Led the creative direction of a national PSA campaign that aired 160,000+ times across all 50 states — the scale and distribution complexity of a major entertainment marketing push, on a nonprofit budget.</p>
+        <p>Result: $77.5M in earned media value. 745M+ impressions. Creative that broadcasters chose to run.</p>
+        <div class="scene-results">
+          <div class="result-cell"><span class="result-num">160K+</span><div class="result-lbl">Airings</div></div>
+          <div class="result-cell"><span class="result-num">$77.5M</span><div class="result-lbl">Media Value</div></div>
+          <div class="result-cell"><span class="result-num">745M+</span><div class="result-lbl">Impressions</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SCENE 03 — FILM STRIP CREDENTIALS ── -->
+<section id="scene-02">
+  <div class="scene-02-header reveal">
+    <div class="scene-label">Scene 03</div>
+    <h2 class="section-title">The <strong>Credits</strong></h2>
+  </div>
+  <div class="filmstrip-wrap">
+    <div class="filmstrip" id="filmstrip">
+      <div class="film-frame">
+        <div class="film-perfs"><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div></div>
+        <div class="film-content"><div class="film-eyebrow">Frame 01 &mdash; Production</div><div class="film-title">Live Broadcast</div><p class="film-body">Zero-failure live event production. Multi-camera coordination. Real-time creative decision-making under <strong>global audience pressure</strong>.</p></div>
+        <div class="film-perfs-bot"><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div></div>
+      </div>
+      <div class="film-frame">
+        <div class="film-perfs"><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div></div>
+        <div class="film-content"><div class="film-eyebrow">Frame 02 &mdash; Narrative</div><div class="film-title">Visual Storytelling</div><p class="film-body">Feature film production exposure. Understanding of how <strong>story structure, pacing, and visual language</strong> drive audience response at scale.</p></div>
+        <div class="film-perfs-bot"><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div></div>
+      </div>
+      <div class="film-frame">
+        <div class="film-perfs"><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div></div>
+        <div class="film-content"><div class="film-eyebrow">Frame 03 &mdash; Direction</div><div class="film-title">Creative Leadership</div><p class="film-body">15+ years directing creative teams across five verticals. <strong>From brief to final cut</strong> &mdash; with the production fluency to make it happen on time.</p></div>
+        <div class="film-perfs-bot"><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div></div>
+      </div>
+      <div class="film-frame">
+        <div class="film-perfs"><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div></div>
+        <div class="film-content"><div class="film-eyebrow">Frame 04 &mdash; Scale</div><div class="film-title">National Distribution</div><p class="film-body">Campaigns at broadcast scale: 160K+ TV airings, all 50 states. <strong>Entertainment-grade reach</strong>, nonprofit creative budgets.</p></div>
+        <div class="film-perfs-bot"><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div></div>
+      </div>
+      <div class="film-frame">
+        <div class="film-perfs"><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div></div>
+        <div class="film-content"><div class="film-eyebrow">Frame 05 &mdash; Brand</div><div class="film-title">Brand for Audience</div><p class="film-body">Entertainment brands live or die on cultural resonance. I build <strong>brand systems that audiences feel</strong> &mdash; not just messaging they see.</p></div>
+        <div class="film-perfs-bot"><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div></div>
+      </div>
+      <div class="film-frame">
+        <div class="film-perfs"><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div></div>
+        <div class="film-content"><div class="film-eyebrow">Frame 06 &mdash; Awards</div><div class="film-title">NAGC First Place</div><p class="film-body">National Association of Government Communicators. <strong>First Place</strong> + Blue Pencil Award of Excellence for creative work under federal contract.</p></div>
+        <div class="film-perfs-bot"><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div><div class="film-perf"></div></div>
+      </div>
+    </div>
+    <div class="filmstrip-nav">
+      <button class="filmstrip-btn" onclick="document.getElementById('filmstrip').scrollBy({left:-296,behavior:'smooth'})">&#8592; Prev Frame</button>
+      <button class="filmstrip-btn" onclick="document.getElementById('filmstrip').scrollBy({left:296,behavior:'smooth'})">Next Frame &#8594;</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── SCENE 04 — NLE TIMELINE ── -->
+<section id="scene-03">
+  <div class="nle-wrap">
+    <div style="position:relative;margin-bottom:0;" class="reveal">
+      <div class="scene-label">Scene 04</div>
+      <h2 class="section-title">Director&#8217;s <strong>Cut</strong></h2>
+      <p style="font-family:var(--font-body);font-size:.9rem;font-weight:400;color:rgba(240,232,216,.82)!important;margin-top:8px;max-width:480px;">Five career stops. One timeline. Scrub through the reel.</p>
+    </div>
+    <div class="nle-player reveal reveal-d1">
+      <div class="nle-screen">
+        <div class="nle-scene-display">
+          <div class="nle-scene-num-display" id="nle-scene-num">Scene 01 of 05</div>
+          <div class="nle-scene-title-display" id="nle-scene-title">IC-CS Group</div>
+          <div class="nle-scene-role" id="nle-scene-role">Creative Director &mdash; 2015&ndash;Present</div>
+          <div class="nle-scene-body-display" id="nle-scene-body">Fractional CD across five verticals. The through-line: communication strategy applied to brand — closing the gap between what organizations build and what audiences believe.</div>
+        </div>
+      </div>
+      <div class="nle-transport">
+        <button class="nle-btn" id="nle-prev" onclick="nleStep(-1)">&#9664;</button>
+        <button class="nle-btn" id="nle-play" onclick="nleTogglePlay()">&#9654;</button>
+        <button class="nle-btn" id="nle-next" onclick="nleStep(1)">&#9654;&#9654;</button>
+        <span class="nle-timecode" id="nle-tc">01:00:00:00</span>
+      </div>
+      <div class="nle-timeline">
+        <div class="nle-track">
+          <span class="nle-track-label">Role</span>
+          <div class="nle-track-lane" id="nle-lane-role">
+            <div class="nle-clip active" style="left:0%;width:19%;" data-scene="0"></div>
+            <div class="nle-clip" style="left:20%;width:19%;" data-scene="1"></div>
+            <div class="nle-clip" style="left:40%;width:19%;" data-scene="2"></div>
+            <div class="nle-clip" style="left:60%;width:19%;" data-scene="3"></div>
+            <div class="nle-clip" style="left:80%;width:19%;" data-scene="4"></div>
+            <div class="nle-playhead" id="nle-ph" style="left:9%"></div>
+          </div>
+        </div>
+        <div class="nle-track">
+          <span class="nle-track-label">Impact</span>
+          <div class="nle-track-lane">
+            <div style="position:absolute;top:2px;bottom:2px;left:0%;width:19%;background:rgba(201,146,42,.06);border:1px solid rgba(201,146,42,.12);"></div>
+            <div style="position:absolute;top:2px;bottom:2px;left:20%;width:19%;background:rgba(201,146,42,.14);border:1px solid rgba(201,146,42,.2);"></div>
+            <div style="position:absolute;top:2px;bottom:2px;left:40%;width:19%;background:rgba(201,146,42,.22);border:1px solid rgba(201,146,42,.3);"></div>
+            <div style="position:absolute;top:2px;bottom:2px;left:60%;width:19%;background:rgba(201,146,42,.12);border:1px solid rgba(201,146,42,.2);"></div>
+            <div style="position:absolute;top:2px;bottom:2px;left:80%;width:19%;background:rgba(201,146,42,.08);border:1px solid rgba(201,146,42,.15);"></div>
+          </div>
+        </div>
+      </div>
+      <div class="nle-scrubber-wrap">
+        <input type="range" class="nle-scrubber" id="nle-scrubber" min="0" max="4" step="1" value="0">
+        <div class="nle-scene-dots">
+          <div class="nle-dot active" onclick="nleGoto(0)"></div>
+          <div class="nle-dot" onclick="nleGoto(1)"></div>
+          <div class="nle-dot" onclick="nleGoto(2)"></div>
+          <div class="nle-dot" onclick="nleGoto(3)"></div>
+          <div class="nle-dot" onclick="nleGoto(4)"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SCENE 05 — APPROACH ── -->
+<section id="scene-04">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div style="position:relative;margin-bottom:0;" class="reveal">
+      <div class="scene-label">Scene 05</div>
+      <h2 class="section-title">The <strong>Method</strong></h2>
+    </div>
+    <div class="approach-grid">
+      <div class="approach-cell reveal">
+        <span class="approach-n">I</span>
+        <div class="approach-title">Production Discipline</div>
+        <p class="approach-body">Feature film and live broadcast set the standard: <strong>every creative decision is final.</strong> No retakes in the real world. I bring that discipline to brand work &mdash; make it right before it ships.</p>
+      </div>
+      <div class="approach-cell reveal reveal-d1">
+        <span class="approach-n">II</span>
+        <div class="approach-title">Audience First</div>
+        <p class="approach-body">Entertainment lives or dies on how it makes audiences <em>feel.</em> Brand creative is no different. <strong>I design for the emotional response first</strong>, then reverse-engineer the execution to deliver it consistently.</p>
+      </div>
+      <div class="approach-cell reveal reveal-d2">
+        <span class="approach-n">III</span>
+        <div class="approach-title">Scale Without Dilution</div>
+        <p class="approach-body">160,000 airings of the same creative. 4 billion people watching the same broadcast. <strong>The best creative holds at any scale</strong> &mdash; because it was built around a truth, not a trend.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA — END CREDITS -->
+<section id="cta">
+  <div class="credits-bg"></div>
+  <div class="credits-rule reveal"></div>
+  <div class="credits-label reveal reveal-d1">That&#8217;s a wrap &mdash; on background. Now let&#8217;s talk.</div>
+  <h2 class="cta-title reveal reveal-d2">
+    <strong>Ready to Roll?</strong>
+    Lights.<br>Camera.<br><em>Brief.</em>
+  </h2>
+  <p class="cta-sub reveal reveal-d3">You need a Creative Director who understands <strong>production reality, audience psychology, and brand discipline</strong> at entertainment scale. That&#8217;s what I bring.</p>
+  <a href="/hire/" class="cta-btn reveal reveal-d4"><span>&#9654; Start the Conversation</span></a>
+  <div class="credits-divider"></div>
+</section>
+
+
+
+<script>
+window.addEventListener('scroll',function(){document.getElementById('main-nav').classList.toggle('scrolled',window.scrollY>60);},{passive:true});
+
+(function(){
+  var io=new IntersectionObserver(function(e){e.forEach(function(el){if(el.isIntersecting){el.target.classList.add('visible');io.unobserve(el.target);}});},{threshold:.06});
+  document.querySelectorAll('.reveal,.reveal-fade').forEach(function(el){io.observe(el);});
+})();
+
+(function(){
+  var scenes=[
+    {num:'Scene 01 of 05',title:'IC-CS Group',role:'Creative Director — 2015–Present',body:'Fractional CD across five verticals. The through-line: communication strategy applied to brand — closing the gap between what organizations build and what audiences believe.',tc:'01:00:00:00',ph:'9%'},
+    {num:'Scene 02 of 05',title:'Keep America Beautiful',role:'Senior Creative Director — 2020–2023',body:'Rebranded a legacy national nonprofit. 160K+ TV airings across all 50 states. Brand architecture, campaign creative, full production pipeline — supporting a national movement that reached 11.9M participants.',tc:'02:00:00:00',ph:'29%'},
+    {num:'Scene 03 of 05',title:'Loch Harbour / DHS S&T',role:'Lead Creative Director — 2017–2019',body:'Federal brand work. NAGC First Place + Blue Pencil Award of Excellence. Government communicators at national scale — where every word and image is audited at the highest level.',tc:'03:00:00:00',ph:'49%'},
+    {num:'Scene 04 of 05',title:'Ecrion Software',role:'Marketing Director — 2015–2016',body:'Full GTM rebuild for enterprise SaaS. Repositioned a European software company for the North American market — brand, messaging, digital, and demand generation from scratch.',tc:'04:00:00:00',ph:'69%'},
+    {num:'Scene 05 of 05',title:'Athens Olympics / Apocalypto',role:'Production Crew — 2004–2006',body:'Camera crew, Athens 2004 Summer Olympics. In-office at Icon Productions during Apocalypto production. The foundation: what zero-failure, high-stakes creative production actually looks like.',tc:'05:00:00:00',ph:'89%'}
+  ];
+  var current=0,playing=false,playTimer=null;
+  function nleRender(idx){
+    var s=scenes[idx];
+    document.getElementById('nle-scene-num').textContent=s.num;
+    document.getElementById('nle-scene-title').textContent=s.title;
+    document.getElementById('nle-scene-role').textContent=s.role;
+    document.getElementById('nle-scene-body').textContent=s.body;
+    document.getElementById('nle-tc').textContent=s.tc;
+    document.getElementById('nle-ph').style.left=s.ph;
+    document.getElementById('nle-scrubber').value=idx;
+    document.querySelectorAll('.nle-clip').forEach(function(c,i){c.classList.toggle('active',i===idx);});
+    document.querySelectorAll('.nle-dot').forEach(function(d,i){d.classList.toggle('active',i===idx);});
+  }
+  window.nleStep=function(dir){current=Math.max(0,Math.min(4,current+dir));nleRender(current);};
+  window.nleGoto=function(idx){current=idx;nleRender(current);};
+  window.nleTogglePlay=function(){
+    playing=!playing;
+    document.getElementById('nle-play').textContent=playing?'⏸':'▶';
+    if(playing){playTimer=setInterval(function(){current=(current+1)%5;nleRender(current);},2200);}
+    else{clearInterval(playTimer);}
+  };
+  document.getElementById('nle-scrubber').addEventListener('input',function(){current=parseInt(this.value);nleRender(current);});
+})();
+</script>
+  <footer id="site-footer"></footer>
+  <script src="/shared/nav.js" defer></script>
+</body>
+</html>
