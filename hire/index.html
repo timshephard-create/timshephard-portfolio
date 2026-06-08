@@ -677,42 +677,21 @@ async function generateBrief() {
   };
   const L = (k,v) => labelMaps[k]?.[v] || v;
 
-  const prompt = `You are Tim Shephard, a Creative Director with experience spanning Olympic broadcasts, federal communications (DHS), SaaS marketing (Ecrion Software), Hollywood production (Icon Productions), and national brand campaigns that mobilised 11.9 million people and drove $300M in economic impact.
-
-A potential client just completed your intake form. Here is everything you know about them:
-- Name: ${submitterName || 'not provided'}
-- Organisation: ${submitterOrg || 'not provided'}
-- Challenge: ${L('challenge', briefState.challenge)}
-- Industry: ${L('industry', briefState.industry)}
-- Timeline: ${L('timeline', briefState.timeline)}
-- Budget: ${L('budget', budget)}
-
-Write a personalised project brief in Tim's voice — pragmatic, direct, no fluff, genuinely useful. Collaborative, not salesy. Backs everything with real experience.
-
-Respond in this EXACT JSON format (no markdown, no backticks, raw JSON only):
-{
-  "overview": "2–3 sentences on what you understand about their situation. Sound like you've thought about their specific industry.",
-  "approach": "3–4 sentences on how you'd approach this. Reference relevant experience (KAB/DHS/Ecrion/Olympics) only where genuinely applicable.",
-  "investment": "1–2 sentences contextualising the budget range and whether it's realistic for the scope.",
-  "steps": ["Step 1", "Step 2", "Step 3"],
-  "ctaHeadline": "Short, warm headline referencing their challenge or org",
-  "ctaEmailSubject": "Email subject line pre-filled for booking a call"
-}`;
-
   try {
-    const res = await fetch('https://cmv-proxy.vercel.app/api/anthropic', {
+    const res = await fetch('/api/brief', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 900,
-        messages: [{ role: 'user', content: prompt }]
+        challenge: briefState.challenge,
+        industry:  briefState.industry,
+        timeline:  briefState.timeline,
+        budget:    selectedBudget,   // null if unselected; server treats as "not specified"
+        name:      submitterName,
+        company:   submitterOrg
       })
     });
-    const data = await res.json();
-    const brief = JSON.parse((data.content?.[0]?.text || '').replace(/```json|```/g, '').trim());
+    if (!res.ok) throw new Error('Brief request failed: ' + res.status);
+    const brief = await res.json();   // /api/brief returns the parsed brief object directly
     renderBrief(brief);
   } catch(err) {
     // Graceful fallback brief
