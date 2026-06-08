@@ -1,4 +1,11 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "builds": [
+    { "src": "api/*.js", "use": "@vercel/node" },
+    { "src": "*.html", "use": "@vercel/static" },
+    { "src": "*/index.html", "use": "@vercel/static" },
+    { "src": "shared/**", "use": "@vercel/static" },
+    { "src": "public/**", "use": "@vercel/static" }
+  ]
 }
