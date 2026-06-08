@@ -71,7 +71,7 @@ def extract_b64_image(html, out_path):
             os.makedirs(os.path.dirname(out_path), exist_ok=True)
             with open(out_path, 'wb') as f:
                 f.write(base64.b64decode(b64))
-            html = html.replace(m.group(0), 'src="/public/images/tim-shephard.jpg"')
+            html = html.replace(m.group(0), 'src="/images/tim-shephard.jpg"')
             print('  [img] Extracted photo ->', out_path)
         except Exception as e:
             print('  [img] Failed:', e)
@@ -164,7 +164,7 @@ print('  done')
 # ── 3. about/index.html ─────────────────────────────────
 print('Building about/index.html...')
 src = rf(SRC + '/pg_about.html')
-src = extract_b64_image(src, DEST + '/public/images/tim-shephard.jpg')
+src = extract_b64_image(src, DEST + '/images/tim-shephard.jpg')
 css = get_css(src)
 body = strip_footer(strip_nav(get_body(src)))
 body = sub(body, '<h2>Fifteen Years.<br>Six Industries.<br>One Method.</h2>',
