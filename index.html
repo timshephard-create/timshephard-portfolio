@@ -51,8 +51,8 @@ body::before {
 /* ── MAIN SPLIT ── */
 .split-container {
   position: fixed;
-  top: 0; left: 0; right: 0;
-  bottom: 90px; /* leave room for the third strip */
+  top: 132px; left: 0; right: 0;   /* sits below the Start Here band */
+  bottom: 90px;                    /* leaves room for the third strip */
   display: flex;
   z-index: 9000;
 }
@@ -151,82 +151,45 @@ body::before {
   transition: box-shadow 0.3s ease;
 }
 
-/* ── CENTER TIEBREAKER CTA ── */
-/* REST (50/50): two stacked, full-bleed copies clipped at a STATIC 50% seam —
-   white over the dark Work half, orange over the light Story half. The clip does
-   not move at rest. mix-blend-mode is gone (it inverted to near-black on the warm
-   white panel and vanished).
-   HOVER: the divide shifts to 58/42 and — at this headline width — the CTA crosses
-   the new seam (measured: "START HERE." ≈330px, the seam only moves ~8% from center,
-   so it clears only above ~2200px wide). So rather than track a moving clip we DROP
-   the split and paint the whole CTA a single color. Orange #e8420a is legible on
-   BOTH panels, so either hover → all orange. (White-on-dark lives only at rest.) */
-.center-cta {
-  position: absolute;
-  inset: 0;
-  z-index: 20;
-  pointer-events: none;            /* panels keep their own hover/click */
-  animation: fadeIn 0.9s ease 0.5s both;
+/* ── TIER 1: START HERE — primary guided entry point (full-width top band) ── */
+.start-here {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 132px;
+  z-index: 9200;
+  background: var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  animation: fadeIn 0.7s ease both;
+  transition: background 0.3s var(--ease);
 }
-.cc-copy {
-  position: absolute;
-  inset: 0;
-  transition: clip-path 0.25s ease, opacity 0.25s ease;
-}
-.cc-onDark  { clip-path: inset(0 50% 0 0); }   /* left half — over dark Work panel */
-.cc-onLight { clip-path: inset(0 0 0 50%); }   /* right half — over light Story panel */
-.cc-onDark  .center-cta-head,
-.cc-onDark  .center-cta-sub  { color: var(--white); }
-.cc-onLight .center-cta-head { color: var(--orange); }
-.cc-onLight .center-cta-sub  { color: var(--ink); }   /* rest: ink on warm white (~16:1, AA). Orange (~3.8:1) failed at 11px. */
-
-/* hover either panel → single orange CTA: hide the white copy, unclip the orange one.
-   The sub-line goes back to orange so it stays readable when the orange copy sits
-   over the dark panel (hover-Work); orange-on-light is acceptable for the transient hover. */
-.split-container:has(.panel-show:hover) .cc-onDark,
-.split-container:has(.panel-tell:hover) .cc-onDark  { opacity: 0; }
-.split-container:has(.panel-show:hover) .cc-onLight,
-.split-container:has(.panel-tell:hover) .cc-onLight { clip-path: inset(0 0 0 0); }
-.split-container:has(.panel-show:hover) .cc-onLight .center-cta-sub,
-.split-container:has(.panel-tell:hover) .cc-onLight .center-cta-sub { color: var(--orange); }
-
-.center-cta-head,
-.center-cta-sub {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  white-space: nowrap;
-  text-align: center;
-}
-.center-cta-head {
-  bottom: calc(50% + 24px);        /* just above the divider dot */
+.start-here:hover { background: var(--orange-hi); }
+.sh-head {
   font-family: var(--font-disp);
   font-weight: 900;
   font-style: italic;
   text-transform: uppercase;
   letter-spacing: -0.025em;
-  line-height: 0.88;
-  font-size: clamp(2.5rem, 4.5vw, 4.5rem);
+  line-height: 0.9;
+  font-size: clamp(2rem, 3.4vw, 2.85rem);
+  color: var(--white);
 }
-.center-cta-sub {
-  top: calc(50% + 24px);           /* just below the divider dot */
+.sh-sub {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   letter-spacing: 0.08em;
+  color: var(--ink);
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  transition: gap 0.3s var(--ease);
 }
-.cc-hit {                          /* clickable target over the text */
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: min(80vw, 360px);
-  height: 140px;
-  pointer-events: auto;
-  cursor: pointer;
-}
-.center-cta:hover .center-cta-sub { gap: 16px; }
+.start-here:hover .sh-sub { gap: 16px; }
 
 /* ── PANEL BASE ── */
 .panel {
@@ -389,28 +352,39 @@ body::before {
 .panel-show { animation: slideLeft  0.9s var(--ease) 0.15s both; }
 .panel-tell  { animation: slideRight 0.9s var(--ease) 0.25s both; }
 
-/* ── MOBILE ── */
+/* ── MOBILE: static vertical stack, page scrolls (Start Here → Work → Story → Building) ── */
 @media (max-width: 700px) {
-  .split-container { flex-direction: column; bottom: 72px; }
-  .panel { padding: 40px 28px 48px; }
-  .panel-stat { display: none; }
-  .divider { top: 50%; left: 0; right: 0; bottom: auto; width: 100%; height: 1px; transform: none; }
-  .divider::after { top: 50%; left: 50%; }
-  /* stacked panels → two-tone clipped top/bottom; the divide doesn't move here, so
-     keep the rest split stable and don't apply the desktop orange-on-hover swap */
-  .cc-onDark,
-  .split-container:has(.panel-show:hover) .cc-onDark,
-  .split-container:has(.panel-tell:hover) .cc-onDark { clip-path: inset(0 0 50% 0); opacity: 1; }   /* top — dark Work */
-  .cc-onLight,
-  .split-container:has(.panel-show:hover) .cc-onLight,
-  .split-container:has(.panel-tell:hover) .cc-onLight { clip-path: inset(50% 0 0 0); }              /* bottom — light Story */
-  /* divide doesn't move on mobile, so keep the bottom sub-line ink (don't flip to orange on touch) */
-  .split-container:has(.panel-show:hover) .cc-onLight .center-cta-sub,
-  .split-container:has(.panel-tell:hover) .cc-onLight .center-cta-sub { color: var(--ink); }
-  .split-container:has(.panel-show:hover) .divider,
-  .split-container:has(.panel-tell:hover) .divider { left: 0; top: 50%; }
+  body { overflow-x: hidden; }
+  /* stacked full-width blocks: drop the horizontal slide-in (caused transient x-overflow) */
+  .panel-show, .panel-tell { animation: fadeIn 0.6s ease both; }
+  /* TIER 1 */
+  .start-here {
+    position: static;
+    height: auto;
+    min-height: 104px;
+    flex-direction: column;
+    gap: 10px;
+    padding: 30px 24px;
+    text-align: center;
+  }
+  /* TIER 2 */
+  .split-container {
+    position: static;
+    flex-direction: column;
+    bottom: auto;
+    z-index: auto;
+  }
+  .panel { min-height: 46vh; padding: 44px 28px 48px; }
+  .divider { display: none; }
   .panel-headline { font-size: clamp(3rem, 10vw, 5rem); }
-  .third-strip { height: 72px; gap: 16px; }
+  /* TIER 3 */
+  .third-strip {
+    position: static;
+    height: auto;
+    min-height: 88px;
+    padding: 22px 24px;
+    gap: 16px;
+  }
   .strip-label, .strip-divider:first-of-type { display: none; }
 }
   </style>
@@ -420,23 +394,16 @@ body::before {
 
 
 
+<!-- TIER 1: START HERE — primary guided entry point (full-width top band) -->
+<a href="/explore/" class="start-here" id="start-here" aria-label="Start here — not sure where to go? Explore interactively.">
+  <span class="sh-head">Start Here.</span>
+  <span class="sh-sub">not sure where to go? →</span>
+</a>
+
+<!-- TIER 2: MY WORK + MY STORY -->
 <div class="split-container" id="ts-split">
 
   <div class="divider"></div>
-
-  <!-- CENTER TIEBREAKER CTA — rest: two-tone clipped at a static 50% seam (white over
-       the dark Work half, orange over the light Story half). hover: see styles. -->
-  <div class="center-cta" id="center-cta">
-    <div class="cc-copy cc-onDark">
-      <span class="center-cta-head">Start Here.</span>
-      <span class="center-cta-sub">not sure where to go? →</span>
-    </div>
-    <div class="cc-copy cc-onLight">
-      <span class="center-cta-head">Start Here.</span>
-      <span class="center-cta-sub">not sure where to go? →</span>
-    </div>
-    <a href="/explore/" class="cc-hit" aria-label="Start here — not sure where to go? Explore interactively."></a>
-  </div>
 
   <!-- LEFT: SHOW / THE WORK -->
   <div class="panel panel-show" onclick="window.location.href='/work/'">
@@ -480,7 +447,7 @@ document.addEventListener('mousemove', e => {
   cursor.style.left = mx + 'px';
   cursor.style.top  = my + 'px';
 });
-document.querySelectorAll('.panel, .panel-cta, .nav-logo, .third-strip').forEach(el => {
+document.querySelectorAll('.panel, .panel-cta, .start-here, .third-strip').forEach(el => {
   el.addEventListener('mouseenter', () => cursor.classList.add('expanded'));
   el.addEventListener('mouseleave', () => cursor.classList.remove('expanded'));
 });
