@@ -11,7 +11,7 @@ Scope: this file is the single source of truth for every reader-facing claim in 
 ## 1. ATTRIBUTION LAW (non-negotiable, applies to every line of copy)
 
 **Tier A — directly attributable to Tim, stated confidently, no hedging:**
-- **160K+ PSA airings** across all 50 states — Keep America Beautiful, "Recycle Like Everyone's Watching"
+- **160K+ PSA airings, aired across all 50 states** — Keep America Beautiful, "Recycle Like Everyone's Watching." (The all-50-states claim is itself Tier A — verified by Tim's records, ruling 2026-07-06.)
 - **$77.5M earned media value** — same campaign
 - **4.5M+ GIF views** — KAB branded Giphy channel
 
