@@ -11,3 +11,4 @@
 7. Preserve the Formspree endpoint (`https://formspree.io/f/xnjgddyr`) and GA4 (`G-82B9C9WGMG`).
 8. **The retired cmv-proxy does not return.** Phase 2+ AI features (EDL service, Audit Desk, Brief Desk, Talkback) are built as NEW serverless functions using a dedicated, spend-capped API key — never the old proxy pattern, never a shared/unlimited key.
 9. QA: append `?key=dawn|morning|midday|golden|overnight` to any page URL to force a lighting key; without it the device clock decides.
+10. **This project must never contain a `public/` directory** — Vercel static classification treats it as the output root, so root `index.html` stops being served (see main commits c403901, 69a8b46). Assets live at `/images` and `/fonts` (and `/css`).
