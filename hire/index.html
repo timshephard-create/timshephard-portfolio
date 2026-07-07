@@ -1,738 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hire — Tim Shephard</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,800;0,900;1,800;1,900&family=Barlow:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/shared/styles.css">
-  <!-- GA4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-82B9C9WGMG"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-82B9C9WGMG');
-  </script>
-  <style>
-:root {
-  --white:#faf9f6; --off:#f2f0eb; --ink:#0a0908; --ink2:#1e1c1a;
-  --muted:rgba(10,9,8,0.40); --muted2:rgba(10,9,8,0.22);
-  --orange:#e8420a; --orange-hi:#ff5520; --orange-lo:rgba(232,66,10,0.06);
-  --border:rgba(10,9,8,0.10); --border-hi:rgba(10,9,8,0.22);
-  --font-disp:'Barlow Condensed',sans-serif;
-  --font-body:'Barlow',sans-serif;
-  --font-mono:'DM Mono',monospace;
-  --ease:cubic-bezier(0.16,1,0.3,1);
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;height:100%}
-body{background:var(--white);color:var(--ink);font-family:var(--font-body);font-size:1rem;line-height:1.7;overflow-x:hidden;min-height:100%}
-h1,h2,h3,h4{color:var(--ink)!important}
-p{color:var(--ink)!important}
-
-.reveal{opacity:0;transform:translateY(16px);transition:opacity 0.7s var(--ease),transform 0.7s var(--ease)}
-.reveal.visible{opacity:1;transform:translateY(0)}
-.reveal-d1{transition-delay:0.08s}.reveal-d2{transition-delay:0.16s}
-.reveal-d3{transition-delay:0.24s}.reveal-d4{transition-delay:0.32s}.reveal-d5{transition-delay:0.40s}
-
-/* NAV — persistent visible background on this light page */
-.site-nav{background:rgba(250,249,246,0.97);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border-hi);z-index:400}
-
-/* LAYOUT */
-.page-wrap{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;margin-top:54px}
-
-/* LEFT */
-.left-col{padding:80px 64px 80px 48px;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid var(--border-hi);position:sticky;top:54px;height:calc(100vh - 54px);overflow-y:auto;overflow-x:hidden;scrollbar-width:none;-ms-overflow-style:none}
-.left-col::-webkit-scrollbar{display:none}
-.left-bg-word{position:absolute;bottom:-60px;left:-20px;font-family:var(--font-disp);font-size:clamp(10rem,20vw,18rem);font-weight:900;font-style:italic;color:transparent;-webkit-text-stroke:1px rgba(10,9,8,0.04);text-transform:uppercase;line-height:1;pointer-events:none;letter-spacing:-0.04em;white-space:nowrap}
-.left-top{position:relative;z-index:1}
-.left-label{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--orange)!important;display:flex;align-items:center;gap:10px;margin-bottom:20px;opacity:0;animation:fadeUp 0.7s var(--ease) 0.2s forwards}
-.left-label::before{content:'';width:22px;height:1px;background:var(--orange)}
-.left-h1{font-family:var(--font-disp);font-size:clamp(5rem,9vw,9.5rem);font-weight:900;font-style:italic;line-height:0.85;letter-spacing:-0.03em;text-transform:uppercase;color:var(--ink)!important;margin-bottom:36px;opacity:0;animation:fadeUp 0.9s var(--ease) 0.3s forwards}
-.left-h1 em{color:transparent!important;-webkit-text-stroke:2px var(--ink);font-style:italic;display:block}
-.left-h1 .orange{color:var(--orange)!important;-webkit-text-stroke:0;display:block}
-.left-desc{font-size:1rem;font-weight:300;color:var(--muted)!important;max-width:380px;line-height:1.7;margin-bottom:40px;opacity:0;animation:fadeUp 0.8s var(--ease) 0.5s forwards}
-.left-desc strong{color:var(--ink)!important;font-weight:500}
-.left-bottom{position:relative;z-index:1;opacity:0;animation:fadeUp 0.7s var(--ease) 0.8s forwards}
-
-.avail-strip{display:flex;gap:0;border:1px solid var(--border-hi);margin-bottom:28px}
-.avail-cell{padding:14px 20px;border-right:1px solid var(--border-hi);flex:1}
-.avail-cell:last-child{border-right:none}
-.avail-label{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted)!important;display:block;margin-bottom:4px}
-.avail-val{font-family:var(--font-disp);font-size:1rem;font-weight:800;text-transform:uppercase;letter-spacing:0.04em;color:var(--ink)!important;line-height:1}
-.avail-val.green{color:var(--orange)!important}
-
-.left-contact-links{display:flex;flex-direction:column;gap:2px}
-.contact-link{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--off);text-decoration:none;transition:background 0.25s,padding 0.25s;border:1px solid transparent}
-.contact-link:hover{background:var(--orange-lo);border-color:rgba(232,66,10,0.2);padding-left:20px}
-.contact-link-label{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)!important}
-.contact-link-val{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:0.08em;color:var(--ink)!important;transition:color 0.2s}
-.contact-link:hover .contact-link-val{color:var(--orange)!important}
-
-@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-
-/* RIGHT — shared wrapper */
-.right-col{padding:80px 48px 80px 64px;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
-
-/* ── GATE 1: CONTACT FORM ── */
-#gate-1{transition:opacity 0.4s ease,transform 0.4s var(--ease)}
-#gate-1.exiting{opacity:0;transform:translateX(-24px);pointer-events:none}
-
-.form-header{margin-bottom:48px}
-.form-eyebrow{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)!important;display:block;margin-bottom:12px}
-.form-title{font-family:var(--font-disp);font-size:clamp(2.5rem,3.5vw,3.5rem);font-weight:900;font-style:italic;line-height:0.9;letter-spacing:-0.02em;text-transform:uppercase;color:var(--ink)!important}
-.form-title em{color:var(--orange)!important;font-style:italic}
-
-.field-group{margin-bottom:28px}
-.field-label{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted)!important;display:block;margin-bottom:10px}
-.field-input,.field-select,.field-textarea{width:100%;background:transparent;border:none;border-bottom:1px solid var(--border-hi);padding:12px 0;font-family:var(--font-body);font-size:1rem;font-weight:400;color:var(--ink)!important;outline:none;transition:border-color 0.3s ease;-webkit-appearance:none;appearance:none;border-radius:0}
-.field-input::placeholder,.field-textarea::placeholder{color:var(--muted2)!important}
-.field-input:focus,.field-select:focus,.field-textarea:focus{border-bottom-color:var(--orange)}
-.field-select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(10,9,8,0.4)' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding-right:28px;background-color:transparent}
-.field-select option{background:var(--white);color:var(--ink)}
-.field-textarea{resize:none;height:100px;line-height:1.65}
-.field-row{display:grid;grid-template-columns:1fr 1fr;gap:32px}
-.field-input.error,.field-textarea.error{border-bottom-color:var(--orange)}
-.field-error-msg{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--orange)!important;display:block;margin-top:6px;opacity:0;transition:opacity 0.2s}
-.field-error-msg.visible{opacity:1}
-
-/* Budget pills — replaces budget dropdown for faster scanning */
-.budget-pills{display:flex;gap:8px;flex-wrap:wrap;padding:8px 0 12px}
-.budget-pill{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:0.1em;text-transform:uppercase;padding:7px 14px;border:1px solid var(--border-hi);cursor:pointer;transition:all 0.2s;color:var(--muted)!important;background:transparent;white-space:nowrap}
-.budget-pill:hover{border-color:var(--orange);color:var(--orange)!important}
-.budget-pill.selected{background:var(--ink);border-color:var(--ink);color:var(--white)!important}
-
-.form-submit{margin-top:36px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
-.submit-btn{display:inline-flex;align-items:center;gap:10px;padding:18px 48px;background:var(--ink);color:var(--white)!important;font-family:var(--font-disp);font-size:1.1rem;font-weight:900;letter-spacing:0.08em;text-transform:uppercase;border:none;cursor:pointer;transition:all 0.3s var(--ease);position:relative;overflow:hidden;white-space:nowrap}
-.submit-btn::before{content:'';position:absolute;inset:0;background:var(--orange);transform:translateX(-100%);transition:transform 0.4s var(--ease)}
-.submit-btn:hover::before{transform:translateX(0)}
-.submit-btn:disabled{opacity:0.6;cursor:not-allowed}
-.submit-btn:disabled::before{display:none}
-.submit-btn span{position:relative;z-index:1;color:var(--white)!important}
-.submit-note{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)!important;line-height:1.6}
-
-/* ── GATE 2: BRIEF UPSELL ── */
-#gate-2{
-  display:none;
-  position:absolute;
-  inset:0;
-  padding:80px 48px 80px 64px;
-  flex-direction:column;
-  justify-content:center;
-  opacity:0;
-  transform:translateX(32px);
-  transition:opacity 0.5s var(--ease),transform 0.5s var(--ease);
-}
-#gate-2.active{display:flex}
-#gate-2.entering{opacity:1;transform:translateX(0)}
-
-.gate2-sent-bar{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:14px 18px;
-  background:var(--off);
-  border-left:3px solid var(--orange);
-  margin-bottom:40px;
-}
-.gate2-sent-icon{font-size:1rem;color:var(--orange)!important}
-.gate2-sent-text{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink)!important}
-.gate2-sent-text strong{color:var(--orange)!important}
-
-.gate2-header{margin-bottom:36px}
-.gate2-eyebrow{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)!important;display:block;margin-bottom:12px}
-.gate2-title{font-family:var(--font-disp);font-size:clamp(2rem,3vw,3rem);font-weight:900;font-style:italic;line-height:0.9;letter-spacing:-0.02em;text-transform:uppercase;color:var(--ink)!important;margin-bottom:14px}
-.gate2-title em{color:var(--orange)!important}
-.gate2-sub{font-size:0.88rem;font-weight:300;color:var(--muted)!important;line-height:1.65;max-width:400px}
-.gate2-sub strong{color:var(--ink)!important;font-weight:500}
-
-/* Mini brief steps */
-.mini-steps{display:flex;gap:6px;margin-bottom:28px}
-.mini-step-dot{width:8px;height:8px;border-radius:50%;background:var(--border-hi);transition:background 0.3s}
-.mini-step-dot.done{background:var(--orange)}
-.mini-step-dot.active{background:var(--ink)}
-
-.brief-panel{display:none}
-.brief-panel.active{display:block;animation:fadeUp 0.4s var(--ease) forwards}
-
-.options-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-bottom:28px}
-.opt-card{border:1px solid var(--border-hi);padding:14px 12px;cursor:pointer;transition:all 0.2s;background:transparent;position:relative;text-align:left}
-.opt-card:hover{border-color:var(--orange);background:var(--orange-lo)}
-.opt-card.selected{border-color:var(--ink);background:var(--ink)}
-.opt-card.selected .opt-label{color:var(--white)!important}
-.opt-card.selected .opt-desc{color:rgba(250,249,246,0.5)!important}
-.opt-label{font-family:var(--font-disp);font-size:0.95rem;font-weight:800;text-transform:uppercase;letter-spacing:0.02em;color:var(--ink)!important;line-height:1.1;margin-bottom:4px;display:block;transition:color 0.2s}
-.opt-desc{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:0.08em;color:var(--muted)!important;line-height:1.4;transition:color 0.2s}
-
-.brief-btn-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-.brief-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:var(--ink);color:var(--white)!important;font-family:var(--font-disp);font-size:1rem;font-weight:900;letter-spacing:0.08em;text-transform:uppercase;border:none;cursor:pointer;transition:all 0.3s var(--ease);position:relative;overflow:hidden}
-.brief-btn::before{content:'';position:absolute;inset:0;background:var(--orange);transform:translateX(-100%);transition:transform 0.4s var(--ease)}
-.brief-btn:hover::before{transform:translateX(0)}
-.brief-btn:disabled{opacity:0.4;cursor:not-allowed}
-.brief-btn:disabled::before{display:none}
-.brief-btn span{position:relative;z-index:1;color:var(--white)!important}
-.brief-back-btn{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)!important;background:none;border:none;cursor:pointer;transition:color 0.2s;padding:0}
-.brief-back-btn:hover{color:var(--ink)!important}
-
-/* Brief loading */
-.brief-loading{display:none;padding:32px 0}
-.brief-loading-ring{width:36px;height:36px;border:2px solid var(--border-hi);border-top-color:var(--orange);border-radius:50%;animation:spin 0.8s linear infinite;margin-bottom:16px}
-@keyframes spin{to{transform:rotate(360deg)}}
-.brief-loading-label{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)!important}
-.brief-loading-dots::after{content:'';animation:dots 1.4s steps(4,end) infinite}
-@keyframes dots{0%,20%{content:''}40%{content:'.'}60%{content:'..'}80%,100%{content:'...'}}
-
-/* Brief result */
-.brief-result{display:none;animation:fadeUp 0.5s var(--ease) forwards}
-.brief-result-inner{border:1px solid var(--border-hi);margin-bottom:24px}
-.brief-result-row{padding:16px 20px;border-bottom:1px solid var(--border-hi)}
-.brief-result-row:last-child{border-bottom:none}
-.brief-result-label{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--orange)!important;display:block;margin-bottom:6px}
-.brief-result-text{font-size:0.82rem;line-height:1.7;color:var(--ink)!important}
-.brief-result-steps{list-style:none}
-.brief-result-steps li{display:flex;align-items:flex-start;gap:10px;padding:6px 0;font-size:0.78rem;line-height:1.5;border-bottom:1px solid var(--border);color:var(--ink)!important}
-.brief-result-steps li:last-child{border-bottom:none}
-.step-circle{width:20px;height:20px;border-radius:50%;background:var(--ink);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:0.69rem;flex-shrink:0;margin-top:1px}
-.brief-cta-strip{background:var(--ink);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.brief-cta-text{font-family:var(--font-disp);font-size:1.1rem;font-weight:900;font-style:italic;text-transform:uppercase;color:var(--white)!important;letter-spacing:-0.01em}
-.brief-cta-link{display:inline-block;padding:10px 24px;background:var(--orange);color:var(--white)!important;font-family:var(--font-disp);font-size:0.9rem;font-weight:900;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;transition:background 0.2s;white-space:nowrap}
-.brief-cta-link:hover{background:var(--orange-hi)}
-
-/* Skip brief */
-.gate2-skip{display:block;text-align:center;margin-top:24px;font-family:var(--font-mono);font-size:0.69rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)!important;cursor:pointer;text-decoration:none;transition:color 0.2s}
-.gate2-skip:hover{color:var(--ink)!important}
-
-/* BOTTOM BAR */
-.bottom-bar{border-top:2px solid var(--ink);padding:24px 48px;display:flex;justify-content:space-between;align-items:center;background:var(--white);flex-wrap:wrap;gap:16px}
-.bottom-bar-left{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)!important;display:flex;align-items:center;gap:16px}
-.bottom-bar-dot{width:6px;height:6px;border-radius:50%;background:var(--orange);display:inline-block;animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.7)}}
-.bottom-bar-right{font-family:var(--font-disp);font-size:1rem;font-weight:900;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink)!important}
-
-/* Mobile */
-@media(max-width:900px){
-  .page-wrap{grid-template-columns:1fr}
-  .left-col{position:static;height:auto;overflow:visible;padding:60px 24px 40px;border-right:none;border-bottom:1px solid var(--border-hi)}
-  .right-col{padding:60px 24px 80px}
-  #gate-2{padding:60px 24px 80px;position:relative;inset:auto}
-  .field-row{grid-template-columns:1fr;gap:0}
-  .bottom-bar{padding:20px 24px;flex-direction:column;align-items:flex-start}
-  .left-h1{font-size:clamp(4rem,14vw,7rem)}
-}
-@media(max-height:800px) and (min-width:901px){
-  .left-col{padding-top:48px;padding-bottom:48px}
-  .left-h1{font-size:clamp(3.5rem,7vw,7rem);margin-bottom:20px}
-  .left-desc{margin-bottom:24px;font-size:0.9rem}
-  .avail-strip{margin-bottom:16px}
-}
-@media(max-height:680px) and (min-width:901px){
-  .left-col{padding-top:32px;padding-bottom:32px}
-  .left-h1{font-size:clamp(3rem,6vw,5.5rem);margin-bottom:16px}
-  .left-desc{display:none}
-}
-
-  /* readability overrides */
-  .left-desc { color: rgba(10,9,8,0.72) !important; }
-  .left-desc strong { color: var(--ink) !important; }
-  .gate2-sub { font-size: 1rem !important; color: rgba(10,9,8,0.72) !important; }
-  .gate2-sub strong { color: var(--ink) !important; }
-  .submit-note { font-size: 0.69rem !important; }
-  .brief-result-text { font-size: 0.875rem !important; line-height: 1.65 !important; }
-  .brief-result-steps li { font-size: 0.875rem !important; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hire — The Crew Call · Tim Shephard</title>
+<meta name="description" content="Hire Tim Shephard, Senior Creative Director — full-time, fractional, project-based, or advisory. One form, straight to Tim. Dallas–Fort Worth, TX; built for remote.">
+<link rel="canonical" href="https://timshephard.co/hire">
+<meta property="og:title" content="Hire — The Crew Call · Tim Shephard">
+<meta property="og:description" content="Full-time and fractional creative direction, open. One page, one form, straight to Tim.">
+<meta property="og:image" content="https://timshephard.co/public/images/og-1200x630.png">
+<meta property="og:type" content="website">
+<script>(function(){var h=new Date().getHours();document.documentElement.setAttribute('data-key',h<5?'overnight':h<8?'dawn':h<11?'morning':h<17?'midday':h<20?'golden':'overnight');})();</script>
+<link rel="preload" href="/public/fonts/big-shoulders-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/public/fonts/courier-prime-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/public/fonts/fonts.css">
+<link rel="stylesheet" href="/public/css/edition.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-82B9C9WGMG"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-82B9C9WGMG');</script>
 </head>
 <body>
-  <header id="site-nav" data-page="Hire" data-nav="full"></header>
+<div class="reg reg-tl"></div><div class="reg reg-tr"></div><div class="reg reg-bl"></div><div class="reg reg-br"></div>
 
+<div class="sheet">
 
-<div class="page-wrap">
+  <header class="masthead">
+    <div class="slug"><span><a href="/" style="border-bottom:none">NIGHT CREW — TIMSHEPHARD.CO</a></span><span>EDITION ZERO — CREW CALL</span></div>
+    <h1>Crew Call</h1>
+    <p class="dataline">TIM SHEPHARD — SENIOR CREATIVE DIRECTOR · AVAILABLE<br>
+    FULL-TIME OPEN · FRACTIONAL OPEN · DALLAS–FORT WORTH, TX · BUILT FOR REMOTE</p>
+  </header>
 
-  <!-- LEFT — permanent, doesn't change -->
-  <div class="left-col">
-    <div class="left-bg-word">Hire</div>
-    <div class="left-top">
-      <div class="left-label">Let's Talk</div>
-      <h1 class="left-h1">
-        Let's<br>
-        <em>Build</em><br>
-        <span class="orange">This.</span>
-      </h1>
-      <p class="left-desc">
-        Full-time or fractional. I build creative systems that turn strategy into results — across nonprofit, tech, government, entertainment, and brand. Drop your details and I’ll come back with something useful.
-      </p>
+  <nav class="contents" aria-label="Contents">
+    <a href="/work">← THE WORK</a>
+    <a href="/ventures">THE BENCH</a>
+    <a href="/services">FRONT OFFICE</a>
+    <a href="/interview">TALKBACK</a>
+    <a href="/hire" aria-current="page">CREW CALL</a>
+  </nav>
+
+  <section id="form" aria-label="Booking form">
+    <h2>The Booking Sheet</h2>
+    <p class="body-lg">One form, no gatekeeping — it lands in my inbox, and I reply personally. If forms aren&rsquo;t your speed: <a href="mailto:tim@timshephard.co">tim@timshephard.co</a> or <a href="https://www.linkedin.com/in/tim-shephard">LinkedIn</a>.</p>
+    <form action="https://formspree.io/f/xnjgddyr" method="POST">
+      <input type="hidden" name="_subject" value="Crew call — timshephard.co">
+      <div class="field">
+        <label for="f-name">Name</label>
+        <input id="f-name" type="text" name="name" required autocomplete="name">
+      </div>
+      <div class="field">
+        <label for="f-email">Email</label>
+        <input id="f-email" type="email" name="email" required autocomplete="email">
+      </div>
+      <div class="field">
+        <label for="f-org">Organization</label>
+        <input id="f-org" type="text" name="organization" autocomplete="organization">
+      </div>
+      <div class="field">
+        <label for="f-engagement">Engagement</label>
+        <select id="f-engagement" name="engagement" required>
+          <option value="">Select one…</option>
+          <option value="full-time">Full-time role</option>
+          <option value="fractional">Fractional / part-time CD</option>
+          <option value="audit">Dailies Report — audit</option>
+          <option value="territory">Creative Territory — brief</option>
+          <option value="project">Other project-based</option>
+          <option value="advisory">Advisory / consulting</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-budget">Budget</label>
+        <select id="f-budget" name="budget">
+          <option value="">Prefer to discuss</option>
+          <option value="under-2k">Under $2K</option>
+          <option value="2k-10k">$2K–$10K</option>
+          <option value="10k-50k">$10K–$50K</option>
+          <option value="50k-plus">$50K+</option>
+          <option value="full-time">Full-time role</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-message">The brief</label>
+        <textarea id="f-message" name="message" rows="6" required placeholder="What are we making, and what's in the way?"></textarea>
+      </div>
+      <button type="submit">SEND IT UP →</button>
+      <p class="note">Sends via Formspree; works with JavaScript off. Nothing is auto-generated on this page — a person reads every word.</p>
+    </form>
+  </section>
+
+  <section id="endorsements" aria-label="On the record">
+    <h2>On the Record</h2>
+    <p class="body-lg">Eight people who&rsquo;ve worked with me, on the record:</p>
+    <blockquote>&ldquo;Successfully led the rebranding efforts of the legacy nonprofit.&rdquo;<footer>— HELEN LOWMAN, CEO, KEEP AMERICA BEAUTIFUL</footer></blockquote>
+    <blockquote>&ldquo;Consistently supported me as a strategic thought partner.&rdquo;<footer>— NOAH ULLMAN, CMO, KEEP AMERICA BEAUTIFUL (DIRECT MANAGER)</footer></blockquote>
+    <blockquote>&ldquo;Tim is one of the best creative directors I&rsquo;ve ever worked with in my 13-year career. He does a great job of empowering his staff to explore creative solutions and push the boundaries beyond what clients often expect.&rdquo;<footer>— ISMA&rsquo;IL RASHADA, LOCH HARBOUR GROUP — DHS S&amp;T DIRECTORATE</footer></blockquote>
+    <blockquote>&ldquo;Tim is the total package: Concept, Design, Execution, Polish, Delivery.&rdquo;<footer>— NATHAN McCALL, PALI CAMP</footer></blockquote>
+    <blockquote>&ldquo;His video productions were done on time at a very high level of quality.&rdquo;<footer>— ANDY WEXLER, PRESIDENT, PALI CAMP</footer></blockquote>
+    <blockquote>&ldquo;Tim is an excellent videographer and managed the media team exceptionally well.&rdquo;<footer>— IAN BRASSETT, GENERAL MANAGER, PALI CAMP</footer></blockquote>
+    <div class="ledger">
+      <div><span>ALSO</span><span>RICK RINGEL — DIRECTOR, ECRION SOFTWARE</span><span>tech / SaaS</span></div>
+      <div><span>&nbsp;</span><span>ALEX SAVCHUCK — BAYFIRST · TEAM DOUBLED IN SIZE DURING THE TRANSITION</span><span>tech / finance</span></div>
     </div>
-    <div class="left-bottom">
-      <div class="avail-strip">
-        <div class="avail-cell"><span class="avail-label">Status</span><span class="avail-val green">Available</span></div>
-        <div class="avail-cell"><span class="avail-label">Full-Time</span><span class="avail-val">Open</span></div>
-        <div class="avail-cell"><span class="avail-label">Fractional</span><span class="avail-val">Open</span></div>
-      </div>
-      <div class="left-contact-links">
-        <a href="mailto:tim@timshephard.co" class="contact-link">
-          <span class="contact-link-label">Email</span>
-          <span class="contact-link-val">tim@timshephard.co &rarr;</span>
-        </a>
-        <a href="https://www.linkedin.com/in/tim-shephard" target="_blank" rel="noopener noreferrer" class="contact-link">
-          <span class="contact-link-label">LinkedIn</span>
-          <span class="contact-link-val">linkedin.com/in/tim-shephard &rarr;</span>
-        </a>
-        <a href="/" class="contact-link">
-          <span class="contact-link-label">Portfolio</span>
-          <span class="contact-link-val">timshephard.co &rarr;</span>
-        </a>
-      </div>
-    </div>
-  </div>
+  </section>
 
-  <!-- RIGHT — two gates stacked -->
-  <div class="right-col" id="right-col">
+  <footer class="colophon">
+    <div class="coffee-ring"></div>
+    <nav aria-label="Footer">
+      <a href="/">CALL SHEET</a>
+      <a href="/work">WORK</a>
+      <a href="/ventures">VENTURES</a>
+      <a href="/services">SERVICES</a>
+      <a href="/interview">INTERVIEW</a>
+      <a href="https://www.linkedin.com/in/tim-shephard">LINKEDIN</a>
+    </nav>
+    <p>CREW CALL — the bell rings on my desk, not a CRM&rsquo;s.<br>
+    EDITION ZERO · TIM SHEPHARD — SENIOR CREATIVE DIRECTOR · CREATIVE MIND VENTURES LLC · DALLAS–FORT WORTH, TX · <a href="mailto:tim@timshephard.co">TIM@TIMSHEPHARD.CO</a></p>
+  </footer>
 
-    <!-- ══ GATE 1: Fast Contact ══ -->
-    <div id="gate-1">
-      <div class="form-header reveal">
-        <span class="form-eyebrow">60 seconds. No commitment.</span>
-        <h2 class="form-title">Tell me what you’re working on.</h2>
-      </div>
-
-      <div id="hire-form">
-        <div class="field-row">
-          <div class="field-group reveal reveal-d1">
-            <label class="field-label" for="f-name">Your Name</label>
-            <input class="field-input" type="text" id="f-name" placeholder="First Last" autocomplete="name">
-            <span class="field-error-msg" id="err-name">Name is required</span>
-          </div>
-          <div class="field-group reveal reveal-d2">
-            <label class="field-label" for="f-company">Company / Organization</label>
-            <input class="field-input" type="text" id="f-company" placeholder="Company name">
-          </div>
-        </div>
-
-        <div class="field-row">
-          <div class="field-group reveal reveal-d2">
-            <label class="field-label" for="f-email">Email Address</label>
-            <input class="field-input" type="email" id="f-email" placeholder="you@company.com" autocomplete="email">
-            <span class="field-error-msg" id="err-email">Valid email required</span>
-          </div>
-          <div class="field-group reveal reveal-d3">
-            <label class="field-label" for="f-role">Engagement Type</label>
-            <select class="field-select" id="f-role">
-              <option value="" disabled selected>Select type</option>
-              <option>Full-Time Role</option>
-              <option>Fractional / Part-Time CD</option>
-              <option>Project-Based Engagement</option>
-              <option>Advisory / Consulting</option>
-              <option>Not sure yet</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Budget qualifier — pill format for speed -->
-        <div class="field-group reveal reveal-d3">
-          <label class="field-label">Approximate Budget</label>
-          <div class="budget-pills" id="budget-pills">
-            <button class="budget-pill" data-val="under-2k" onclick="selectBudget(this)">Under $2K</button>
-            <button class="budget-pill" data-val="2k-10k" onclick="selectBudget(this)">$2K–$10K</button>
-            <button class="budget-pill" data-val="10k-50k" onclick="selectBudget(this)">$10K–$50K</button>
-            <button class="budget-pill" data-val="50k-plus" onclick="selectBudget(this)">$50K+</button>
-            <button class="budget-pill" data-val="full-time" onclick="selectBudget(this)">Full-Time</button>
-          </div>
-        </div>
-
-        <div class="field-group reveal reveal-d4">
-          <label class="field-label" for="f-message">What are you trying to build? <span style="opacity:0.5">(optional)</span></label>
-          <textarea class="field-textarea" id="f-message" placeholder="Challenge, timeline, context — anything useful. You can also skip this and tell me on the call."></textarea>
-        </div>
-
-        <div class="form-submit reveal reveal-d5">
-          <button class="submit-btn" id="submit-btn" onclick="submitGate1()">
-            <span id="btn-label">Send Message &rarr;</span>
-          </button>
-          <p class="submit-note">I typically respond<br>within 24 hours.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- ══ GATE 2: Brief Upsell ══ -->
-    <div id="gate-2">
-
-      <!-- Confirmation strip -->
-      <div class="gate2-sent-bar">
-        <span class="gate2-sent-icon">✓</span>
-        <span class="gate2-sent-text">Message sent — I'll reply within 24 hours. <strong id="g2-name-echo"></strong></span>
-      </div>
-
-      <!-- Brief upsell header -->
-      <div class="gate2-header" id="g2-ask">
-        <span class="gate2-eyebrow">// Optional — takes 2 minutes</span>
-        <h2 class="gate2-title">Want a<br><em>Personalised</em><br>Brief?</h2>
-        <p class="gate2-sub">Answer 3 quick questions and I'll generate a <strong>custom project brief</strong> — scope, approach, investment range — sent to your inbox before I reply. It'll make our first call 10x more useful.</p>
-      </div>
-
-      <!-- Step progress dots -->
-      <div class="mini-steps" id="mini-steps">
-        <div class="mini-step-dot active" id="dot-1"></div>
-        <div class="mini-step-dot" id="dot-2"></div>
-        <div class="mini-step-dot" id="dot-3"></div>
-      </div>
-
-      <!-- Brief panels -->
-      <!-- Panel 1: Challenge -->
-      <div class="brief-panel active" id="bp-1">
-        <p class="field-label" style="margin-bottom:14px">What's the core challenge?</p>
-        <div class="options-row" id="challenge-opts">
-          <div class="opt-card" data-val="brand-overhaul" onclick="selectOpt(this,'challenge-opts')">
-            <span class="opt-label">Brand Overhaul</span>
-            <span class="opt-desc">Identity & positioning feel off</span>
-          </div>
-          <div class="opt-card" data-val="campaign" onclick="selectOpt(this,'challenge-opts')">
-            <span class="opt-label">Campaign</span>
-            <span class="opt-desc">Launch a product or cause</span>
-          </div>
-          <div class="opt-card" data-val="digital" onclick="selectOpt(this,'challenge-opts')">
-            <span class="opt-label">Digital</span>
-            <span class="opt-desc">Web, social, digital storytelling</span>
-          </div>
-          <div class="opt-card" data-val="strategy" onclick="selectOpt(this,'challenge-opts')">
-            <span class="opt-label">Strategy</span>
-            <span class="opt-desc">Need a senior creative voice</span>
-          </div>
-          <div class="opt-card" data-val="community" onclick="selectOpt(this,'challenge-opts')">
-            <span class="opt-label">Community</span>
-            <span class="opt-desc">Mobilise or re-engage audience</span>
-          </div>
-          <div class="opt-card" data-val="content" onclick="selectOpt(this,'challenge-opts')">
-            <span class="opt-label">Content</span>
-            <span class="opt-desc">Video, editorial, multimedia</span>
-          </div>
-        </div>
-        <div class="brief-btn-row">
-          <button class="brief-btn" id="bp1-next" onclick="goPanel(2)" disabled><span>Next &rarr;</span></button>
-          <button class="brief-back-btn" onclick="skipBrief()">Skip — just email me</button>
-        </div>
-      </div>
-
-      <!-- Panel 2: Industry -->
-      <div class="brief-panel" id="bp-2">
-        <p class="field-label" style="margin-bottom:14px">Your industry?</p>
-        <div class="options-row" id="industry-opts">
-          <div class="opt-card" data-val="nonprofit-cause" onclick="selectOpt(this,'industry-opts')">
-            <span class="opt-label">Nonprofit</span>
-            <span class="opt-desc">Social impact, advocacy</span>
-          </div>
-          <div class="opt-card" data-val="tech-saas" onclick="selectOpt(this,'industry-opts')">
-            <span class="opt-label">Tech / SaaS</span>
-            <span class="opt-desc">Software, platforms</span>
-          </div>
-          <div class="opt-card" data-val="consumer-brand" onclick="selectOpt(this,'industry-opts')">
-            <span class="opt-label">Consumer</span>
-            <span class="opt-desc">Retail, lifestyle, CPG</span>
-          </div>
-          <div class="opt-card" data-val="government-defense" onclick="selectOpt(this,'industry-opts')">
-            <span class="opt-label">Gov / Defense</span>
-            <span class="opt-desc">Federal, public sector</span>
-          </div>
-          <div class="opt-card" data-val="gaming-entertainment" onclick="selectOpt(this,'industry-opts')">
-            <span class="opt-label">Gaming / Ent</span>
-            <span class="opt-desc">Studios, media, film</span>
-          </div>
-          <div class="opt-card" data-val="real-estate" onclick="selectOpt(this,'industry-opts')">
-            <span class="opt-label">Real Estate</span>
-            <span class="opt-desc">Developers, builders</span>
-          </div>
-        </div>
-        <div class="brief-btn-row">
-          <button class="brief-btn" id="bp2-next" onclick="goPanel(3)" disabled><span>Next &rarr;</span></button>
-          <button class="brief-back-btn" onclick="goPanel(1)">← Back</button>
-        </div>
-      </div>
-
-      <!-- Panel 3: Timeline -->
-      <div class="brief-panel" id="bp-3">
-        <p class="field-label" style="margin-bottom:14px">Timeline?</p>
-        <div class="options-row" id="timeline-opts" style="grid-template-columns:repeat(2,1fr)">
-          <div class="opt-card" data-val="asap" onclick="selectOpt(this,'timeline-opts')">
-            <span class="opt-label">ASAP</span>
-            <span class="opt-desc">Results within weeks</span>
-          </div>
-          <div class="opt-card" data-val="1-2months" onclick="selectOpt(this,'timeline-opts')">
-            <span class="opt-label">1–2 Months</span>
-            <span class="opt-desc">Some runway</span>
-          </div>
-          <div class="opt-card" data-val="3-6months" onclick="selectOpt(this,'timeline-opts')">
-            <span class="opt-label">3–6 Months</span>
-            <span class="opt-desc">Substantial build</span>
-          </div>
-          <div class="opt-card" data-val="ongoing" onclick="selectOpt(this,'timeline-opts')">
-            <span class="opt-label">Ongoing</span>
-            <span class="opt-desc">Long-term partner</span>
-          </div>
-        </div>
-        <div class="brief-btn-row">
-          <button class="brief-btn" id="bp3-generate" onclick="generateBrief()" disabled><span>Generate My Brief &rarr;</span></button>
-          <button class="brief-back-btn" onclick="goPanel(2)">← Back</button>
-        </div>
-      </div>
-
-      <!-- Loading -->
-      <div class="brief-loading" id="brief-loading">
-        <div class="brief-loading-ring"></div>
-        <p class="brief-loading-label">Building your brief<span class="brief-loading-dots"></span></p>
-      </div>
-
-      <!-- Brief result -->
-      <div class="brief-result" id="brief-result">
-        <div class="brief-result-inner">
-          <div class="brief-result-row">
-            <span class="brief-result-label">Overview</span>
-            <p class="brief-result-text" id="br-overview"></p>
-          </div>
-          <div class="brief-result-row">
-            <span class="brief-result-label">Recommended Approach</span>
-            <p class="brief-result-text" id="br-approach"></p>
-          </div>
-          <div class="brief-result-row">
-            <span class="brief-result-label">Investment Range</span>
-            <p class="brief-result-text" id="br-investment"></p>
-          </div>
-          <div class="brief-result-row">
-            <span class="brief-result-label">Next Steps</span>
-            <ul class="brief-result-steps" id="br-steps"></ul>
-          </div>
-        </div>
-        <div class="brief-cta-strip">
-          <span class="brief-cta-text" id="br-cta-headline">Let's talk through this.</span>
-          <a href="mailto:tim@timshephard.co" class="brief-cta-link" id="br-cta-link">Book a Call &rarr;</a>
-        </div>
-      </div>
-
-      <!-- Skip link (only before brief is generated) -->
-      <a href="/" class="gate2-skip" id="gate2-skip-link">No thanks — I'll wait for Tim's reply</a>
-
-    </div><!-- /gate-2 -->
-
-  </div><!-- /right-col -->
-</div><!-- /page-wrap -->
-
-<div class="bottom-bar">
-  <div class="bottom-bar-left">
-    <span class="bottom-bar-dot"></span>
-    Available for Full-Time &amp; Fractional Engagements &mdash; Dallas / Fort Worth, TX
-  </div>
-  <span class="bottom-bar-right">Tim Shephard &mdash; Creative Director</span>
 </div>
-
-<script>
-/* ── STATE ── */
-const briefState = { challenge: null, industry: null, timeline: null };
-let selectedBudget = null;
-let submitterName = '';
-let submitterEmail = '';
-let submitterOrg = '';
-
-/* ── REVEAL ── */
-(function() {
-  var io = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) {
-      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
-    });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
-})();
-
-/* ── BUDGET PILLS ── */
-function selectBudget(btn) {
-  document.querySelectorAll('.budget-pill').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-  selectedBudget = btn.dataset.val;
-}
-
-/* ── BRIEF OPTION CARDS ── */
-function selectOpt(card, gridId) {
-  document.querySelectorAll('#' + gridId + ' .opt-card').forEach(c => c.classList.remove('selected'));
-  card.classList.add('selected');
-  const val = card.dataset.val;
-  if (gridId === 'challenge-opts') {
-    briefState.challenge = val;
-    document.getElementById('bp1-next').disabled = false;
-  } else if (gridId === 'industry-opts') {
-    briefState.industry = val;
-    document.getElementById('bp2-next').disabled = false;
-  } else if (gridId === 'timeline-opts') {
-    briefState.timeline = val;
-    document.getElementById('bp3-generate').disabled = false;
-  }
-}
-
-/* ── PANEL NAV ── */
-function goPanel(num) {
-  [1,2,3].forEach(n => {
-    document.getElementById('bp-' + n).classList.remove('active');
-    const dot = document.getElementById('dot-' + n);
-    dot.classList.remove('active', 'done');
-  });
-  for (let i = 1; i < num; i++) document.getElementById('dot-' + i).classList.add('done');
-  document.getElementById('dot-' + num).classList.add('active');
-  document.getElementById('bp-' + num).classList.add('active');
-}
-
-/* ── GATE 1 SUBMIT ── */
-async function submitGate1() {
-  const name    = document.getElementById('f-name').value.trim();
-  const email   = document.getElementById('f-email').value.trim();
-  const company = document.getElementById('f-company').value.trim();
-  const role    = document.getElementById('f-role').value;
-  const message = document.getElementById('f-message').value.trim();
-
-  // Clear errors
-  ['f-name','f-email'].forEach(id => document.getElementById(id).classList.remove('error'));
-  ['err-name','err-email'].forEach(id => document.getElementById(id).classList.remove('visible'));
-
-  let valid = true;
-  if (!name) {
-    document.getElementById('f-name').classList.add('error');
-    document.getElementById('err-name').classList.add('visible');
-    valid = false;
-  }
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    document.getElementById('f-email').classList.add('error');
-    document.getElementById('err-email').classList.add('visible');
-    valid = false;
-  }
-  if (!valid) return;
-
-  const btn = document.getElementById('submit-btn');
-  btn.disabled = true;
-  document.getElementById('btn-label').textContent = 'Sending…';
-
-  // Store for Gate 2 use
-  submitterName = name;
-  submitterEmail = email;
-  submitterOrg = company;
-
-  try {
-    const res = await fetch('https://formspree.io/f/xnjgddyr', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({
-        name, email,
-        company: company || '—',
-        role: role || '—',
-        budget: selectedBudget || '—',
-        message: message || '—',
-        source: 'hire-gate-1'
-      })
-    });
-
-    if (res.ok) {
-      transitionToGate2(name);
-    } else {
-      throw new Error('Submission failed');
-    }
-  } catch(err) {
-    // Fallback: still transition — don't block the user
-    transitionToGate2(name);
-    console.warn('Formspree error:', err.message);
-  }
-}
-
-/* ── TRANSITION ── */
-function transitionToGate2(name) {
-  const gate1 = document.getElementById('gate-1');
-  const gate2 = document.getElementById('gate-2');
-
-  gate1.classList.add('exiting');
-
-  setTimeout(() => {
-    gate1.style.display = 'none';
-    document.getElementById('g2-name-echo').textContent = name ? name + '.' : '';
-    gate2.classList.add('active');
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        gate2.classList.add('entering');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    });
-  }, 400);
-}
-
-/* ── GENERATE BRIEF ── */
-async function generateBrief() {
-  const budget = selectedBudget || 'not specified';
-
-  // Hide panels, show loading
-  document.getElementById('g2-ask').style.display = 'none';
-  document.getElementById('mini-steps').style.display = 'none';
-  [1,2,3].forEach(n => document.getElementById('bp-' + n).classList.remove('active'));
-  document.getElementById('brief-loading').style.display = 'block';
-  document.getElementById('gate2-skip-link').style.display = 'none';
-
-  const labelMaps = {
-    challenge: {'brand-overhaul':'Brand Overhaul','campaign':'Campaign Launch','digital':'Digital Presence','strategy':'Strategic Direction','community':'Community & Engagement','content':'Content & Production'},
-    industry: {'nonprofit-cause':'Nonprofit / Cause','tech-saas':'Tech / SaaS','consumer-brand':'Consumer Brand','government-defense':'Government / Defense','gaming-entertainment':'Gaming / Entertainment','real-estate':'Real Estate / Construction'},
-    timeline: {'asap':'ASAP','1-2months':'1–2 Months','3-6months':'3–6 Months','ongoing':'Ongoing'},
-    budget: {'under-2k':'Under $2,000','2k-10k':'$2,000–$10,000','10k-50k':'$10,000–$50,000','50k-plus':'$50,000+','full-time':'Full-Time Role'}
-  };
-  const L = (k,v) => labelMaps[k]?.[v] || v;
-
-  try {
-    const res = await fetch('/api/brief', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        challenge: briefState.challenge,
-        industry:  briefState.industry,
-        timeline:  briefState.timeline,
-        budget:    selectedBudget,   // null if unselected; server treats as "not specified"
-        name:      submitterName,
-        company:   submitterOrg
-      })
-    });
-    if (!res.ok) throw new Error('Brief request failed: ' + res.status);
-    const brief = await res.json();   // /api/brief returns the parsed brief object directly
-    renderBrief(brief);
-  } catch(err) {
-    // Graceful fallback brief
-    renderBrief({
-      overview: `Based on what you've shared, you're working through a ${L('challenge', briefState.challenge)} challenge in the ${L('industry', briefState.industry)} space. That's a problem I've solved before — and the approach is usually clearer than it looks from the inside.`,
-      approach: "I'd want to start with a focused discovery conversation to understand the specifics before recommending scope. In my experience, the real challenge almost always sits slightly upstream from where the client first identifies it.",
-      investment: `Your budget range of ${L('budget', budget)} is workable. We'll scope it precisely on the call.`,
-      steps: ["Schedule a 20-minute discovery call", "I'll review any existing assets or briefs beforehand", "Send you a formal scope and timeline within 48 hours"],
-      ctaHeadline: "Let's talk through this.",
-      ctaEmailSubject: `Project Brief — ${submitterOrg || submitterName}`
-    });
-  }
-}
-
-function renderBrief(brief) {
-  document.getElementById('brief-loading').style.display = 'none';
-  document.getElementById('br-overview').textContent = brief.overview;
-  document.getElementById('br-approach').textContent = brief.approach;
-  document.getElementById('br-investment').textContent = brief.investment;
-
-  const stepsList = document.getElementById('br-steps');
-  stepsList.innerHTML = '';
-  (brief.steps || []).forEach((s, i) => {
-    const li = document.createElement('li');
-    li.innerHTML = `<span class="step-circle">${i+1}</span><span>${s}</span>`;
-    stepsList.appendChild(li);
-  });
-
-  document.getElementById('br-cta-headline').textContent = brief.ctaHeadline || "Let's talk through this.";
-  const emailSubject = brief.ctaEmailSubject || `Project Brief — ${submitterOrg || submitterName}`;
-  document.getElementById('br-cta-link').href = `mailto:tim@timshephard.co?subject=${encodeURIComponent(emailSubject)}`;
-
-  document.getElementById('brief-result').style.display = 'block';
-  document.getElementById('gate2-skip-link').style.display = 'none';
-}
-
-function skipBrief() {
-  window.location.href = '/';
-}
-</script>
-  <footer id="site-footer"></footer>
-  <script src="/shared/nav.js" defer></script>
 </body>
 </html>
