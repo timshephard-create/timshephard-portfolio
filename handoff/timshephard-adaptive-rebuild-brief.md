@@ -32,7 +32,7 @@ Tim's career as one physical space — a production floor:
 - **The Monitor Wall** — Keep America Beautiful: a bank of CRTs/monitors running the PSA work. Approaching it surfaces the record: 160K+ airings, $77.5M earned media, 4.5M+ GIF views
 - **The Records Wing** — federal communications: files, stamps, institutional light
 - **The Stage** — global broadcast production: studio floor, rigging, tungsten
-- **The Bench** — AI-native ventures mid-assembly (AI Daily Digest, The Other 1776, Candora as machines being built; one machine is visibly building *this site*)
+- **The Bench** — AI-native ventures mid-assembly (AI Daily Digest, The Other 1776, Kindora as machines being built; one machine is visibly building *this site*)
 - **The Front Office** — services: the audit desk and the brief desk (see 4.4)
 - **The Archive** — shelved reels/tapes: every past visitor's cut, labeled and dated
 
