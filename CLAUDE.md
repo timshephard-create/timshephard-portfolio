@@ -9,3 +9,5 @@
 5. `build.py` is defunct — do not run it.
 6. Design spec: /handoff/production-bible.md + grammar-contract.md (normative), type-manifest.json, plane-tag-map.json. Edition Zero is pure static HTML/CSS, self-hosted fonts, no framework, no build step.
 7. Preserve the Formspree endpoint (`https://formspree.io/f/xnjgddyr`) and GA4 (`G-82B9C9WGMG`).
+8. **The retired cmv-proxy does not return.** Phase 2+ AI features (EDL service, Audit Desk, Brief Desk, Talkback) are built as NEW serverless functions using a dedicated, spend-capped API key — never the old proxy pattern, never a shared/unlimited key.
+9. QA: append `?key=dawn|morning|midday|golden|overnight` to any page URL to force a lighting key; without it the device clock decides.

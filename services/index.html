@@ -10,7 +10,7 @@
 <meta property="og:description" content="The Dailies Report and Creative Territory — audit and direction, built to convert. AI-supported, editor-signed.">
 <meta property="og:image" content="https://timshephard.co/public/images/og-1200x630.png">
 <meta property="og:type" content="website">
-<script>(function(){var h=new Date().getHours();document.documentElement.setAttribute('data-key',h<5?'overnight':h<8?'dawn':h<11?'morning':h<17?'midday':h<20?'golden':'overnight');})();</script>
+<script>(function(){var m=/[?&]key=(dawn|morning|midday|golden|overnight)\b/.exec(location.search),h=new Date().getHours();document.documentElement.setAttribute('data-key',m?m[1]:h<5?'overnight':h<8?'dawn':h<11?'morning':h<17?'midday':h<20?'golden':'overnight');})();</script>
 <link rel="preload" href="/public/fonts/big-shoulders-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/public/fonts/courier-prime-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/public/fonts/fonts.css">
