@@ -1,496 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Work — Tim Shephard</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,700;0,900;1,700;1,900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/shared/styles.css">
-  <!-- GA4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-82B9C9WGMG"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-82B9C9WGMG');
-  </script>
-  <style>
-/* ── PAGE HEADER ── */
-#ts-header{padding:96px 48px 40px;position:relative;z-index:1;border-bottom:1px solid var(--border);}
-.page-eyebrow{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.22em;text-transform:uppercase;color:var(--orange)!important;display:flex;align-items:center;gap:10px;margin-bottom:16px;}
-.page-eyebrow::before{content:'';width:24px;height:1px;background:var(--orange);}
-.page-title{font-family:var(--font-disp);font-size:clamp(4rem,9vw,9rem);font-weight:900;font-style:italic;text-transform:uppercase;letter-spacing:-0.03em;line-height:0.85;color:var(--ink)!important;}
-.page-title em{color:transparent!important;-webkit-text-stroke:2px var(--ink);}
-.page-stats{display:flex;gap:48px;margin-top:32px;padding-top:24px;border-top:1px solid var(--border);flex-wrap:wrap;}
-.page-stat{display:flex;flex-direction:column;gap:3px;}
-.page-stat-num{font-family:var(--font-disp);font-size:2rem;font-weight:900;color:var(--orange)!important;line-height:1;}
-.page-stat-label{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(10,9,8,0.6)!important;}
-
-/* ── FILTER BAR ── */
-#ts-filter{position:sticky;top:52px;z-index:9000;background:rgba(10,9,8,0.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 48px;display:flex;align-items:center;gap:4px;overflow-x:auto;-ms-overflow-style:none;scrollbar-width:none;}
-#ts-filter::-webkit-scrollbar{display:none;}
-.filter-btn{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(248,247,244,0.35)!important;background:none;border:none;padding:14px 16px;cursor:pointer;white-space:nowrap;transition:color .2s;position:relative;}
-.filter-btn::after{content:'';position:absolute;bottom:0;left:16px;right:16px;height:2px;background:var(--orange);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease);}
-.filter-btn:hover{color:rgba(248,247,244,0.7)!important;}
-.filter-btn.active{color:var(--white)!important;}
-.filter-btn.active::after{transform:scaleX(1);}
-.filter-btn[data-cat="nonprofit"].active::after{background:var(--c-nonprofit);}
-.filter-btn[data-cat="film"].active::after{background:var(--c-film);}
-.filter-btn[data-cat="gov"].active::after{background:var(--c-gov);}
-.filter-btn[data-cat="tech"].active::after{background:var(--c-tech);}
-.filter-divider{width:1px;height:20px;background:var(--border);flex-shrink:0;margin:0 4px;}
-
-/* ── WORK GRID ── */
-#ts-grid{padding:3px;display:grid;grid-template-columns:repeat(3,1fr);gap:3px;position:relative;z-index:1;}
-
-/* ── WORK CARD ── */
-.work-card{position:relative;overflow:hidden;text-decoration:none;display:block;background:var(--ink2);cursor:pointer;transform-style:preserve-3d;will-change:transform;min-height:320px;}
-.work-card:hover{box-shadow:0 20px 60px rgba(0,0,0,.5);}
-
-/* Category top bar */
-.work-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;z-index:4;}
-.work-card.c-nonprofit::before{background:var(--c-nonprofit);}
-.work-card.c-film::before{background:var(--c-film);}
-.work-card.c-gov::before{background:var(--c-gov);}
-.work-card.c-tech::before{background:var(--c-tech);}
-.work-card.c-brand::before{background:var(--c-brand);}
-
-/* Span helpers */
-.span-v2{grid-row:span 2;}
-.span-h2{grid-column:span 2;}
-
-/* Image layer */
-.card-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .7s var(--ease);}
-.work-card:hover .card-bg{transform:scale(1.04);}
-
-/* Gradient overlay */
-.card-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,9,8,.6) 0%,rgba(10,9,8,.08) 35%,rgba(10,9,8,.08) 50%,rgba(10,9,8,.92) 100%);}
-
-/* Shine */
-.card-shine{position:absolute;inset:-50%;width:200%;height:200%;z-index:2;background:radial-gradient(circle at 50% 50%,rgba(255,255,255,.10) 0%,transparent 60%);opacity:0;transition:opacity .4s ease;pointer-events:none;}
-.work-card:hover .card-shine{opacity:1;}
-
-/* Scrim */
-.card-scrim{position:absolute;inset:0;background:rgba(0,0,0,0);z-index:1;transition:background .4s ease;}
-.work-card:hover .card-scrim{background:rgba(0,0,0,.12);}
-
-/* Stat — top left */
-.card-stat{position:absolute;top:20px;left:24px;z-index:3;}
-.card-stat-num{font-family:var(--font-disp);font-size:2.4rem;font-weight:900;line-height:1;display:block;text-shadow:0 2px 12px rgba(0,0,0,.5);transition:transform .4s var(--ease);}
-.work-card:hover .card-stat-num{transform:scale(1.06);transform-origin:left center;}
-.card-stat-label{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(248,247,244,.65)!important;display:block;margin-top:3px;text-shadow:0 1px 4px rgba(0,0,0,.7);}
-.c-nonprofit .card-stat-num{color:var(--c-nonprofit)!important;}
-.c-film .card-stat-num{color:var(--c-film)!important;}
-.c-gov .card-stat-num{color:var(--c-gov)!important;}
-.c-tech .card-stat-num{color:var(--c-tech)!important;}
-
-/* Arrow — top right */
-.card-arrow{position:absolute;top:18px;right:20px;width:32px;height:32px;border:1px solid rgba(248,247,244,.15);display:flex;align-items:center;justify-content:center;font-size:.85rem;color:rgba(248,247,244,.4)!important;z-index:3;transition:all .3s ease;opacity:0;transform:scale(.85);}
-.work-card:hover .card-arrow{opacity:1;transform:scale(1);border-color:rgba(248,247,244,.4);color:var(--white)!important;}
-
-/* Content — bottom */
-.card-content{position:absolute;bottom:0;left:0;right:0;padding:24px 24px 26px;z-index:3;}
-.card-tag{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px;text-shadow:0 1px 6px rgba(0,0,0,.8);}
-.card-tag::before{content:'';width:14px;height:1px;background:currentColor;}
-.c-nonprofit .card-tag{color:var(--c-nonprofit)!important;}
-.c-film .card-tag{color:var(--c-film)!important;}
-.c-gov .card-tag{color:var(--c-gov)!important;}
-.c-tech .card-tag{color:var(--c-tech)!important;}
-.card-title{font-family:var(--font-disp);font-weight:900;font-style:italic;text-transform:uppercase;letter-spacing:-.01em;line-height:.9;color:var(--white)!important;margin-bottom:10px;text-shadow:0 2px 10px rgba(0,0,0,.6);}
-.work-card:nth-child(1) .card-title,
-.work-card.span-v2 .card-title{font-size:clamp(1.8rem,2.8vw,2.8rem);}
-.card-title{font-size:clamp(1.3rem,2vw,2rem);}
-.card-outcome{font-size:.8rem;color:rgba(248,247,244,.55)!important;font-family:var(--font-disp);font-weight:400;line-height:1.5;max-width:380px;transition:color .3s ease;}
-.work-card:hover .card-outcome{color:rgba(248,247,244,.85)!important;}
-
-/* Wide card grid override */
-.span-h2 .card-content{display:grid;grid-template-columns:1fr 1fr;align-items:end;gap:24px;padding:24px 28px;}
-.span-h2 .card-outcome{max-width:none;}
-
-/* No-image dark card */
-.card-no-img{background:var(--ink2);}
-.card-no-img .card-bg{background:linear-gradient(135deg,#151311 0%,#1e1c18 100%);}
-.card-no-img.c-nonprofit .card-bg{background:linear-gradient(135deg,#071a0e 0%,#0d2918 100%);}
-.card-no-img.c-film .card-bg{background:linear-gradient(135deg,#1a1208 0%,#261c08 100%);}
-.card-no-img.c-gov .card-bg{background:linear-gradient(135deg,#1a1608 0%,#25200a 100%);}
-.card-no-img.c-tech .card-bg{background:linear-gradient(135deg,#04161a 0%,#062028 100%);}
-
-/* ── HIDDEN STATE (filter) ── */
-.work-card.hidden{display:none;}
-
-/* ── REVEAL ANIMATION ── */
-@keyframes cardIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
-.work-card{animation:cardIn .6s var(--ease) both;}
-.work-card:nth-child(1){animation-delay:.05s;}
-.work-card:nth-child(2){animation-delay:.1s;}
-.work-card:nth-child(3){animation-delay:.15s;}
-.work-card:nth-child(4){animation-delay:.2s;}
-.work-card:nth-child(5){animation-delay:.25s;}
-.work-card:nth-child(6){animation-delay:.3s;}
-.work-card:nth-child(7){animation-delay:.35s;}
-.work-card:nth-child(8){animation-delay:.4s;}
-.work-card:nth-child(9){animation-delay:.45s;}
-.work-card:nth-child(10){animation-delay:.5s;}
-.work-card:nth-child(11){animation-delay:.55s;}
-.work-card:nth-child(12){animation-delay:.6s;}
-
-/* ── FOOTER ── */
-#ts-footer{background:var(--ink);border-top:3px solid var(--orange);padding:24px 48px;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;}
-.footer-logo{font-family:var(--font-disp);font-size:1.1rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:rgba(248,247,244,.9)!important;text-decoration:none;}
-.footer-links{display:flex;gap:24px;}
-.footer-links a{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(248,247,244,.28)!important;text-decoration:none;transition:color .2s;}
-.footer-links a:hover{color:var(--orange)!important;}
-.footer-copy{font-family:var(--font-mono);font-size:0.69rem;color:rgba(248,247,244,.18)!important;}
-
-/* ── MOBILE ── */
-@media(max-width:900px){
-  #ts-grid{grid-template-columns:1fr 1fr;}
-  .span-v2{grid-row:span 1;}
-  .span-h2{grid-column:span 2;}
-  #ts-filter{padding:0 20px;}
-  #ts-header{padding:80px 24px 32px;}
-  #ts-footer{padding:22px 24px;flex-direction:column;gap:14px;text-align:center;}
-}
-@media(max-width:560px){
-  #ts-grid{grid-template-columns:1fr;}
-  .span-h2{grid-column:span 1;}
-  .span-h2 .card-content{grid-template-columns:1fr;}
-}
-
-  /* readability overrides */
-  .card-outcome { font-size: 0.875rem !important; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Work — Camera Reports · Tim Shephard</title>
+<meta name="description" content="Case studies: the Keep America Beautiful rebrand and PSA campaign (160K+ airings, $77.5M earned media), federal communications for DHS S&T, the Athens 2004 broadcast, Ecrion Software, and One Thousand Voices.">
+<link rel="canonical" href="https://timshephard.co/work">
+<meta property="og:title" content="Work — Camera Reports · Tim Shephard">
+<meta property="og:description" content="KAB flagship, federal records, global broadcast, SaaS GTM, humanitarian media — the full camera reports.">
+<meta property="og:image" content="https://timshephard.co/public/images/og-1200x630.png">
+<meta property="og:type" content="website">
+<script>(function(){var h=new Date().getHours();document.documentElement.setAttribute('data-key',h<5?'overnight':h<8?'dawn':h<11?'morning':h<17?'midday':h<20?'golden':'overnight');})();</script>
+<link rel="preload" href="/public/fonts/big-shoulders-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/public/fonts/courier-prime-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/public/fonts/fonts.css">
+<link rel="stylesheet" href="/public/css/edition.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-82B9C9WGMG"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-82B9C9WGMG');</script>
 </head>
 <body>
-  <header id="site-nav" data-page="Work" data-theme="dark" data-nav="full"></header>
-<!-- NAV -->
+<div class="reg reg-tl"></div><div class="reg reg-tr"></div><div class="reg reg-bl"></div><div class="reg reg-br"></div>
 
+<div class="sheet">
 
-<!-- FILTER BAR -->
-<div id="ts-filter">
-  <button class="filter-btn active" data-cat="all">All Work</button>
-  <div class="filter-divider"></div>
-  <button class="filter-btn" data-cat="nonprofit">Nonprofit</button>
-  <button class="filter-btn" data-cat="film">Film &amp; TV</button>
-  <button class="filter-btn" data-cat="gov">Gov</button>
-  <button class="filter-btn" data-cat="tech">Tech &amp; SaaS</button>
-</div>
+  <header class="masthead">
+    <div class="slug"><span><a href="/" style="border-bottom:none">NIGHT CREW — TIMSHEPHARD.CO</a></span><span>EDITION ZERO — CAMERA REPORTS</span></div>
+    <h1>The Work</h1>
+    <p class="dataline">TIM SHEPHARD — SENIOR CREATIVE DIRECTOR · 15+ YEARS · FIVE VERTICALS<br>
+    EVERY REPORT BELOW IS FILED AS SHOT — NOTHING STAGED, NOTHING BORROWED</p>
+  </header>
 
-<!-- PAGE HEADER -->
-<div id="ts-header">
-  <div class="page-eyebrow">Selected Work</div>
-  <h1 class="page-title">My<br><em>Work.</em></h1>
-  <div class="page-stats">
-    <div class="page-stat"><span class="page-stat-num">15+</span><span class="page-stat-label">Years</span></div>
-    <div class="page-stat"><span class="page-stat-num">5</span><span class="page-stat-label">Verticals</span></div>
-    <div class="page-stat"><span class="page-stat-num">$300M</span><span class="page-stat-label">Org. Impact</span></div>
-    <div class="page-stat"><span class="page-stat-num">160K+</span><span class="page-stat-label">PSA Airings</span></div>
-    <div class="page-stat"><span class="page-stat-num">NAGC</span><span class="page-stat-label">1st Place</span></div>
-  </div>
-</div>
+  <nav class="contents" aria-label="Contents">
+    <a href="#monitor-wall">01 — MONITOR WALL</a>
+    <a href="#records">02 — THE RECORDS</a>
+    <a href="#stage">03 — THE STAGE</a>
+    <a href="#ecrion">04 — THE REBUILD</a>
+    <a href="#otv">05 — THE FIELD</a>
+    <a href="/">← CALL SHEET</a>
+  </nav>
 
-<!-- WORK GRID -->
-<div id="ts-grid">
+  <section id="monitor-wall" aria-label="Keep America Beautiful">
+    <h2>01 — The Monitor Wall · Keep America Beautiful</h2>
+    <p class="note">SENIOR CREATIVE DIRECTOR · 2020–2023 · NATIONAL — ALL 50 STATES</p>
+    <p class="body-lg">A 70-year-old national nonprofit, dormant to digital-native audiences, with 20,000+ affiliate organizations and no coherent identity between them. The engagement was a complete rebrand — identity system, digital infrastructure, PSA campaign, affiliate toolkit — repositioning a cleanup campaign as a national behavior-change movement.</p>
+    <p class="body-lg">The flagship: &ldquo;Recycle Like Everyone&rsquo;s Watching.&rdquo; Broadcasters ran it 160,000+ times across all 50 states — not on media spend, but because the creative was built to be worth airing. The branded Giphy channel put the campaign into everyday conversation, 4.5 million views at a time.</p>
+    <div class="stats">
+      <div><b>160K+</b>PSA airings<br><small>all 50 states</small></div>
+      <div><b>$77.5M</b>earned media value</div>
+      <div><b>4.5M+</b>GIF views<br><small>branded Giphy channel</small></div>
+      <div><b>20K+</b>affiliate organizations</div>
+    </div>
+    <div class="stats">
+      <div><span class="org-label">Org outcome — the movement my work supported</span><b>11.9M</b>participants, single program year</div>
+      <div><span class="org-label">Org outcome — the movement my work supported</span><b>$300M</b>documented economic impact<br><small>volunteer activity + waste diversion</small></div>
+    </div>
+    <blockquote>
+      &ldquo;The brand wasn&rsquo;t broken. It was dormant. We woke it up — and built the infrastructure for a national movement to show up.&rdquo;
+      <footer>— TIM SHEPHARD, SENIOR CREATIVE DIRECTOR, KEEP AMERICA BEAUTIFUL</footer>
+    </blockquote>
+    <div class="stills">
+      <figure><img src="/public/images/work/kab-2023-national-conference-illustration-complete.webp" alt="Keep America Beautiful 2023 National Conference illustration" width="1500" height="1160" loading="lazy"><figcaption>KAB 2023 NATIONAL CONFERENCE — ILLUSTRATION</figcaption></figure>
+      <figure><img src="/public/images/work/greatest-american-cleanup-linkedin-banner.webp" alt="Greatest American Cleanup LinkedIn banner" width="1500" height="450" loading="lazy"><figcaption>GREATEST AMERICAN CLEANUP — CAMPAIGN BANNER</figcaption></figure>
+      <figure><img src="/public/images/work/23-sep-kab-gac-brand-image-v2-3-01.webp" alt="Greatest American Cleanup brand image" width="1500" height="844" loading="lazy"><figcaption>GAC BRAND IMAGE — SYSTEM IN USE</figcaption></figure>
+      <figure><img src="/public/images/work/vision-2021-standard-web-banner.webp" alt="Vision 2021 web banner" width="1500" height="788" loading="lazy"><figcaption>VISION 2021 — WEB BANNER</figcaption></figure>
+      <figure><img src="/public/images/work/web-ready-infographic.webp" alt="Campaign infographic" width="800" height="1401" loading="lazy"><figcaption>CAMPAIGN INFOGRAPHIC</figcaption></figure>
+      <figure><img src="/public/images/work/wildflower-planting-instructions.webp" alt="Wildflower planting instructions design" width="1046" height="797" loading="lazy"><figcaption>WILDFLOWER PLANTING INSTRUCTIONS — AFFILIATE TOOLKIT</figcaption></figure>
+    </div>
+    <blockquote>
+      &ldquo;Successfully led the rebranding efforts of the legacy nonprofit.&rdquo;
+      <footer>— HELEN LOWMAN, CEO, KEEP AMERICA BEAUTIFUL</footer>
+    </blockquote>
+  </section>
 
-  <!-- 01: Keep America Beautiful — TALL LEFT -->
-  <a href="/nonprofit/" class="work-card c-nonprofit span-v2" data-cat="nonprofit">
-    <div class="card-bg" style="background-image:url('https://images.squarespace-cdn.com/content/v1/55e18f35e4b09e18596261bb/8fce1f92-d6f8-4d0c-8b61-dc4693fb5181/KAB+2023+National+Conference+Illustration_complete.jpg');"></div>
-    <div class="card-shine"></div>
-    <div class="card-scrim"></div>
-    <div class="card-stat">
-      <span class="card-stat-num">11.9M</span>
-      <span class="card-stat-label">Movement Reach</span>
+  <section id="records" aria-label="Federal communications — DHS S&T">
+    <h2>02 — The Records · Loch Harbour Group // DHS S&amp;T</h2>
+    <p class="note">CREATIVE DIRECTOR · 2017–2019 · FEDERAL — NATIONAL</p>
+    <p class="body-lg">Creative direction under maximum constraint: a 10-person cross-functional team inside the Department of Homeland Security Science &amp; Technology Directorate&rsquo;s zero-fail, multi-tier approval pipeline. Every deliverable — interactive, print, web, video — cleared federal review and shipped 100% Section 508 compliant.</p>
+    <p class="body-lg">The flagship, &ldquo;Mobilizing Innovation,&rdquo; turned the directorate&rsquo;s annual report into an interactive digital publication — and took the NAGC Blue Pencil &amp; Gold Screen Award.</p>
+    <div class="stats">
+      <div><b>10</b>direct reports<br><small>creative, technical, compliance</small></div>
+      <div><b>100%</b>Section 508 compliant</div>
+      <div><b>13</b>screens<br><small>field operations application</small></div>
+      <div><b>0</b>tolerance for failure</div>
     </div>
-    <div class="card-arrow">→</div>
-    <div class="card-content">
-      <div class="card-tag">Nonprofit / Social Impact</div>
-      <div class="card-title">Keep America Beautiful</div>
-      <p class="card-outcome">70-year national rebrand. 20K+ affiliates. $300M documented economic impact. All 50 states.</p>
+    <div class="stills">
+      <figure><img src="/public/images/work/mobilizing1.webp" alt="Mobilizing Innovation interactive annual report — opening screen" width="1500" height="759" loading="lazy"><figcaption>MOBILIZING INNOVATION — NAGC BLUE PENCIL &amp; GOLD SCREEN AWARD</figcaption></figure>
+      <figure><img src="/public/images/work/mobilizing2.webp" alt="Mobilizing Innovation — interior screen" width="1500" height="657" loading="lazy"><figcaption>MOBILIZING INNOVATION — INTERIOR</figcaption></figure>
+      <figure><img src="/public/images/work/mobilizing7.webp" alt="Mobilizing Innovation — data screen" width="1500" height="671" loading="lazy"><figcaption>MOBILIZING INNOVATION — DATA</figcaption></figure>
+      <figure><img src="/public/images/work/2019-05-29-13-29-23.webp" alt="DHS S&T field application screen" width="1065" height="709" loading="lazy"><figcaption>FIELD APPLICATION — 1 OF 13 SCREENS</figcaption></figure>
+      <figure><img src="/public/images/work/2019-05-29-13-30-10.webp" alt="DHS S&T field application screen" width="1065" height="709" loading="lazy"><figcaption>FIELD APPLICATION — USER FLOW</figcaption></figure>
+      <figure><img src="/public/images/work/st-tabletop.webp" alt="DHS S&T tabletop exercise materials" width="1500" height="750" loading="lazy"><figcaption>S&amp;T TABLETOP EXERCISE</figcaption></figure>
+      <figure><img src="/public/images/work/booklet-2spreads-1.webp" alt="Federal booklet spreads" width="1500" height="552" loading="lazy"><figcaption>BOOKLET SPREADS — CLEARED MULTI-TIER REVIEW</figcaption></figure>
+      <figure><img src="/public/images/work/ces2019-postcards.webp" alt="CES 2019 postcards" width="1500" height="659" loading="lazy"><figcaption>CES 2019 — CONFERENCE COLLATERAL</figcaption></figure>
+      <figure><img src="/public/images/work/crit-impacts-diecut.webp" alt="Critical Impacts die-cut print piece" width="1500" height="750" loading="lazy"><figcaption>CRITICAL IMPACTS — DIE-CUT</figcaption></figure>
+      <figure><img src="/public/images/work/ngfr-booklet-preview.webp" alt="Next Generation First Responder booklet" width="1500" height="750" loading="lazy"><figcaption>NGFR BOOKLET</figcaption></figure>
+      <figure><img src="/public/images/work/sxsw2018-branding.webp" alt="SXSW 2018 event branding" width="1500" height="750" loading="lazy"><figcaption>SXSW 2018 — EVENT BRANDING</figcaption></figure>
+      <figure><img src="/public/images/work/happy-holidays-cartoon-12192018.webp" alt="DHS holiday card illustration" width="1500" height="844" loading="lazy"><figcaption>AGENCY HOLIDAY CARD — HUMAN VOICE INSIDE FEDERAL STRUCTURE</figcaption></figure>
     </div>
-  </a>
+    <blockquote>
+      &ldquo;Tim is one of the best creative directors I&rsquo;ve ever worked with in my 13-year career. He does a great job of empowering his staff to explore creative solutions and push the boundaries beyond what clients often expect.&rdquo;
+      <footer>— ISMA&rsquo;IL RASHADA, LOCH HARBOUR GROUP — DHS S&amp;T DIRECTORATE</footer>
+    </blockquote>
+  </section>
 
-  <!-- 02: Athens Olympics -->
-  <a href="/entertainment/" class="work-card c-film" data-cat="film">
-    <div class="card-bg" style="background-image:url('https://images.squarespace-cdn.com/content/v1/526dd037e4b06485ddc3dcd5/1405363044463-HF25TRYYYDT8E5LIF15I/20140713_0346.jpg');"></div>
-    <div class="card-shine"></div>
-    <div class="card-scrim"></div>
-    <div class="card-stat">
-      <span class="card-stat-num">4B</span>
-      <span class="card-stat-label">Athens '04 Audience</span>
+  <section id="stage" aria-label="Broadcast and film">
+    <h2>03 — The Stage · Global Broadcast &amp; Film</h2>
+    <p class="note">CAMERA CREW · ATHENS 2004 — AND THE ROOMS WHERE FEATURES GET MADE</p>
+    <p class="body-lg">Camera crew on the Athens 2004 Summer Olympics broadcast: an audience of four billion, 200+ nations on the feed, and zero retakes available. Live to the world, one take — that&rsquo;s the whole discipline, and it&rsquo;s where the production standard on every report above was set.</p>
+    <div class="stats">
+      <div><b>4B</b>broadcast audience<br><small>Athens 2004</small></div>
+      <div><b>200+</b>nations on the feed</div>
+      <div><b>0</b>retakes available</div>
+      <div><b>$40M</b>Apocalypto<br><small>in-office, Icon Productions</small></div>
     </div>
-    <div class="card-arrow">→</div>
-    <div class="card-content">
-      <div class="card-tag">Film &amp; Entertainment</div>
-      <div class="card-title">Athens Olympics 2004</div>
-      <p class="card-outcome">Camera crew for the 2004 Athens Summer Olympics broadcast. 200+ nations. Zero retakes.</p>
+    <div class="ledger">
+      <div><span>2004</span><span>ATHENS SUMMER OLYMPICS — BROADCAST</span><span>camera crew</span></div>
+      <div><span>&nbsp;</span><span>APOCALYPTO — ICON PRODUCTIONS, DIR. MEL GIBSON</span><span>in-office</span></div>
+      <div><span>&nbsp;</span><span>PALI CAMP — MEDIA TEAM</span><span>team lead, video</span></div>
     </div>
-  </a>
+    <blockquote>
+      &ldquo;Tim is the total package: Concept, Design, Execution, Polish, Delivery.&rdquo;
+      <footer>— NATHAN McCALL, PALI CAMP</footer>
+    </blockquote>
+  </section>
 
-  <!-- 03: DHS Tabletop -->
-  <a href="/gov/" class="work-card c-gov" data-cat="gov">
-    <div class="card-bg" style="background-image:url('https://images.squarespace-cdn.com/content/v1/55e18f35e4b09e18596261bb/1558124146250-WVGH3X91KDCR3KH6OVOV/ST_tabletop.jpg');"></div>
-    <div class="card-shine"></div>
-    <div class="card-scrim"></div>
-    <div class="card-stat">
-      <span class="card-stat-num">NAGC</span>
-      <span class="card-stat-label">1st Place</span>
+  <section id="ecrion" aria-label="Ecrion Software">
+    <h2>04 — The Rebuild · Ecrion Software</h2>
+    <p class="note">MARKETING DIRECTOR · 2015–2016 · ENTERPRISE SAAS — GLOBAL</p>
+    <p class="body-lg">A European enterprise SaaS company — document automation — entering North America with nothing built for the market. Full rebrand and go-to-market rebuild from zero: identity, messaging, web, demand generation, content strategy, events. First in the category to introduce a brand mascot system, turning enterprise software that reads like enterprise software into a brand people remember.</p>
+    <div class="stills">
+      <figure><img src="/public/images/work/screen-shot-2015-12-07-at-10-31-49-am.webp" alt="Ecrion website before the rebrand" width="1500" height="893" loading="lazy"><figcaption>BEFORE — THE INHERITED SITE</figcaption></figure>
+      <figure><img src="/public/images/work/ecrion-for-blog.webp" alt="Ecrion brand content after the rebrand" width="1064" height="1440" loading="lazy"><figcaption>AFTER — REBUILT BRAND CONTENT</figcaption></figure>
+      <figure><img src="/public/images/work/tachie-lou-03.webp" alt="Ecrion brand mascot character" width="1500" height="747" loading="lazy"><figcaption>BRAND MASCOT SYSTEM — FIRST IN CATEGORY</figcaption></figure>
+      <figure><img src="/public/images/work/techie-lou-blog.webp" alt="Ecrion blog content with mascot" width="1500" height="567" loading="lazy"><figcaption>CONTENT ENGINE — BLOG</figcaption></figure>
+      <figure><img src="/public/images/work/thanksgiving-comic-strip-black-1.webp" alt="Ecrion seasonal comic strip" width="1500" height="779" loading="lazy"><figcaption>SEASONAL CAMPAIGN — COMIC FORMAT</figcaption></figure>
+      <figure><img src="/public/images/work/eos-p-no-numbers.webp" alt="Ecrion product marketing material" width="1500" height="567" loading="lazy"><figcaption>PRODUCT MARKETING</figcaption></figure>
+      <figure><img src="/public/images/work/testing-linked-in-champain.webp" alt="Ecrion LinkedIn campaign creative" width="1500" height="1599" loading="lazy"><figcaption>LINKEDIN DEMAND GEN</figcaption></figure>
+      <figure><img src="/public/images/work/schita.webp" alt="Ecrion brand creative sketch" width="1500" height="1064" loading="lazy"><figcaption>BRAND CREATIVE — WORKING SKETCH</figcaption></figure>
     </div>
-    <div class="card-arrow">→</div>
-    <div class="card-content">
-      <div class="card-tag">Government / Public Sector</div>
-      <div class="card-title">DHS S&amp;T Directorate</div>
-      <p class="card-outcome">Creative Director, 10-person team. Award-winning federal communications. Zero-fail pipeline.</p>
-    </div>
-  </a>
+  </section>
 
-  <!-- 04: National PSA — WIDE -->
-  <a href="/nonprofit/" class="work-card c-nonprofit span-h2" data-cat="nonprofit">
-    <div class="card-bg" style="background-image:url('https://images.squarespace-cdn.com/content/v1/55e18f35e4b09e18596261bb/8fce1f92-d6f8-4d0c-8b61-dc4693fb5181/KAB+2023+National+Conference+Illustration_complete.jpg');background-position:center 30%;"></div>
-    <div class="card-shine"></div>
-    <div class="card-scrim"></div>
-    <div class="card-arrow">→</div>
-    <div class="card-content">
-      <div>
-        <div class="card-stat" style="position:relative;top:auto;left:auto;margin-bottom:10px;">
-          <span class="card-stat-num">160K+</span>
-          <span class="card-stat-label">National TV Airings</span>
-        </div>
-        <div class="card-tag">Nonprofit / Broadcast</div>
-        <div class="card-title">National PSA Campaign</div>
-      </div>
-      <p class="card-outcome">$77.5M in earned media value. All 50 states. Creative that broadcasters chose to run.</p>
+  <section id="otv" aria-label="One Thousand Voices">
+    <h2>05 — The Field · One Thousand Voices</h2>
+    <p class="note">FOUNDER &amp; CREATIVE DIRECTOR · 2014–2022 · MIDDLE EAST — DBA OF ISCS GROUP</p>
+    <p class="body-lg">Eight years of documentary and advocacy media on the Syrian and Iraqi refugee crises — field production built to move donors, policymakers, and the public. Shot on the ground from Beirut, July 2014 onward: the Rescue Me Program, Voices for Syria, Healing Through Art.</p>
+    <blockquote>
+      &ldquo;Some organizations exist because funding allows them to. One Thousand Voices existed because the work needed to exist — and no one else was doing it.&rdquo;
+      <footer>— TIM SHEPHARD, FOUNDER &amp; CREATIVE DIRECTOR, ONE THOUSAND VOICES</footer>
+    </blockquote>
+    <div class="stills">
+      <figure><img src="/public/images/work/20140713-0346.webp" alt="Rescue Me Program field documentation, Beirut 2014" width="1500" height="1000" loading="lazy"><figcaption>RESCUE ME PROGRAM — BEIRUT, JULY 2014</figcaption></figure>
+      <figure><img src="/public/images/work/20140713-0039.webp" alt="Voices for Syria field documentation" width="1500" height="1000" loading="lazy"><figcaption>VOICES FOR SYRIA — FIELD</figcaption></figure>
+      <figure><img src="/public/images/work/20140714-0178.webp" alt="Healing Through Art program documentation" width="1500" height="1000" loading="lazy"><figcaption>HEALING THROUGH ART</figcaption></figure>
+      <figure><img src="/public/images/work/20140714-0191.webp" alt="Healing Through Art program documentation" width="1500" height="1000" loading="lazy"><figcaption>HEALING THROUGH ART — SESSION</figcaption></figure>
     </div>
-  </a>
+  </section>
 
-  <!-- 05: Ecrion Brand — TALL -->
-  <a href="/tech/" class="work-card c-tech span-v2" data-cat="tech">
-    <div class="card-bg" style="background-image:url('https://images.squarespace-cdn.com/content/v1/55e18f35e4b09e18596261bb/1558019827276-BMXOWCXIOQUG6I6DZ31H/schita.jpg');"></div>
-    <div class="card-shine"></div>
-    <div class="card-scrim"></div>
-    <div class="card-stat">
-      <span class="card-stat-num">GTM</span>
-      <span class="card-stat-label">Full Rebuild</span>
-    </div>
-    <div class="card-arrow">→</div>
-    <div class="card-content">
-      <div class="card-tag">Tech &amp; SaaS</div>
-      <div class="card-title">Ecrion Software</div>
-      <p class="card-outcome">European SaaS → North American enterprise. Brand, messaging, digital, demand gen rebuilt from zero.</p>
-    </div>
-  </a>
+  <section aria-label="Next">
+    <h2>Where This Goes</h2>
+    <p class="body-lg">The same discipline now runs the <a href="/ventures">Bench</a> — AI-native ventures shipping under Creative Mind Ventures LLC — and the <a href="/services">Front Office</a>, where two documents are built for hire. Ready to talk? <a href="/hire">The crew call is one page.</a></p>
+  </section>
 
-  <!-- 06: Apocalypto -->
-  <a href="/entertainment/" class="work-card c-film card-no-img" data-cat="film">
-    <div class="card-bg"></div>
-    <div class="card-shine"></div>
-    <div class="card-scrim"></div>
-    <div class="card-stat">
-      <span class="card-stat-num">$40M</span>
-      <span class="card-stat-label">Feature Film</span>
-    </div>
-    <div class="card-arrow">→</div>
-    <div class="card-content">
-      <div class="card-tag">Film &amp; Entertainment</div>
-      <div class="card-title">Apocalypto</div>
-      <p class="card-outcome">In-office at Icon Productions during Mel Gibson's $40M epic — close to high-pressure creative decisions.</p>
-    </div>
-  </a>
-
-  <!-- 07: Mobilizing Innovation — DHS -->
-  <a href="/gov/" class="work-card c-gov" data-cat="gov">
-    <div class="card-bg" style="background-image:url('https://images.squarespace-cdn.com/content/v1/55e18f35e4b09e18596261bb/1558366375118-MFMK3NCMH98GWA6LN5LA/mobilizing1.PNG');background-position:center top;"></div>
-    <div class="card-shine"></div>
-    <div class="card-scrim"></div>
-    <div class="card-stat">
-      <span class="card-stat-num">Blue</span>
-      <span class="card-stat-label">Pencil Award</span>
-    </div>
-    <div class="card-arrow">→</div>
-    <div class="card-content">
-      <div class="card-tag">Gov / Interactive</div>
-      <div class="card-title">Mobilizing Innovation</div>
-      <p class="card-outcome">NAGC 1st Place. Interactive digital annual report for DHS S&T. Ambitious design inside federal compliance.</p>
-    </div>
-  </a>
-
-  <!-- 08: Ecrion Content Marketing -->
-  <a href="/tech/" class="work-card c-tech" data-cat="tech">
-    <div class="card-bg" style="background-image:url('https://images.squarespace-cdn.com/content/v1/55e18f35e4b09e18596261bb/1558019850611-UPVRVX43U50VFXZC6X9E/Tachie+Lou+03.jpg');"></div>
-    <div class="card-shine"></div>
-    <div class="card-scrim"></div>
-    <div class="card-stat">
-      <span class="card-stat-num">B2B</span>
-      <span class="card-stat-label">Demand Gen</span>
-    </div>
-    <div class="card-arrow">→</div>
-    <div class="card-content">
-      <div class="card-tag">Tech / Content Marketing</div>
-      <div class="card-title">Ecrion — Content Strategy</div>
-      <p class="card-outcome">Brand mascot, blog, social, webinar program. Thought leadership built for enterprise SaaS buyers.</p>
-    </div>
-  </a>
-
-  <!-- 09: One Thousand Voices — WIDE -->
-  <a href="/nonprofit/" class="work-card c-nonprofit span-h2 card-no-img" data-cat="nonprofit">
-    <div class="card-bg"></div>
-    <div class="card-shine"></div>
-    <div class="card-scrim"></div>
-    <div class="card-arrow">→</div>
-    <div class="card-content">
-      <div>
-        <div class="card-stat" style="position:relative;top:auto;left:auto;margin-bottom:10px;">
-          <span class="card-stat-num">8 Yrs</span>
-          <span class="card-stat-label">Field Storytelling</span>
-        </div>
-        <div class="card-tag">Nonprofit / Documentary</div>
-        <div class="card-title">One Thousand Voices</div>
-      </div>
-      <p class="card-outcome">Founded 2014. Syrian and Iraqi refugee crisis documentation. Creative direction as advocacy — built to move donors, policymakers, and the public.</p>
-    </div>
-  </a>
-
-  <!-- 10: DHS Field App -->
-  <a href="/gov/" class="work-card c-gov" data-cat="gov">
-    <div class="card-bg" style="background-image:url('https://images.squarespace-cdn.com/content/v1/55e18f35e4b09e18596261bb/1559243833506-BGZUAIHJILFK4077SZWU/2019-05-29_13-29-23.png');background-position:center top;"></div>
-    <div class="card-shine"></div>
-    <div class="card-scrim"></div>
-    <div class="card-stat">
-      <span class="card-stat-num">13</span>
-      <span class="card-stat-label">App Screens</span>
-    </div>
-    <div class="card-arrow">→</div>
-    <div class="card-content">
-      <div class="card-tag">Gov / Interactive</div>
-      <div class="card-title">DHS Field Application</div>
-      <p class="card-outcome">Interactive field operations application for DHS S&T. 13 screens, full user flow, federal compliance.</p>
-    </div>
-  </a>
-
-  <!-- 11: DHS Federal Collateral -->
-  <a href="/gov/" class="work-card c-gov" data-cat="gov">
-    <div class="card-bg" style="background-image:url('https://images.squarespace-cdn.com/content/v1/55e18f35e4b09e18596261bb/1558124115841-PAH0SS663BIX59EOVR62/booklet_2spreads_1.png');"></div>
-    <div class="card-shine"></div>
-    <div class="card-scrim"></div>
-    <div class="card-stat">
-      <span class="card-stat-num">10</span>
-      <span class="card-stat-label">Person Team</span>
-    </div>
-    <div class="card-arrow">→</div>
-    <div class="card-content">
-      <div class="card-tag">Gov / Print &amp; Collateral</div>
-      <div class="card-title">Federal Print Work</div>
-      <p class="card-outcome">Booklets, tabletop exercises, postcards, die-cuts, conference collateral. All cleared multi-tier federal review.</p>
-    </div>
-  </a>
-
-  <!-- 12: Ecrion Product Marketing — WIDE -->
-  <a href="/tech/" class="work-card c-tech span-h2" data-cat="tech">
-    <div class="card-bg" style="background-image:url('https://images.squarespace-cdn.com/content/v1/55e18f35e4b09e18596261bb/1558019914169-ZSV8A7B4UOFVGGEZWF84/EOS-P+no+numbers.jpg');"></div>
-    <div class="card-shine"></div>
-    <div class="card-scrim"></div>
-    <div class="card-arrow">→</div>
-    <div class="card-content">
-      <div>
-        <div class="card-stat" style="position:relative;top:auto;left:auto;margin-bottom:10px;">
-          <span class="card-stat-num">NA</span>
-          <span class="card-stat-label">Market Entry</span>
-        </div>
-        <div class="card-tag">Tech / Product Marketing</div>
-        <div class="card-title">Ecrion — Product Marketing</div>
-      </div>
-      <p class="card-outcome">Enterprise buyer positioning. Events, trade shows, product collateral. Full-stack creative ownership, 2015–2016.</p>
-    </div>
-  </a>
-
-  <!-- 13: DHS Holiday / Cultural -->
-  <a href="/gov/" class="work-card c-gov" data-cat="gov">
-    <div class="card-bg" style="background-image:url('https://images.squarespace-cdn.com/content/v1/55e18f35e4b09e18596261bb/1558124119888-VUEORE22A366NJ2ZL5D9/happy_holidays_cartoon_12192018.jpg');"></div>
-    <div class="card-shine"></div>
-    <div class="card-scrim"></div>
-    <div class="card-stat">
-      <span class="card-stat-num">508</span>
-      <span class="card-stat-label">Compliant</span>
-    </div>
-    <div class="card-arrow">→</div>
-    <div class="card-content">
-      <div class="card-tag">Gov / Brand</div>
-      <div class="card-title">DHS Cultural Campaigns</div>
-      <p class="card-outcome">Internal brand work. Holiday communications, agency identity materials. Human voice inside federal structure.</p>
-    </div>
-  </a>
-
-  <!-- 14: Ecrion Campaign Content -->
-  <a href="/tech/" class="work-card c-tech" data-cat="tech">
-    <div class="card-bg" style="background-image:url('https://images.squarespace-cdn.com/content/v1/55e18f35e4b09e18596261bb/1558019628215-XGTEVDND8MFR5G9QABON/Thanksgiving+comic+strip+black+%281%29.jpg');"></div>
-    <div class="card-shine"></div>
-    <div class="card-scrim"></div>
-    <div class="card-stat">
-      <span class="card-stat-num">GTM</span>
-      <span class="card-stat-label">Content Engine</span>
-    </div>
-    <div class="card-arrow">→</div>
-    <div class="card-content">
-      <div class="card-tag">Tech / Campaign Content</div>
-      <div class="card-title">Ecrion — Campaign Creative</div>
-      <p class="card-outcome">Comic strip format, seasonal content, brand personality. Enterprise SaaS creative that doesn't feel like enterprise SaaS.</p>
-    </div>
-  </a>
+  <footer class="colophon">
+    <div class="coffee-ring"></div>
+    <nav aria-label="Footer">
+      <a href="/">CALL SHEET</a>
+      <a href="/ventures">VENTURES</a>
+      <a href="/services">SERVICES</a>
+      <a href="/interview">INTERVIEW</a>
+      <a href="/hire">HIRE</a>
+      <a href="https://www.linkedin.com/in/tim-shephard">LINKEDIN</a>
+    </nav>
+    <p>CAMERA REPORTS — filed as shot. Figures labeled ORG OUTCOME belong to the movement, not to me alone.<br>
+    EDITION ZERO · TIM SHEPHARD — SENIOR CREATIVE DIRECTOR · CREATIVE MIND VENTURES LLC · DALLAS–FORT WORTH, TX</p>
+  </footer>
 
 </div>
-
-<!-- FOOTER -->
-
-
-<script>
-/* ── FILTER ── */
-var filterBtns = document.querySelectorAll('.filter-btn');
-var cards = document.querySelectorAll('.work-card');
-var countEl = document.getElementById('work-count');
-
-filterBtns.forEach(function(btn) {
-  btn.addEventListener('click', function() {
-    var cat = this.getAttribute('data-cat');
-    filterBtns.forEach(function(b) { b.classList.remove('active'); });
-    this.classList.add('active');
-    var visible = 0;
-    cards.forEach(function(card) {
-      var cardCat = card.getAttribute('data-cat');
-      var show = (cat === 'all' || cardCat === cat);
-      card.classList.toggle('hidden', !show);
-      if (show) visible++;
-    });
-    countEl.textContent = visible + ' project' + (visible !== 1 ? 's' : '');
-  });
-});
-
-/* ── 3D TILT ── */
-(function() {
-  if (window.matchMedia('(hover: none)').matches) return;
-  var MAX = 6, EASE = 0.16;
-  cards.forEach(function(card) {
-    var shine = card.querySelector('.card-shine');
-    var tRX = 0, tRY = 0, cRX = 0, cRY = 0, active = false, raf;
-    function lerp(a,b,t){return a+(b-a)*t;}
-    function tick(){
-      cRX += (tRX-cRX)*EASE; cRY += (tRY-cRY)*EASE;
-      card.style.transform='rotateX('+cRX.toFixed(2)+'deg) rotateY('+cRY.toFixed(2)+'deg) scale('+(active?1.02:1)+')';
-      if(active||Math.abs(cRX)>.05||Math.abs(cRY)>.05){raf=requestAnimationFrame(tick);}
-      else{card.style.transform='';cancelAnimationFrame(raf);}
-    }
-    card.addEventListener('mouseenter',function(){active=true;cancelAnimationFrame(raf);raf=requestAnimationFrame(tick);});
-    card.addEventListener('mousemove',function(e){
-      var r=card.getBoundingClientRect();
-      var x=(e.clientX-r.left)/r.width, y=(e.clientY-r.top)/r.height;
-      tRY=(x-.5)*MAX*2; tRX=-(y-.5)*MAX*2;
-      if(shine)shine.style.background='radial-gradient(circle at '+(x*100).toFixed(1)+'% '+(y*100).toFixed(1)+'%,rgba(255,255,255,.12) 0%,transparent 55%)';
-    });
-    card.addEventListener('mouseleave',function(){active=false;tRX=0;tRY=0;if(!raf)raf=requestAnimationFrame(tick);});
-  });
-})();
-</script>
-  <footer id="site-footer"></footer>
-  <script src="/shared/nav.js" defer></script>
 </body>
 </html>
