@@ -1,0 +1,1186 @@
+{
+  "rule": "STANDING RULE 3 — TYPE LAW: every glyph is LIVE TYPE (renders as real DOM text in build, never baked) or TEXTURE TYPE (ambient set paint — may bake). This per-frame index is coarse; the role table governs.",
+  "roleTable": {
+    "liveAlways": [
+      "all Courier Prime (slates, TC, verb legend, HUD, tags, paperwork)",
+      "all Fragment Mono + Saira Condensed (bench plates, machine logs)",
+      "all phosphor screen content (#9FE8B4)",
+      "any painted-looking figure carrying data (archive counter, stat headlines, title cards, leader frames)"
+    ],
+    "textureMayBake": [
+      "Big Shoulders painted floor/wall titles",
+      "Big Shoulders Stencil crate markings",
+      "chalk hit-marks, tape scribbles, coffee rings (glyphic set dressing)"
+    ]
+  },
+  "frameCount": 116,
+  "frames": [
+    {
+      "frame": "RS dailies desktop morning",
+      "turn": "t6",
+      "caption": "DESKTOP · MORNING 09:00 · above lux — typed ink on paper · full document · LT mono+display",
+      "liveType": [
+        "mono",
+        "display"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "RS dailies desktop overnight",
+      "turn": "t6",
+      "caption": "DESKTOP · OVERNIGHT 02:40 · below lux — tungsten paper on soot, circles go phosphor · same document · LT mono+display+phosphor",
+      "liveType": [
+        "mono",
+        "display",
+        "phosphor"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "RS dailies mobile overnight",
+      "turn": "t6",
+      "caption": "375 · OVERNIGHT · the report as a reel — sections slated, snap at slates · LT mono+display+phosphor",
+      "liveType": [
+        "mono",
+        "display",
+        "phosphor"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "RS dailies email one-pager",
+      "turn": "t6",
+      "caption": "EMAILABLE ONE-PAGER · 600 px · always ink — email leaves the floor, so it ships as the print · LT mono+display",
+      "liveType": [
+        "mono",
+        "display"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "RS territory desktop morning",
+      "turn": "t6",
+      "caption": "DESKTOP · MORNING 09:00 · typed ink on paper · full document · LT mono+display",
+      "liveType": [
+        "mono",
+        "display"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "RS territory desktop overnight",
+      "turn": "t6",
+      "caption": "DESKTOP · OVERNIGHT 02:40 · tungsten paper on soot — the option glows phosphor · same document · LT mono+display+phosphor",
+      "liveType": [
+        "mono",
+        "display",
+        "phosphor"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "RS territory mobile morning",
+      "turn": "t6",
+      "caption": "375 · MORNING · the territory as a printed brief — ink, snap at slates · LT mono+display",
+      "liveType": [
+        "mono",
+        "display"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "RS territory email one-pager",
+      "turn": "t6",
+      "caption": "EMAILABLE ONE-PAGER · 600 px · ink always · LT mono+display",
+      "liveType": [
+        "mono",
+        "display"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "BF open overnight",
+      "turn": "t5",
+      "caption": "FEED OPEN · OVERNIGHT 02:40 · live rushes — tungsten/phosphor on soot · LT mono+masthead+phosphor",
+      "liveType": [
+        "mono",
+        "masthead",
+        "phosphor"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "BF open midday",
+      "turn": "t5",
+      "caption": "FEED OPEN · MIDDAY 12:30 · the printed edition — typed ink on paper, grit survives · LT mono+masthead",
+      "liveType": [
+        "mono",
+        "masthead"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "BF key dawn",
+      "turn": "t5",
+      "caption": "KEY STRIP — the same masthead in all five keys · temperature only, layout invariant, HUD law flips at 120 lux · LT mono+masthead",
+      "liveType": [
+        "mono",
+        "masthead"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "BF key morning",
+      "turn": "t5",
+      "caption": "",
+      "liveType": [],
+      "textureType": []
+    },
+    {
+      "frame": "BF key midday",
+      "turn": "t5",
+      "caption": "",
+      "liveType": [],
+      "textureType": []
+    },
+    {
+      "frame": "BF key golden",
+      "turn": "t5",
+      "caption": "",
+      "liveType": [],
+      "textureType": []
+    },
+    {
+      "frame": "BF key overnight",
+      "turn": "t5",
+      "caption": "",
+      "liveType": [],
+      "textureType": []
+    },
+    {
+      "frame": "BF reel structure",
+      "turn": "t5",
+      "caption": "THE REEL · mid-scroll · scroll rail = dolly track, chapters slated · LT mono+display+phosphor",
+      "liveType": [
+        "mono",
+        "display",
+        "phosphor"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "BF pull mid-hold",
+      "turn": "t5",
+      "caption": "PULL ON MOBILE · mid-hold · RACK isolates, gate meter above the thumb · LT mono",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "BF thumb map",
+      "turn": "t5",
+      "caption": "SPEC BOARD · 375×812 · not a shipped screen — the contract for every screen · LT mono",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "GS CUT before",
+      "turn": "t4",
+      "caption": "BEFORE · SC.01 MEDIUM · cut armed on a shelved reel · LT mono+phosphor TX paint",
+      "liveType": [
+        "mono",
+        "phosphor"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "GS CUT after",
+      "turn": "t4",
+      "caption": "AFTER · SC.06 full frame, 2 frames later · title card is content · LT mono+phosphor+title",
+      "liveType": [
+        "mono",
+        "phosphor",
+        "title"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "GS DOLLY before",
+      "turn": "t4",
+      "caption": "BEFORE · SC.02 WIDE · track at 0.0 M · parallax rates pinned to layers · LT mono TX paint+stencil",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint",
+        "stencil"
+      ]
+    },
+    {
+      "frame": "GS DOLLY after",
+      "turn": "t4",
+      "caption": "AFTER · 4.2 M down the track · displacement per layer made visible · LT mono TX stencil",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "stencil"
+      ]
+    },
+    {
+      "frame": "GS RACK before",
+      "turn": "t4",
+      "caption": "BEFORE · near plane sharp — the pulled tab · board soft at 4.5 M · LT mono",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "GS RACK after",
+      "turn": "t4",
+      "caption": "AFTER · racked to far plane — the Athens board reads, tab goes soft · LT mono",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "GS WIPE before",
+      "turn": "t4",
+      "caption": "BEFORE · SC.03 · pointer at frame edge, next wing peeking · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "GS WIPE after",
+      "turn": "t4",
+      "caption": "AFTER · mid-wipe at 55% · bench wing entering cold, stage exiting warm · LT mono",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "GS RETAKE before",
+      "turn": "t4",
+      "caption": "BEFORE · the arm ladder · tally dark — no event, no red · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "GS RETAKE after",
+      "turn": "t4",
+      "caption": "AFTER · sticks in frame, tape running · the only legitimate tally in this storyboard · LT mono+display",
+      "liveType": [
+        "mono",
+        "display"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "Type law exemplar GH-01",
+      "turn": "t4",
+      "caption": "EXEMPLAR — GH-01 annotated under the law · every glyph in frame badged · LT mono+phosphor TX paint",
+      "liveType": [
+        "mono",
+        "phosphor"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "DP SC.01 establishing morning",
+      "turn": "t3",
+      "caption": "ESTABLISHING · MORNING 09:00 · 24MM T4 · 2.39:1 · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "DP SC.01 medium morning",
+      "turn": "t3",
+      "caption": "MEDIUM · MORNING · 50MM T2.8 · 16:9 · headline stat legible · LT mono+phosphor TX paint",
+      "liveType": [
+        "mono",
+        "phosphor"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "DP SC.01 detail morning",
+      "turn": "t3",
+      "caption": "POST-DOLLY DETAIL · MORNING · 65MM T2.0 · the paper record — HUD law above threshold: ink · LT mono",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "DP SC.01 establishing overnight",
+      "turn": "t3",
+      "caption": "ESTABLISHING · OVERNIGHT 02:40 · 24MM T2.8 · 2.39:1 · LT mono+phosphor TX paint",
+      "liveType": [
+        "mono",
+        "phosphor"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "DP SC.01 medium overnight",
+      "turn": "t3",
+      "caption": "MEDIUM · OVERNIGHT · 50MM T2.0 · 16:9 · LT mono+phosphor TX paint",
+      "liveType": [
+        "mono",
+        "phosphor"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "DP SC.01 detail overnight",
+      "turn": "t3",
+      "caption": "POST-DOLLY DETAIL · OVERNIGHT · 65MM T2.0 · the phosphor record — HUD law below threshold: phosphor · LT mono+phosphor TX paint",
+      "liveType": [
+        "mono",
+        "phosphor"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "DP SC.02 establishing morning",
+      "turn": "t3",
+      "caption": "ESTABLISHING · MORNING 09:00 · 24MM T4 · 2.39:1 · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "DP SC.02 medium morning",
+      "turn": "t3",
+      "caption": "MEDIUM · MORNING · 50MM T2.8 · 16:9 · open drawer, tabs legible · LT mono",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "DP SC.02 detail morning",
+      "turn": "t3",
+      "caption": "POST-DOLLY DETAIL · MORNING · 65MM T2.0 · file open on the reading table · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "DP SC.02 establishing overnight",
+      "turn": "t3",
+      "caption": "ESTABLISHING · OVERNIGHT 02:40 · 24MM T2.8 · 2.39:1 · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "DP SC.02 medium overnight",
+      "turn": "t3",
+      "caption": "MEDIUM · OVERNIGHT · 50MM T2.0 · 16:9 · the pulled drawer, lamp-lit · LT mono",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "DP SC.02 detail overnight",
+      "turn": "t3",
+      "caption": "POST-DOLLY DETAIL · OVERNIGHT · 65MM T2.0 · file open under the lamp · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "DP SC.03 establishing morning",
+      "turn": "t3",
+      "caption": "ESTABLISHING · MORNING 09:00 · 24MM T4 · 2.39:1 · crane height · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "DP SC.03 medium morning",
+      "turn": "t3",
+      "caption": "MEDIUM · MORNING · 50MM T2.8 · 16:9 · the Athens board · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "DP SC.03 detail morning",
+      "turn": "t3",
+      "caption": "POST-DOLLY DETAIL · MORNING · 65MM T2.0 · call sheet, full page · LT mono",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "DP SC.03 establishing overnight",
+      "turn": "t3",
+      "caption": "ESTABLISHING · OVERNIGHT 02:40 · 24MM T4 · 2.39:1 · crane height · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "DP SC.03 medium overnight",
+      "turn": "t3",
+      "caption": "MEDIUM · OVERNIGHT · 50MM T2.0 · 16:9 · the board in a beam · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "DP SC.03 detail overnight",
+      "turn": "t3",
+      "caption": "POST-DOLLY DETAIL · OVERNIGHT · 65MM T2.0 · call sheet under the work lamp · LT mono",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "DP SC.04 establishing morning",
+      "turn": "t3",
+      "caption": "ESTABLISHING · MORNING 09:00 · 24MM T4 · 2.39:1 · shafts die at the boundary line · LT mono+phosphor",
+      "liveType": [
+        "mono",
+        "phosphor"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "DP SC.04 medium morning",
+      "turn": "t3",
+      "caption": "MEDIUM · MORNING · 50MM T2.8 · 16:9 · machines on the rail, plates legible · LT mono+phosphor",
+      "liveType": [
+        "mono",
+        "phosphor"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "DP SC.04 detail morning",
+      "turn": "t3",
+      "caption": "POST-DOLLY DETAIL · MORNING · 65MM T2.0 · M-03 log, idle · LT mono+phosphor",
+      "liveType": [
+        "mono",
+        "phosphor"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "DP SC.04 establishing overnight",
+      "turn": "t3",
+      "caption": "ESTABLISHING · OVERNIGHT 02:40 · 24MM T2.8 · 2.39:1 · the only wing that looks the same · LT mono+phosphor",
+      "liveType": [
+        "mono",
+        "phosphor"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "DP SC.04 medium overnight",
+      "turn": "t3",
+      "caption": "MEDIUM · OVERNIGHT · 50MM T2.0 · 16:9 · composing, REC live · LT mono+phosphor",
+      "liveType": [
+        "mono",
+        "phosphor"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "DP SC.04 detail overnight",
+      "turn": "t3",
+      "caption": "POST-DOLLY DETAIL · OVERNIGHT · 65MM T2.0 · the day-crew note at the border · LT mono+phosphor",
+      "liveType": [
+        "mono",
+        "phosphor"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "DP SC.05 establishing morning",
+      "turn": "t3",
+      "caption": "ESTABLISHING · MORNING 09:00 · 24MM T4 · 2.39:1 · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "DP SC.05 medium morning",
+      "turn": "t3",
+      "caption": "MEDIUM · MORNING · 50MM T2.8 · 16:9 · the Audit Desk, service copy legible · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "DP SC.05 detail morning",
+      "turn": "t3",
+      "caption": "POST-DOLLY DETAIL · MORNING · 65MM T2.0 · intake form, blank and waiting · LT mono",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "DP SC.05 establishing overnight",
+      "turn": "t3",
+      "caption": "ESTABLISHING · OVERNIGHT 02:40 · 24MM T2.8 · 2.39:1 · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "DP SC.05 medium overnight",
+      "turn": "t3",
+      "caption": "MEDIUM · OVERNIGHT · 50MM T2.0 · 16:9 · one desk pool, bell hot · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "DP SC.05 detail overnight",
+      "turn": "t3",
+      "caption": "POST-DOLLY DETAIL · OVERNIGHT · 65MM T2.0 · intake form, night rate · LT mono",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "DP SC.06 establishing morning",
+      "turn": "t3",
+      "caption": "ESTABLISHING · MORNING 09:00 · 24MM T4 · 2.39:1 · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "DP SC.06 medium morning",
+      "turn": "t3",
+      "caption": "MEDIUM · MORNING · 50MM T2.8 · 16:9 · one shelf, labels legible · LT mono",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "DP SC.06 detail morning",
+      "turn": "t3",
+      "caption": "POST-DOLLY DETAIL · MORNING · 65MM T2.0 · label read in daylight · LT mono",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "DP SC.06 establishing overnight",
+      "turn": "t3",
+      "caption": "ESTABLISHING · OVERNIGHT 02:40 · 24MM T2.8 · 2.39:1 · one red slot on the whole set · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "DP SC.06 medium overnight",
+      "turn": "t3",
+      "caption": "MEDIUM · OVERNIGHT · 50MM T2.0 · 16:9 · lamp rakes the shelf · LT mono",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "DP SC.06 detail overnight",
+      "turn": "t3",
+      "caption": "POST-DOLLY DETAIL · OVERNIGHT · 65MM T2.0 · label under the lamp · LT mono",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "Pull beat 1 hold",
+      "turn": "t3",
+      "caption": "BEAT 1 — THE HOLD · viewer holds on Nº 4,275 · RACK FOCUS isolates the can · 50MM T2.0 · LT mono",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "Pull beat 2 pull",
+      "turn": "t3",
+      "caption": "BEAT 2 — THE PULL · can slides out on the rail, tag swinging · 65MM T2.0 · LT mono",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "Pull beat 3 open",
+      "turn": "t3",
+      "caption": "BEAT 3 — THE OPEN · lid off on the light table · the case study runs from the reel · 65MM T2.0 · LT mono+phosphor TX paint",
+      "liveType": [
+        "mono",
+        "phosphor"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "GH-01 golden hour full floor",
+      "turn": "t3",
+      "caption": "GH-01 · FULL FLOOR — GOLDEN HOUR 18:40 · 2.39:1 · 21MM T2.8 · west elephant door · 3800K · one frame for the awards annual · LT mono+phosphor TX paint",
+      "liveType": [
+        "mono",
+        "phosphor"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "FL-01 Monitor Wall first light hero",
+      "turn": "t2",
+      "caption": "FL-01 · SC.01 MONITOR WALL — FIRST LIGHT HERO · 2.39:1 · CAM HT 1.42M · 32MM T2.8 · daylight enters frame left, screens go quiet · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "FL-02 Monitor Wall first light detail",
+      "turn": "t2",
+      "caption": "FL-02 · SC.01 MONITOR WALL — DESK DETAIL · 16:9 · CAM HT 1.18M · 50MM T2.0 · sun patch crosses the night log · LT mono",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "FL-03 Records first light hero",
+      "turn": "t2",
+      "caption": "FL-03 · SC.02 RECORDS WING — FIRST LIGHT HERO · 2.39:1 · CAM HT 1.55M · 35MM T2.8 · clerestory shafts rake the drawer wall · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "FL-04 Records first light detail",
+      "turn": "t2",
+      "caption": "FL-04 · SC.02 RECORDS WING — DESK DETAIL · 16:9 · CAM HT 1.02M · 65MM T2.0 · window light crosses the closed folder · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "FL-05 Stage first light hero",
+      "turn": "t2",
+      "caption": "FL-05 · SC.03 THE STAGE — FIRST LIGHT HERO · 2.39:1 · CAM HT 2.9M (CRANE) · 24MM T4 · elephant door open, tungsten vs dawn · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "FL-06 Stage first light detail",
+      "turn": "t2",
+      "caption": "FL-06 · SC.03 THE STAGE — DIMMER BOARD DETAIL · 16:9 · CAM HT 1.30M · 50MM T2.0 · faders coming down with the sun coming up · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "FL-07 Bench first light hero",
+      "turn": "t2",
+      "caption": "FL-07 · SC.04 THE BENCH — FIRST LIGHT HERO · 2.39:1 · CAM HT 1.35M · 35MM T2.8 · dawn stops at the boundary line — instrument light constant · LT mono+phosphor",
+      "liveType": [
+        "mono",
+        "phosphor"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "FL-08 Bench first light detail",
+      "turn": "t2",
+      "caption": "FL-08 · SC.04 THE BENCH — TERMINAL DETAIL · 16:9 · CAM HT 1.10M · 65MM T2.0 · the overnight log, read cold · LT mono+phosphor",
+      "liveType": [
+        "mono",
+        "phosphor"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "FL-09 Front Office first light hero",
+      "turn": "t2",
+      "caption": "FL-09 · SC.05 FRONT OFFICE — FIRST LIGHT HERO · 2.39:1 · CAM HT 1.50M · 40MM T2.8 · gold lettering catches the sunrise · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "FL-10 Front Office first light detail",
+      "turn": "t2",
+      "caption": "FL-10 · SC.05 FRONT OFFICE — INTAKE DETAIL · 16:9 · CAM HT 1.05M · 50MM T2.0 · first form of the day, sunlit · LT mono",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "FL-11 Archive first light hero",
+      "turn": "t2",
+      "caption": "FL-11 · SC.06 THE ARCHIVE — FIRST LIGHT HERO · 2.39:1 · CAM HT 1.60M · 35MM T2.8 · raking dawn along the shelf rims · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "FL-12 Archive first light detail",
+      "turn": "t2",
+      "caption": "FL-12 · SC.06 THE ARCHIVE — CAN LABEL DETAIL · 16:9 · CAM HT 1.00M · 65MM T2.0 · last night's can, closed out · LT mono",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "MD-01 Monitor Wall midday",
+      "turn": "t2",
+      "caption": "MD-01 · SC.01 MONITOR WALL — MIDDAY · 2.39:1 · 6200K skylight flood · the bank is the darkest thing in the room · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "MD-02 Records midday",
+      "turn": "t2",
+      "caption": "MD-02 · SC.02 RECORDS WING — MIDDAY · 2.39:1 · window-grid shadows on the deck · public hours · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "MD-03 Stage midday",
+      "turn": "t2",
+      "caption": "MD-03 · SC.03 THE STAGE — MIDDAY · 2.39:1 · doors full open · fresnels dark on the grid · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "MD-04 Bench midday",
+      "turn": "t2",
+      "caption": "MD-04 · SC.04 THE BENCH — MIDDAY · 2.39:1 · blackout canopy · noon everywhere else · LT mono+phosphor",
+      "liveType": [
+        "mono",
+        "phosphor"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "MD-05 Front Office midday",
+      "turn": "t2",
+      "caption": "MD-05 · SC.05 FRONT OFFICE — MIDDAY · 2.39:1 · brightest frame of the day · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "MD-06 Archive midday",
+      "turn": "t2",
+      "caption": "MD-06 · SC.06 THE ARCHIVE — MIDDAY · 2.39:1 · the archive as museum · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "Lighting-state spec sheet",
+      "turn": "t2",
+      "caption": "",
+      "liveType": [],
+      "textureType": []
+    },
+    {
+      "frame": "A-01 Monitor Wall hero",
+      "turn": "t1",
+      "caption": "A-01 · SC.01 MONITOR WALL — HERO · 2.39:1 · CAM HT 1.42M · 32MM T2.8 · screens are the light source · LT mono+phosphor TX paint",
+      "liveType": [
+        "mono",
+        "phosphor"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "A-02 Monitor Wall detail",
+      "turn": "t1",
+      "caption": "A-02 · SC.01 MONITOR WALL — DOLLY-IN DETAIL · 16:9 · CAM HT 1.18M · 50MM T2.0 · LT mono+phosphor TX paint",
+      "liveType": [
+        "mono",
+        "phosphor"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "A-03 Records hero",
+      "turn": "t1",
+      "caption": "A-03 · SC.02 RECORDS WING — HERO · 2.39:1 · CAM HT 1.55M · 35MM T2.8 · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "A-04 Records detail",
+      "turn": "t1",
+      "caption": "A-04 · SC.02 RECORDS WING — DOLLY-IN DETAIL · 16:9 · CAM HT 1.02M · 65MM T2.0 · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "A-05 Stage hero",
+      "turn": "t1",
+      "caption": "A-05 · SC.03 THE STAGE — HERO · 2.39:1 · CAM HT 2.9M (CRANE) · 24MM T4 · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "A-06 Stage detail",
+      "turn": "t1",
+      "caption": "A-06 · SC.03 THE STAGE — DOLLY-IN DETAIL · 16:9 · CAM HT 1.30M · 50MM T2.0 · LT mono TX stencil+paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "stencil",
+        "paint"
+      ]
+    },
+    {
+      "frame": "A-07 Bench hero",
+      "turn": "t1",
+      "caption": "A-07 · SC.04 THE BENCH — HERO · 2.39:1 · CAM HT 1.35M · 35MM T2.8 · LT mono+phosphor TX paint",
+      "liveType": [
+        "mono",
+        "phosphor"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "A-08 Bench detail",
+      "turn": "t1",
+      "caption": "A-08 · SC.04 THE BENCH — DOLLY-IN DETAIL · 16:9 · CAM HT 1.10M · 65MM T2.0 · LT mono+phosphor",
+      "liveType": [
+        "mono",
+        "phosphor"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "A-09 Front Office hero",
+      "turn": "t1",
+      "caption": "A-09 · SC.05 FRONT OFFICE — HERO · 2.39:1 · CAM HT 1.50M · 40MM T2.8 · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "A-10 Front Office detail",
+      "turn": "t1",
+      "caption": "A-10 · SC.05 FRONT OFFICE — DOLLY-IN DETAIL · 16:9 · CAM HT 1.05M · 50MM T2.0 · LT mono",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "A-11 Archive hero",
+      "turn": "t1",
+      "caption": "A-11 · SC.06 THE ARCHIVE — HERO · 2.39:1 · CAM HT 1.60M · 35MM T2.8 · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "A-12 Archive detail",
+      "turn": "t1",
+      "caption": "A-12 · SC.06 THE ARCHIVE — DOLLY-IN DETAIL · 16:9 · CAM HT 1.00M · 65MM T2.0 · LT mono TX paint",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": [
+        "paint"
+      ]
+    },
+    {
+      "frame": "A Grammar Spec",
+      "turn": "t1",
+      "caption": "",
+      "liveType": [],
+      "textureType": []
+    },
+    {
+      "frame": "A HUD System",
+      "turn": "t1",
+      "caption": "",
+      "liveType": [],
+      "textureType": []
+    },
+    {
+      "frame": "B-01 Monitor Wall hero",
+      "turn": "t1",
+      "caption": "B-01 · SC.01 MONITOR WALL — HERO · 2.39:1 · CAM HT 1.42M · 32MM T2.8 · screens are the light source · LT mono",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "B-02 Monitor Wall detail",
+      "turn": "t1",
+      "caption": "B-02 · SC.01 MONITOR WALL — DOLLY-IN DETAIL · 16:9 · CAM HT 1.18M · 50MM T2.0 · LT mono",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "B-03 Records hero",
+      "turn": "t1",
+      "caption": "B-03 · SC.02 RECORDS WING — HERO · 2.39:1 · CAM HT 1.55M · 35MM T2.8 · LT mono",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "B-04 Records detail",
+      "turn": "t1",
+      "caption": "B-04 · SC.02 RECORDS WING — DOLLY-IN DETAIL · 16:9 · CAM HT 1.02M · 65MM T2.0 · LT mono",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "B-05 Stage hero",
+      "turn": "t1",
+      "caption": "B-05 · SC.03 THE STAGE — HERO · 2.39:1 · CAM HT 2.9M (CRANE) · 24MM T4 · LT mono",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "B-06 Stage detail",
+      "turn": "t1",
+      "caption": "B-06 · SC.03 THE STAGE — DOLLY-IN DETAIL · 16:9 · CAM HT 1.30M · 50MM T2.0 · LT mono",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "B-07 Bench hero",
+      "turn": "t1",
+      "caption": "B-07 · SC.04 THE BENCH — HERO · 2.39:1 · CAM HT 1.35M · 35MM T2.8 · LT mono",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "B-08 Bench detail",
+      "turn": "t1",
+      "caption": "B-08 · SC.04 THE BENCH — DOLLY-IN DETAIL · 16:9 · CAM HT 1.10M · 65MM T2.0 · LT mono",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "B-09 Front Office hero",
+      "turn": "t1",
+      "caption": "B-09 · SC.05 FRONT OFFICE — HERO · 2.39:1 · CAM HT 1.50M · 40MM T2.8 · LT mono",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "B-10 Front Office detail",
+      "turn": "t1",
+      "caption": "B-10 · SC.05 FRONT OFFICE — DOLLY-IN DETAIL · 16:9 · CAM HT 1.05M · 50MM T2.0 · LT mono",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "B-11 Archive hero",
+      "turn": "t1",
+      "caption": "B-11 · SC.06 THE ARCHIVE — HERO · 2.39:1 · CAM HT 1.60M · 35MM T2.8 · LT mono",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "B-12 Archive detail",
+      "turn": "t1",
+      "caption": "B-12 · SC.06 THE ARCHIVE — DOLLY-IN DETAIL · 16:9 · CAM HT 1.00M · 65MM T2.0 · LT mono",
+      "liveType": [
+        "mono"
+      ],
+      "textureType": []
+    },
+    {
+      "frame": "B Grammar Spec",
+      "turn": "t1",
+      "caption": "",
+      "liveType": [],
+      "textureType": []
+    },
+    {
+      "frame": "B HUD System",
+      "turn": "t1",
+      "caption": "",
+      "liveType": [],
+      "textureType": []
+    }
+  ]
+}

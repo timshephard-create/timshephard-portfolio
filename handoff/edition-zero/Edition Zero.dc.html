@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&amp;family=Saira+Condensed:wght@500;600;700&amp;family=Fragment+Mono&amp;family=Big+Shoulders:wght@800;900&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FDFBF4}
+a{color:#6E2C1F;text-decoration:none;border-bottom:1px solid rgba(110,44,31,.4)}
+a:hover{color:#241B10;border-bottom-color:#241B10}
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:#FDFBF4;color:#241B10;font-family:'Courier Prime',monospace;position:relative">
+<sc-if value="{{ registrationMarks }}" hint-placeholder-val="{{ true }}">
+  <div style="position:fixed;top:16px;left:16px;width:20px;height:20px;border-left:1.5px solid rgba(36,27,16,.4);border-top:1.5px solid rgba(36,27,16,.4)"></div>
+  <div style="position:fixed;top:16px;right:16px;width:20px;height:20px;border-right:1.5px solid rgba(36,27,16,.4);border-top:1.5px solid rgba(36,27,16,.4)"></div>
+  <div style="position:fixed;bottom:16px;left:16px;width:20px;height:20px;border-left:1.5px solid rgba(36,27,16,.4);border-bottom:1.5px solid rgba(36,27,16,.4)"></div>
+  <div style="position:fixed;bottom:16px;right:16px;width:20px;height:20px;border-right:1.5px solid rgba(36,27,16,.4);border-bottom:1.5px solid rgba(36,27,16,.4)"></div>
+</sc-if>
+
+<div style="max-width:720px;margin:0 auto;padding:64px 28px 80px;display:flex;flex-direction:column;gap:44px">
+
+  <header data-screen-label="EZ masthead" style="display:flex;flex-direction:column;gap:18px;position:relative">
+    <div style="display:flex;justify-content:space-between;font:400 12px 'Courier Prime',monospace;letter-spacing:.14em;color:rgba(36,27,16,.6);border-bottom:3px double #241B10;padding-bottom:10px"><span>THE OVERNIGHT PRINT OF TIMSHEPHARD.CO</span><span>EDITION ZERO — PROOF</span></div>
+    <h1 style="font:900 clamp(64px,14vw,120px)/0.9 'Big Shoulders',sans-serif;text-transform:uppercase;margin:0">Night Crew</h1>
+    <div style="font:400 13px/1.9 'Courier Prime',monospace;letter-spacing:.1em;color:rgba(36,27,16,.7)">CUT Nº 4,285 · COMPOSED 02:00 · STRUCK 06:51 · ONE VIEWER — YOU<br>TIM SHEPHARD — DESIGN FOR BROADCAST · TITLES, LIVE GRAPHICS, MOTION SYSTEMS</div>
+    <div style="position:absolute;right:0;top:54px;border:3px solid #6E2C1F;color:#6E2C1F;font:700 13px 'Courier Prime',monospace;letter-spacing:.2em;padding:7px 14px;transform:rotate(-4deg)">PROOF — DO NOT SHIP</div>
+  </header>
+
+  <nav data-screen-label="EZ contents" style="border-top:2px solid #241B10;border-bottom:2px solid #241B10;padding:14px 0;display:flex;flex-wrap:wrap;gap:10px 22px;font:400 13px 'Courier Prime',monospace;letter-spacing:.08em">
+    <a href="#athens" style="border-bottom:none">01 — ATHENS 2004</a>
+    <a href="#records" style="border-bottom:none">02 — THE RECORDS</a>
+    <a href="#bench" style="border-bottom:none">03 — THE BENCH</a>
+    <a href="#office" style="border-bottom:none">04 — FRONT OFFICE</a>
+    <a href="#archive" style="border-bottom:none">05 — THE ARCHIVE</a>
+    <a href="#talkback" style="border-bottom:none">TALKBACK</a>
+  </nav>
+
+  <section id="athens" data-screen-label="EZ 01 Athens" style="display:flex;flex-direction:column;gap:16px;scroll-margin:40px">
+    <h2 style="font:700 17px 'Courier Prime',monospace;letter-spacing:.16em;border-bottom:2px solid #241B10;padding-bottom:8px;margin:0">01 — ATHENS 2004 · OLYMPIC BROADCAST TITLES</h2>
+    <p style="font:400 15px/1.85 'Courier Prime',monospace;margin:0">Title sequence and live graphics package for the Athens 2004 Olympic broadcast — designed for a live audience of four billion, transmitted once, with no second take. Twenty-six sports, one typographic system, every frame built to survive a stadium feed, a hotel television and a control-room monitor at the same time.</p>
+    <div style="display:flex;gap:28px;flex-wrap:wrap;border:1px solid rgba(36,27,16,.3);padding:16px 22px">
+      <span style="font:400 13px/1.7 'Courier Prime',monospace"><b style="font-size:22px">4,000,000,000</b><br>live audience, one take</span>
+      <span style="font:400 13px/1.7 'Courier Prime',monospace"><b style="font-size:22px">26</b><br>sports, one system</span>
+      <span style="font:400 13px/1.7 'Courier Prime',monospace"><b style="font-size:22px">0</b><br>reruns available</span>
+    </div>
+    <p style="font:400 14px/1.8 'Courier Prime',monospace;margin:0;color:rgba(36,27,16,.75)">&#8220;Live to four billion. One take. That&#8217;s the whole discipline.&#8221;</p>
+  </section>
+
+  <section id="records" data-screen-label="EZ 02 Records" style="display:flex;flex-direction:column;gap:16px;scroll-margin:40px">
+    <h2 style="font:700 17px 'Courier Prime',monospace;letter-spacing:.16em;border-bottom:2px solid #241B10;padding-bottom:8px;margin:0">02 — THE RECORDS · 200+ BROADCAST HOURS</h2>
+    <p style="font:400 15px/1.85 'Courier Prime',monospace;margin:0">Two decades of title design and live packaging, filed by year. A pulled selection from the drawers:</p>
+    <div style="font:400 13.5px/1.6 'Courier Prime',monospace">
+      <div style="display:grid;grid-template-columns:64px 1fr 150px;gap:0;padding:9px 0;border-bottom:1px solid rgba(36,27,16,.25)"><span>2004</span><span>ATHENS — OLYMPIC BROADCAST TITLES</span><span>lead design</span></div>
+      <div style="display:grid;grid-template-columns:64px 1fr 150px;gap:0;padding:9px 0;border-bottom:1px solid rgba(36,27,16,.25)"><span>2008</span><span>ELECTION NIGHT — NETWORK GRAPHICS SYSTEM</span><span>system design</span></div>
+      <div style="display:grid;grid-template-columns:64px 1fr 150px;gap:0;padding:9px 0;border-bottom:1px solid rgba(36,27,16,.25)"><span>2012</span><span>WORLD CUP QUALIFIERS — LIVE PACKAGE</span><span>lead design</span></div>
+      <div style="display:grid;grid-template-columns:64px 1fr 150px;gap:0;padding:9px 0;border-bottom:1px solid rgba(36,27,16,.25)"><span>2017</span><span>LATE DESK — NIGHTLY TITLES, 900 EPISODES</span><span>title design</span></div>
+      <div style="display:grid;grid-template-columns:64px 1fr 150px;gap:0;padding:9px 0;border-bottom:1px solid rgba(36,27,16,.25)"><span>2021</span><span>CONTINENTAL GAMES — VENUE + BROADCAST TYPE</span><span>motion system</span></div>
+      <div style="display:grid;grid-template-columns:64px 1fr 150px;gap:0;padding:9px 0;border-bottom:1px solid rgba(36,27,16,.25)"><span>2024</span><span>SIGNAL — TITLES FOR A DOCUMENTARY SEASON</span><span>title design</span></div>
+    </div>
+    <p style="font:400 13px/1.7 'Courier Prime',monospace;margin:0;color:rgba(36,27,16,.6)">The full drawers open on the floor. Every file has a call sheet.</p>
+  </section>
+
+  <section id="bench" data-screen-label="EZ 03 Bench" style="display:flex;flex-direction:column;gap:16px;scroll-margin:40px;background:#10141B;color:#EDF0F2;padding:26px 28px">
+    <h2 style="font:600 17px 'Saira Condensed',sans-serif;letter-spacing:.2em;border-bottom:1px solid rgba(237,240,242,.4);padding-bottom:10px;margin:0">03 — THE BENCH · THE INSTRUMENT ZONE</h2>
+    <p style="font:400 13px/1.9 'Fragment Mono',monospace;margin:0;color:rgba(237,240,242,.85)">The cold corner of the floor — machines, not props. Capability plates, engraved:</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+      <div style="border:1px solid #39434C;padding:14px 16px;font:400 12px/1.8 'Fragment Mono',monospace;color:#9AA4AC"><b style="color:#EDF0F2">M-01</b><br>TITLE + TYPE SYSTEMS<br>broadcast-safe, tested at 6 m and 6 in</div>
+      <div style="border:1px solid #39434C;padding:14px 16px;font:400 12px/1.8 'Fragment Mono',monospace;color:#9AA4AC"><b style="color:#EDF0F2">M-02</b><br>LIVE GRAPHICS RIGS<br>data-driven packages that hold air for 6 hours</div>
+      <div style="border:1px solid #39434C;padding:14px 16px;font:400 12px/1.8 'Fragment Mono',monospace;color:#9AA4AC"><b style="color:#EDF0F2">M-03</b><br>THE OVERNIGHT COMPOSITOR<br>AI-assisted pipeline; composes this print at 02:00</div>
+    </div>
+    <p style="font:400 11.5px/1.7 'Fragment Mono',monospace;margin:0;color:rgba(237,240,242,.55)">Instrument light is constant here. Even in the print, the Bench keeps its own key.</p>
+  </section>
+
+  <section id="office" data-screen-label="EZ 04 Front Office" style="display:flex;flex-direction:column;gap:16px;scroll-margin:40px">
+    <h2 style="font:700 17px 'Courier Prime',monospace;letter-spacing:.16em;border-bottom:2px solid #241B10;padding-bottom:8px;margin:0">04 — FRONT OFFICE · THE SERVICES COUNTER</h2>
+    <p style="font:400 15px/1.85 'Courier Prime',monospace;margin:0">Two documents leave this counter. Both are priced, both are signed, both convert readers into clients:</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div style="border:2px solid #241B10;padding:20px 22px;display:flex;flex-direction:column;gap:10px">
+        <span style="font:900 26px 'Big Shoulders',sans-serif;text-transform:uppercase">Dailies Report</span>
+        <span style="font:400 13px/1.75 'Courier Prime',monospace">The Audit Desk watches everything you&#8217;ve got — site, film, paperwork — and returns circled takes, named failures and a costed pick-up list. No scores, no charts. Verdicts.</span>
+        <a href="#talkback" style="font:700 13px 'Courier Prime',monospace;letter-spacing:.12em;color:#6E2C1F;border:2px solid #6E2C1F;padding:10px 14px;text-align:center;align-self:stretch;border-bottom-width:2px">BOOK THE PICK-UP DAY →</a>
+      </div>
+      <div style="border:2px solid #241B10;padding:20px 22px;display:flex;flex-direction:column;gap:10px">
+        <span style="font:900 26px 'Big Shoulders',sans-serif;text-transform:uppercase">Creative Territory</span>
+        <span style="font:400 13px/1.75 'Courier Prime',monospace">The Brief Desk takes your intake and returns a direction you can option: logline, world, lookbook, ten rules, three first setups. One territory per client, exclusive while held.</span>
+        <a href="#talkback" style="font:700 13px 'Courier Prime',monospace;letter-spacing:.12em;color:#6E2C1F;border:2px solid #6E2C1F;padding:10px 14px;text-align:center;align-self:stretch;border-bottom-width:2px">TAKE THE OPTION →</a>
+      </div>
+    </div>
+    <p style="font:400 13px/1.7 'Courier Prime',monospace;margin:0;color:rgba(36,27,16,.6)">Fixed rates on request — ring the bell. Specimen copies of both documents hang in the office.</p>
+  </section>
+
+  <section id="archive" data-screen-label="EZ 05 Archive" style="display:flex;flex-direction:column;gap:14px;scroll-margin:40px">
+    <h2 style="font:700 17px 'Courier Prime',monospace;letter-spacing:.16em;border-bottom:2px solid #241B10;padding-bottom:8px;margin:0">05 — THE ARCHIVE</h2>
+    <p style="font:400 15px/1.85 'Courier Prime',monospace;margin:0"><b style="font-size:26px">4,284</b> cuts shelved to date. No two alike, none rerun. Every overnight edition of this site is composed at 02:00, printed once, and canned. Yours is Nº 4,285 — tonight it joins the shelf, and tomorrow&#8217;s viewer gets a different paper.</p>
+  </section>
+
+  <section id="talkback" data-screen-label="EZ talkback" style="display:flex;flex-direction:column;gap:14px;scroll-margin:40px;border:2px solid #241B10;padding:22px 26px">
+    <h2 style="font:700 17px 'Courier Prime',monospace;letter-spacing:.16em;margin:0">TALKBACK — ASK THE DIRECTOR ANYTHING</h2>
+    <p style="font:400 14px/1.8 'Courier Prime',monospace;margin:0">The interview channel opens at window 2 on the floor. On paper, it&#8217;s simpler: <a href="mailto:desk@timshephard.co">desk@timshephard.co</a> — replies return as timed, typed log entries. For the working floor itself, <a href="#">return to the floor →</a></p>
+  </section>
+
+  <sc-if value="{{ showColophon }}" hint-placeholder-val="{{ true }}">
+  <footer data-screen-label="EZ colophon" style="display:flex;flex-direction:column;gap:10px;border-top:3px double #241B10;padding-top:16px;position:relative">
+    <div style="font:400 11.5px/1.9 'Courier Prime',monospace;color:rgba(36,27,16,.6)">COLOPHON — set in Courier Prime and Big Shoulders; the Bench in Saira Condensed and Fragment Mono. Composed overnight by M-03. Printed once. Grit is invariant; the ring below was already on the desk.<br>EDITION ZERO · PROOF PRINT · TIMSHEPHARD.CO — A WORKING FLOOR, 24 HOURS</div>
+    <div style="position:absolute;right:36px;top:-14px;width:52px;height:52px;border:5px solid rgba(110,44,31,.2);border-radius:50%;transform:rotate(7deg)"></div>
+  </footer>
+  </sc-if>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;registrationMarks&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Print&quot;, &quot;description&quot;: &quot;Corner registration marks on the proof&quot;}, &quot;showColophon&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Print&quot;, &quot;description&quot;: &quot;Colophon block at the foot of the print&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      registrationMarks: this.props.registrationMarks ?? true,
+      showColophon: this.props.showColophon ?? true
+    };
+  }
+}
+</script>
+</body>
+</html>

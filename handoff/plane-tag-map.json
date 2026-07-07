@@ -1,0 +1,109 @@
+{
+  "rule": "Every dressed element carries exactly one parallax tag. Rates declared once, never re-tuned per wing. RACK's two planes per shot are two adjacent tags. The Pull: can MID → rail to FG → light table MID.",
+  "rates": {
+    "FG": 1.2,
+    "MID": 0.6,
+    "BG": 0.2
+  },
+  "wings": {
+    "SC.01 MONITOR WALL": {
+      "FG": [
+        "camera cables",
+        "tape hit-marks",
+        "sandbag"
+      ],
+      "MID": [
+        "console desk",
+        "chairs",
+        "work lamp",
+        "PGM feed tags"
+      ],
+      "BG": [
+        "monitor bank + wall",
+        "painted MONITOR WALL (TX)",
+        "pipe grid"
+      ]
+    },
+    "SC.02 RECORDS WING": {
+      "FG": [
+        "floor cables",
+        "pulled paper tab + tag",
+        "coffee ring"
+      ],
+      "MID": [
+        "reading table",
+        "crate stack (REEL stencil, TX)",
+        "work lamp"
+      ],
+      "BG": [
+        "drawer cabinet wall",
+        "painted THE RECORDS (TX)",
+        "clerestory shafts"
+      ]
+    },
+    "SC.03 THE STAGE": {
+      "FG": [
+        "sandbags",
+        "cable ramps",
+        "chalk hit-marks"
+      ],
+      "MID": [
+        "Athens board",
+        "stat cards",
+        "easel",
+        "fresnels on stands"
+      ],
+      "BG": [
+        "elephant door + cyc",
+        "painted THE STAGE (TX)",
+        "overhead pipe grid"
+      ]
+    },
+    "SC.04 THE BENCH": {
+      "FG": [
+        "boundary line",
+        "day-crew note"
+      ],
+      "MID": [
+        "machines M-01–M-03 on the rail",
+        "engraved plates"
+      ],
+      "BG": [
+        "steel wall",
+        "instrument shaft — planes keep the cold key (Rule 2)"
+      ]
+    },
+    "SC.05 FRONT OFFICE": {
+      "FG": [
+        "counter bell",
+        "intake forms",
+        "pen on chain"
+      ],
+      "MID": [
+        "audit desk",
+        "service window",
+        "desk pool lamp"
+      ],
+      "BG": [
+        "transom wall",
+        "painted signage (TX)"
+      ]
+    },
+    "SC.06 THE ARCHIVE": {
+      "FG": [
+        "brass rail (The Pull rides it)",
+        "swing tags",
+        "dust in beam"
+      ],
+      "MID": [
+        "can shelves (RACK near plane)",
+        "light table",
+        "the red slot"
+      ],
+      "BG": [
+        "deep stacks",
+        "archive counter figure (LT)"
+      ]
+    }
+  }
+}
