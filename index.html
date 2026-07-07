@@ -1,460 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tim Shephard — Creative Director</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,700;0,900;1,700;1,900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/shared/styles.css">
-  <!-- GA4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-82B9C9WGMG"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-82B9C9WGMG');
-  </script>
-  <style>
-/* ── CURSOR ── */
-#cursor {
-  position: fixed;
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  background: var(--orange);
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: transform 0.1s ease, width 0.3s var(--ease), height 0.3s var(--ease), background 0.3s ease;
-  mix-blend-mode: normal;
-}
-#cursor.expanded {
-  width: 48px; height: 48px;
-  background: transparent;
-  border: 1.5px solid var(--orange);
-}
-
-/* ── GRID OVERLAY ── */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(248,247,244,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(248,247,244,0.04) 1px, transparent 1px);
-  background-size: 52px 52px;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* ── MAIN SPLIT ── */
-.split-container {
-  position: fixed;
-  top: 132px; left: 0; right: 0;   /* sits below the Start Here band */
-  bottom: 90px;                    /* leaves room for the third strip */
-  display: flex;
-  z-index: 9000;
-}
-
-/* ── THIRD STRIP: WHAT I'M BUILDING ── */
-.third-strip {
-  position: fixed;
-  bottom: 0; left: 0; right: 0;
-  height: 90px;
-  background: var(--ink);
-  border-top: 1px solid rgba(248,247,244,0.07);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 28px;
-  text-decoration: none;
-  cursor: pointer;
-  z-index: 9100;
-  overflow: hidden;
-  animation: fadeIn 0.8s ease 0.4s both;
-  transition: background 0.3s var(--ease);
-}
-.third-strip::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 3px;
-  background: var(--orange);
-  transform: scaleY(0);
-  transform-origin: bottom;
-  transition: transform 0.4s var(--ease);
-}
-.third-strip:hover { background: var(--ink2); }
-.third-strip:hover::before { transform: scaleY(1); }
-
-.strip-label {
-  font-family: var(--font-mono);
-  font-size: 0.69rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(248,247,244,0.38);
-}
-.strip-divider {
-  width: 1px;
-  height: 20px;
-  background: rgba(248,247,244,0.12);
-  flex-shrink: 0;
-}
-.strip-headline {
-  font-family: var(--font-disp);
-  font-weight: 900;
-  font-style: italic;
-  font-size: clamp(1.5rem, 2.2vw, 2.25rem);
-  letter-spacing: -0.02em;
-  line-height: 1;
-  color: var(--white);
-  text-transform: uppercase;
-}
-.strip-cta {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.06em;
-  color: var(--orange);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.strip-arrow {
-  display: inline-block;
-  transition: transform 0.3s var(--ease);
-}
-.third-strip:hover .strip-arrow { transform: translateX(5px); }
-
-/* ── DIVIDER ── */
-.divider {
-  position: absolute;
-  top: 0; bottom: 0;
-  left: 50%;
-  width: 1px;
-  background: rgba(232,66,10,0.4);
-  z-index: 10;
-  transform: translateX(-50%);
-  transition: left 0.7s var(--ease);
-  pointer-events: none;
-}
-.divider::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  background: var(--orange);
-  box-shadow: 0 0 0 4px rgba(232,66,10,0.15);
-  transition: box-shadow 0.3s ease;
-}
-
-/* ── TIER 1: START HERE — primary guided entry point (full-width top band) ── */
-.start-here {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  height: 132px;
-  z-index: 9200;
-  background: var(--orange);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 28px;
-  text-decoration: none;
-  cursor: pointer;
-  overflow: hidden;
-  animation: fadeIn 0.7s ease both;
-  transition: background 0.3s var(--ease);
-}
-.start-here:hover { background: var(--orange-hi); }
-.sh-head {
-  font-family: var(--font-disp);
-  font-weight: 900;
-  font-style: italic;
-  text-transform: uppercase;
-  letter-spacing: -0.025em;
-  line-height: 0.9;
-  font-size: clamp(2rem, 3.4vw, 2.85rem);
-  color: var(--white);
-}
-.sh-sub {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  color: var(--ink);
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  transition: gap 0.3s var(--ease);
-}
-.start-here:hover .sh-sub { gap: 16px; }
-
-/* ── PANEL BASE ── */
-.panel {
-  flex: 1;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 60px 56px 64px;
-  transition: flex 0.7s var(--ease);
-  cursor: none;
-}
-
-/* ── LEFT: DARK / SHOW ── */
-.panel-show {
-  background: var(--ink);
-  flex: 1;
-}
-.split-container:has(.panel-show:hover) .panel-show { flex: 1.4; }
-.split-container:has(.panel-show:hover) .panel-tell { flex: 0.6; }
-.split-container:has(.panel-show:hover) .divider { left: 58%; }
-
-/* ── RIGHT: LIGHT / TELL ── */
-.panel-tell {
-  background: var(--white);
-  flex: 1;
-}
-.split-container:has(.panel-tell:hover) .panel-tell { flex: 1.4; }
-.split-container:has(.panel-tell:hover) .panel-show { flex: 0.6; }
-.split-container:has(.panel-tell:hover) .divider { left: 42%; }
-
-/* ── GHOST TYPE (BIG BG TEXT) ── */
-.panel-ghost {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: var(--font-disp);
-  font-size: clamp(10rem, 22vw, 22rem);
-  font-weight: 900;
-  font-style: italic;
-  text-transform: uppercase;
-  letter-spacing: -0.03em;
-  line-height: 0.85;
-  white-space: nowrap;
-  pointer-events: none;
-  transition: opacity 0.5s ease, transform 0.7s var(--ease);
-  user-select: none;
-}
-.panel-show .panel-ghost {
-  color: transparent;
-  -webkit-text-stroke: 1.5px rgba(248,247,244,0.07);
-  transform: translate(-50%, -50%) translateX(0px);
-}
-.panel-show:hover .panel-ghost {
-  -webkit-text-stroke: 1.5px rgba(248,247,244,0.12);
-  transform: translate(-50%, -50%) translateX(-20px);
-}
-.panel-tell .panel-ghost {
-  color: transparent;
-  -webkit-text-stroke: 1.5px rgba(10,9,8,0.06);
-  transform: translate(-50%, -50%) translateX(0px);
-}
-.panel-tell:hover .panel-ghost {
-  -webkit-text-stroke: 1.5px rgba(10,9,8,0.11);
-  transform: translate(-50%, -50%) translateX(20px);
-}
-
-/* ── CORNER INDEX ── */
-
-
-/* ── ORANGE TOP BAR ── */
-.panel::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: var(--orange);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.5s var(--ease);
-}
-.panel:hover::after { transform: scaleX(1); }
-
-/* ── CONTENT BLOCK ── */
-.panel-content {
-  position: relative;
-  z-index: 5;
-}
-.panel-headline {
-  font-family: var(--font-disp);
-  font-weight: 900;
-  font-style: italic;
-  text-transform: uppercase;
-  letter-spacing: -0.025em;
-  line-height: 0.88;
-  font-size: clamp(3.5rem, 6vw, 7.5rem);
-  margin-bottom: 28px;
-  transition: transform 0.5s var(--ease);
-}
-.panel-show .panel-headline { color: var(--white); }
-.panel-tell .panel-headline { color: var(--ink); }
-.panel:hover .panel-headline { transform: translateX(6px); }
-
-/* ── CTA BUTTON ── */
-.panel-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 400;
-  letter-spacing: 0.08em;
-  text-transform: none;
-  padding: 12px 24px;
-  position: relative;
-  overflow: hidden;
-  transition: gap 0.3s var(--ease);
-  border-radius: 0;
-}
-.panel-cta::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  transform: translateX(-100%);
-  transition: transform 0.4s var(--ease);
-  z-index: -1;
-}
-.panel-cta:hover { gap: 20px; }
-.panel-cta:hover::before { transform: translateX(0); }
-
-.panel-show .panel-cta {
-  color: var(--white);
-  border: 1.5px solid rgba(248,247,244,0.25);
-}
-.panel-show .panel-cta::before { background: var(--orange); }
-.panel-show .panel-cta:hover { border-color: var(--orange); }
-
-.panel-tell .panel-cta {
-  color: var(--ink);
-  border: 1.5px solid rgba(10,9,8,0.2);
-}
-.panel-tell .panel-cta::before { background: var(--ink); }
-.panel-tell .panel-cta:hover { color: var(--white); border-color: var(--ink); }
-
-.cta-arrow {
-  display: inline-block;
-  transition: transform 0.35s var(--ease);
-}
-.panel-cta:hover .cta-arrow { transform: translateX(4px); }
-
-/* ── INTRO ANIMATION ── */
-@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
-@keyframes slideLeft  { from { opacity: 0; transform: translateX(-24px); } to { opacity: 1; transform: translateX(0); } }
-@keyframes slideRight { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: translateX(0); } }
-
-.panel-show { animation: slideLeft  0.9s var(--ease) 0.15s both; }
-.panel-tell  { animation: slideRight 0.9s var(--ease) 0.25s both; }
-
-/* ── MOBILE: static vertical stack, page scrolls (Start Here → Work → Story → Building) ── */
-@media (max-width: 700px) {
-  body { overflow-x: hidden; }
-  /* stacked full-width blocks: drop the horizontal slide-in (caused transient x-overflow) */
-  .panel-show, .panel-tell { animation: fadeIn 0.6s ease both; }
-  /* TIER 1 */
-  .start-here {
-    position: static;
-    height: auto;
-    min-height: 104px;
-    flex-direction: column;
-    gap: 10px;
-    padding: 30px 24px;
-    text-align: center;
-  }
-  /* TIER 2 */
-  .split-container {
-    position: static;
-    flex-direction: column;
-    bottom: auto;
-    z-index: auto;
-  }
-  .panel { min-height: 46vh; padding: 44px 28px 48px; }
-  .divider { display: none; }
-  .panel-headline { font-size: clamp(3rem, 10vw, 5rem); }
-  /* TIER 3 */
-  .third-strip {
-    position: static;
-    height: auto;
-    min-height: 88px;
-    padding: 22px 24px;
-    gap: 16px;
-  }
-  .strip-label, .strip-divider:first-of-type { display: none; }
-}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tim Shephard — Senior Creative Director · Night Crew</title>
+<meta name="description" content="Tim Shephard, Senior Creative Director — national campaigns, brand systems, broadcast, and AI-native ventures. 160K+ PSA airings, $77.5M earned media. Dallas–Fort Worth, TX.">
+<link rel="canonical" href="https://timshephard.co/">
+<meta property="og:title" content="Tim Shephard — Senior Creative Director · Night Crew">
+<meta property="og:description" content="National campaigns, brand systems, broadcast, and AI-native ventures. The paperwork of the production.">
+<meta property="og:image" content="https://timshephard.co/public/images/og-1200x630.png">
+<meta property="og:type" content="website">
+<script>(function(){var h=new Date().getHours();document.documentElement.setAttribute('data-key',h<5?'overnight':h<8?'dawn':h<11?'morning':h<17?'midday':h<20?'golden':'overnight');})();</script>
+<link rel="preload" href="/public/fonts/big-shoulders-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/public/fonts/courier-prime-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/public/fonts/fonts.css">
+<link rel="stylesheet" href="/public/css/edition.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-82B9C9WGMG"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-82B9C9WGMG');</script>
 </head>
 <body>
-<div id="cursor"></div>
+<div class="reg reg-tl"></div><div class="reg reg-tr"></div><div class="reg reg-bl"></div><div class="reg reg-br"></div>
 
+<div class="sheet">
 
+  <header class="masthead">
+    <div class="slug"><span>THE PAPERWORK OF TIMSHEPHARD.CO</span><span>EDITION ZERO — THE CALL SHEET</span></div>
+    <h1>Night Crew</h1>
+    <p class="dataline">TIM SHEPHARD — SENIOR CREATIVE DIRECTOR<br>
+    NATIONAL CAMPAIGNS · BRAND SYSTEMS · BROADCAST · AI-NATIVE VENTURES<br>
+    DALLAS–FORT WORTH, TX · <span id="key-label">MORNING KEY</span> — SET BY YOUR CLOCK</p>
+  </header>
 
-<!-- TIER 1: START HERE — primary guided entry point (full-width top band) -->
-<a href="/explore/" class="start-here" id="start-here" aria-label="Start here — not sure where to go? Explore interactively.">
-  <span class="sh-head">Start Here.</span>
-  <span class="sh-sub">not sure where to go? →</span>
-</a>
+  <nav class="contents" aria-label="Contents">
+    <a href="/work#monitor-wall">01 — THE MONITOR WALL</a>
+    <a href="/work#records">02 — THE RECORDS</a>
+    <a href="/work#stage">03 — THE STAGE</a>
+    <a href="/ventures">04 — THE BENCH</a>
+    <a href="/services">05 — FRONT OFFICE</a>
+    <a href="/interview">TALKBACK</a>
+    <a href="/hire">CREW CALL</a>
+  </nav>
 
-<!-- TIER 2: MY WORK + MY STORY -->
-<div class="split-container" id="ts-split">
-
-  <div class="divider"></div>
-
-  <!-- LEFT: SHOW / THE WORK -->
-  <div class="panel panel-show" onclick="window.location.href='/work/'">
-    <span class="panel-ghost">Work</span>
-
-    <div class="panel-content">
-      <h2 class="panel-headline">My<br>Work.</h2>
-      <a href="/work/" class="panel-cta">
-        show me <span class="cta-arrow">→</span>
-      </a>
+  <section id="monitor-wall" aria-label="The Monitor Wall — Keep America Beautiful">
+    <h2>01 — The Monitor Wall · Keep America Beautiful</h2>
+    <p class="body-lg">Senior Creative Director, 2020–2023. A complete rebrand of a 70-year-old national nonprofit and its 20,000+ affiliate organizations — and the PSA campaign broadcasters chose to run: &ldquo;Recycle Like Everyone&rsquo;s Watching,&rdquo; aired 160,000+ times across all 50 states.</p>
+    <div class="stats">
+      <div><b>160K+</b>PSA airings, all 50 states</div>
+      <div><b>$77.5M</b>earned media value</div>
+      <div><b>4.5M+</b>GIF views, branded Giphy channel</div>
     </div>
-  </div>
-
-  <div class="panel panel-tell" onclick="window.location.href='/about/'">
-    <span class="panel-ghost">Story</span>
-
-    <div class="panel-content">
-      <h2 class="panel-headline">My<br>Story.</h2>
-      <a href="/about/" class="panel-cta">
-        tell me <span class="cta-arrow">→</span>
-      </a>
+    <div class="stats">
+      <div><span class="org-label">Org outcome — the movement my work supported</span><b>11.9M</b>participants, single program year</div>
+      <div><span class="org-label">Org outcome — the movement my work supported</span><b>$300M</b>documented economic impact</div>
     </div>
-  </div>
+    <p class="note"><a href="/work#monitor-wall">Full camera report →</a></p>
+  </section>
+
+  <section id="records" aria-label="The Records — federal communications">
+    <h2>02 — The Records · Federal Communications</h2>
+    <p class="body-lg">Creative Director, Loch Harbour Group // DHS S&amp;T Directorate, 2017–2019. A 10-person team inside a zero-fail, multi-tier federal approval pipeline — every deliverable 100% Section 508 compliant. &ldquo;Mobilizing Innovation,&rdquo; the directorate&rsquo;s interactive annual report, took the NAGC Blue Pencil &amp; Gold Screen Award.</p>
+    <p class="note"><a href="/work#records">Open the drawers →</a></p>
+  </section>
+
+  <section id="stage" aria-label="The Stage — broadcast and film">
+    <h2>03 — The Stage · Broadcast &amp; Film</h2>
+    <p class="body-lg">Camera crew on the Athens 2004 Olympic broadcast — an audience of four billion, 200+ nations, zero retakes. In-office at Icon Productions during Mel Gibson&rsquo;s $40M Apocalypto. The foundation: what zero-failure, high-stakes production actually looks like.</p>
+    <p class="note"><a href="/work#stage">Roll the record →</a></p>
+  </section>
+
+  <section class="bench" id="bench" aria-label="The Bench — AI-native ventures">
+    <h2>04 — The Bench · The Instrument Zone</h2>
+    <p>The cold corner of the floor — machines, not props. Built and run under Creative Mind Ventures LLC:</p>
+    <div class="machines">
+      <div class="machine"><b>M-01 · AI DAILY DIGEST</b><br><span class="m-status m-live">● LIVE</span><br>~15 tech feeds scored with Claude every morning; one editorial brief.</div>
+      <div class="machine"><b>M-02 · THE OTHER 1776</b><br><span class="m-status m-live">● LIVE</span><br>Cinematic documentary channel on overlooked founding-era figures.</div>
+      <div class="machine"><b>M-03 · KINDORA</b><br><span class="m-status">● BETA</span><br>Four overwhelming family decisions, turned into clear answers.</div>
+    </div>
+    <p class="note">Instrument light is constant here — even in the print, the Bench keeps its own key. <a href="/ventures">Full bench log →</a></p>
+  </section>
+
+  <section id="front-office" aria-label="Front Office — services">
+    <h2>05 — Front Office · The Services Counter</h2>
+    <p class="body-lg">Two documents leave this counter. Both are signed, both are built to convert:</p>
+    <div class="docs">
+      <div class="doc">
+        <span class="doc-title">Dailies Report</span>
+        <p>The Audit Desk reviews everything you&rsquo;ve got — site, brand, paperwork — and returns named verdicts and a costed pick-up list. No scores, no charts. Verdicts.</p>
+        <a class="doc-cta" href="/services#audit">BOOK THE AUDIT →</a>
+      </div>
+      <div class="doc">
+        <span class="doc-title">Creative Territory</span>
+        <p>The Brief Desk takes your intake and returns a direction you can option: a first-take creative territory in a working methodology, not a mood board.</p>
+        <a class="doc-cta" href="/services#territory">OPEN A BRIEF →</a>
+      </div>
+    </div>
+    <p class="note">Full-time and fractional engagements are open. <a href="/hire">The crew call is one page →</a></p>
+  </section>
+
+  <section id="talkback-strip" aria-label="Talkback">
+    <h2>Talkback</h2>
+    <p class="body-lg">Questions come with the territory — the frequent ones are answered on the <a href="/interview">talkback sheet</a>. Everything else: <a href="mailto:tim@timshephard.co">tim@timshephard.co</a>.</p>
+  </section>
+
+  <footer class="colophon">
+    <div class="coffee-ring"></div>
+    <nav aria-label="Footer">
+      <a href="/work">WORK</a>
+      <a href="/ventures">VENTURES</a>
+      <a href="/services">SERVICES</a>
+      <a href="/interview">INTERVIEW</a>
+      <a href="/hire">HIRE</a>
+      <a href="https://www.linkedin.com/in/tim-shephard">LINKEDIN</a>
+    </nav>
+    <p>COLOPHON — set in Courier Prime and Big Shoulders; the Bench in Saira Condensed and Fragment Mono. Static HTML, no framework, fonts self-hosted; the palette keeps your local hours. Figures labeled ORG OUTCOME belong to the movement, not to me alone. Grit is invariant; the ring above was already on the desk.<br>
+    EDITION ZERO · TIM SHEPHARD — SENIOR CREATIVE DIRECTOR · CREATIVE MIND VENTURES LLC · DALLAS–FORT WORTH, TX</p>
+  </footer>
 
 </div>
 
-<!-- THIRD STRIP: WHAT I'M BUILDING -->
-<a href="/projects/" class="third-strip" id="third-strip">
-  <span class="strip-label">// currently shipping</span>
-  <span class="strip-divider"></span>
-  <span class="strip-headline">What I'm Building.</span>
-  <span class="strip-divider"></span>
-  <span class="strip-cta">take a look <span class="strip-arrow">→</span></span>
-</a>
-
-<script>
-const cursor = document.getElementById('cursor');
-let mx = 0, my = 0;
-document.addEventListener('mousemove', e => {
-  mx = e.clientX; my = e.clientY;
-  cursor.style.left = mx + 'px';
-  cursor.style.top  = my + 'px';
-});
-document.querySelectorAll('.panel, .panel-cta, .start-here, .third-strip').forEach(el => {
-  el.addEventListener('mouseenter', () => cursor.classList.add('expanded'));
-  el.addEventListener('mouseleave', () => cursor.classList.remove('expanded'));
-});
-
-document.querySelectorAll('.panel-cta').forEach(btn => {
-  btn.addEventListener('click', e => { e.stopPropagation(); });
-});
-</script>
+<script>(function(){var k=document.documentElement.getAttribute('data-key');var el=document.getElementById('key-label');if(k&&el)el.textContent=k.toUpperCase()+' KEY';})();</script>
 </body>
 </html>
