@@ -288,7 +288,22 @@ html[data-key="overnight"] { --img-grade: sepia(.38) saturate(.62) contrast(1.1)
   letter-spacing: .14em;
   border-bottom-width: 2px;
 }
-.hud-take { display: inline-flex; align-items: center; min-height: 44px; }
+.hud-take { display: inline-flex; align-items: center; }
+
+/* the verb legend — HUD element 3: one line, one order, never iconized.
+   Each verb fades to 30% after its first use; 10s of idle restores it. */
+.hud-bottom-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-height: 44px;
+  justify-content: flex-end;
+  padding-right: 8px;
+}
+.verbs { font-size: 9.5px; letter-spacing: .1em; white-space: nowrap; }
+.verbs span { transition: opacity .6s linear; }
+.verbs span.spent { opacity: .3; }
+@media (max-width: 389px) { .verbs { font-size: 8.5px; } }
 
 .retake {
   pointer-events: auto;

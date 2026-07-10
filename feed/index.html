@@ -30,7 +30,10 @@
   <a class="textfeed" id="textfeed" href="/">TEXT FEED</a>
 </header>
 <footer class="hud hud-bottom" aria-label="Deck">
-  <span class="hud-take"><span id="hud-take">TAKE 1</span> · <span id="hud-key">KEY</span> · <span id="hud-tc" aria-hidden="true">00:00:00·00</span></span>
+  <div class="hud-bottom-stack">
+    <span class="verbs" id="verbs" aria-label="The verbs"><span data-verb="cut">CUT=TAP</span> · <span data-verb="dolly">DOLLY=SCROLL</span> · <span data-verb="rack">RACK=HOLD</span> · <span data-verb="wipe">WIPE=EDGE</span> · <span data-verb="retake">RETAKE=↻</span></span>
+    <span class="hud-take"><span id="hud-take">TAKE 1</span> · <span id="hud-key">KEY</span> · <span id="hud-tc" aria-hidden="true">00:00:00·00</span></span>
+  </div>
   <button class="retake" id="retake" type="button" aria-label="Retake — recompose the reel order">↻<span class="retake-label">RETAKE</span></button>
 </footer>
 

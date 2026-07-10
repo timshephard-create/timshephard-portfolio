@@ -38,6 +38,20 @@
 
   function track(name) { if (window.gtag) { window.gtag('event', name); } }
 
+  /* verb legend (HUD element 3): each verb fades to 30% after its first
+     use; any 10s of idle restores the full line */
+  var verbsEl = document.getElementById('verbs');
+  var verbIdle = null;
+  function verbUsed(v) {
+    if (!verbsEl) return;
+    var s = verbsEl.querySelector('[data-verb="' + v + '"]');
+    if (s) s.classList.add('spent');
+    if (verbIdle) clearTimeout(verbIdle);
+    verbIdle = setTimeout(function () {
+      [].forEach.call(verbsEl.querySelectorAll('.spent'), function (x) { x.classList.remove('spent'); });
+    }, 10000);
+  }
+
   function frames() { return [].slice.call(reel.querySelectorAll('.frame')); }
 
   /* ---------- HUD: key label + honest timecode (the device clock) ---------- */
@@ -75,10 +89,13 @@
 
   /* ---------- leader black (CUT) ---------- */
 
+  var lastJump = 0;
+
   function jumpTo(frame) {
     if (!frame) return;
     /* 'instant', not 'auto': the root carries scroll-behavior:smooth,
        and a CUT is 0ms by contract */
+    lastJump = performance.now();
     frame.scrollIntoView({ behavior: 'instant', block: 'start' });
     updateCurrent();
   }
@@ -95,6 +112,7 @@
       jumpTo(frame); /* inside the window (or reduced motion): lands hard */
     }
     track('feed_cut');
+    verbUsed('cut');
   }
 
   function neighbor(dir) {
@@ -141,6 +159,7 @@
       frame.classList.add('racked');
       gateOn();
       track('feed_rack');
+      verbUsed('rack');
     }, 120);
   });
 
@@ -182,6 +201,7 @@
     canEl.addEventListener('pointercancel', pullAbort, { once: true });
     try { canEl.setPointerCapture(e.pointerId); } catch (err) { /* pointer already gone */ }
     track('feed_pull');
+    verbUsed('rack');
   }
 
   function pullAbort() {
@@ -238,10 +258,11 @@
 
   function wipe(dir) {
     var tabled = current && current.classList.contains('tabled');
-    if (tabled) { reCan(current); track('feed_wipe'); return; } /* WIPE re-cans */
+    if (tabled) { reCan(current); track('feed_wipe'); verbUsed('wipe'); return; } /* WIPE re-cans */
     var target = neighbor(dir);
     if (!target) return;
     track('feed_wipe');
+    verbUsed('wipe');
     if (RM) { jumpTo(target); return; }
     flat.classList.add('run');
     setTimeout(function () { jumpTo(target); }, WIPE_MS / 2); /* slate re-registers as the seam crosses */
@@ -315,6 +336,7 @@
       setTimeout(function () { clapper.classList.remove('on'); }, CLAPPER_MS);
     }
     track('feed_retake');
+    verbUsed('retake');
   }
   retakeBtn.addEventListener('click', retake);
 
@@ -337,6 +359,8 @@
     requestAnimationFrame(function () {
       ticking = false;
       updateCurrent();
+      /* a CUT/WIPE jump also scrolls — only hand-driven scroll is a DOLLY */
+      if (performance.now() - lastJump > 400) verbUsed('dolly');
       if (RM) return; /* slate tracking always; parallax only with motion */
       var st = scroller.scrollTop, vh = window.innerHeight;
       frames().forEach(function (f) {
