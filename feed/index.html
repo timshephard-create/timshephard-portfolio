@@ -27,7 +27,10 @@
 <!-- fixed chrome (HUD) — Rule 2 governs its palette via the key tokens -->
 <header class="hud hud-top" aria-label="Slate">
   <span class="hud-slug" id="hud-slug">NIGHT CREW · OPEN</span>
-  <a class="textfeed" id="textfeed" href="/">TEXT FEED</a>
+  <span class="hud-top-right">
+    <button class="snd" id="snd" type="button" aria-pressed="true" aria-label="Toggle sound">SND ●</button>
+    <a class="textfeed" id="textfeed" href="/">TEXT FEED</a>
+  </span>
 </header>
 <footer class="hud hud-bottom" aria-label="Deck">
   <div class="hud-bottom-stack">
@@ -302,6 +305,7 @@
 
 </main>
 
+<script src="/js/feed-sound.js" defer></script>
 <script src="/js/feed.js" defer></script>
 </body>
 </html>

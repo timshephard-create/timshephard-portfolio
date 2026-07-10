@@ -58,6 +58,33 @@
 
   hudKey.textContent = (document.documentElement.getAttribute('data-key') || 'morning').toUpperCase() + ' KEY';
 
+  /* ---------- sound (synthesized; /js/feed-sound.js loads first) ---------- */
+
+  function snd() { return window.__feedSound || null; }
+
+  /* the first gesture unlocks the room */
+  ['pointerdown', 'keydown', 'touchstart'].forEach(function (ev) {
+    document.addEventListener(ev, function () { if (snd()) snd().unlock(); }, { passive: true });
+  });
+
+  var sndBtn = document.getElementById('snd');
+  function syncSndChip() {
+    if (!sndBtn || !snd()) return;
+    var off = snd().muted || snd().reduced;
+    sndBtn.setAttribute('aria-pressed', String(!off));
+    sndBtn.textContent = off ? 'SND ○' : 'SND ●';
+  }
+  if (sndBtn) {
+    syncSndChip();
+    sndBtn.addEventListener('click', function () {
+      if (!snd()) return;
+      snd().unlock();
+      snd().toggle();
+      syncSndChip();
+      track('feed_sound_toggle');
+    });
+  }
+
   function pad(n) { return (n < 10 ? '0' : '') + n; }
   function tc() {
     var d = new Date();
@@ -113,6 +140,7 @@
     }
     track('feed_cut');
     verbUsed('cut');
+    if (snd()) snd().cut();
   }
 
   function neighbor(dir) {
@@ -160,6 +188,7 @@
       gateOn();
       track('feed_rack');
       verbUsed('rack');
+      if (snd()) snd().rackStart();
     }, 120);
   });
 
@@ -168,6 +197,7 @@
     if (rackFrame) {
       rackFrame.classList.remove('racked'); /* falls back at 2× (0.35s CSS default) */
       gateDrain();
+      if (snd()) snd().rackRelease();
       if (performance.now() - rackStartAt > 250) {
         suppressCutUntil = performance.now() + 350; /* a hold is not a tap */
       }
@@ -202,18 +232,21 @@
     try { canEl.setPointerCapture(e.pointerId); } catch (err) { /* pointer already gone */ }
     track('feed_pull');
     verbUsed('rack');
+    if (snd()) snd().rackStart();
   }
 
   function pullAbort() {
     if (pullTimer) clearTimeout(pullTimer);
     if (pullFrame) pullFrame.classList.remove('isolated');
     gateDrain();
+    if (snd()) snd().rackRelease();
     pullFrame = null; pullCan = null; pullReady = false;
   }
 
   function pullUp() {
     if (pullTimer) clearTimeout(pullTimer);
     gateDrain();
+    if (snd()) snd().rackRelease();
     if (!pullFrame) return;
     if (!pullReady) { pullAbort(); return; } /* early release: falls back at 2× */
     var frame = pullFrame, id = pullCan.dataset.pull;
@@ -263,6 +296,7 @@
     if (!target) return;
     track('feed_wipe');
     verbUsed('wipe');
+    if (snd()) snd().wipe();
     if (RM) { jumpTo(target); return; }
     flat.classList.add('run');
     setTimeout(function () { jumpTo(target); }, WIPE_MS / 2); /* slate re-registers as the seam crosses */
@@ -337,6 +371,7 @@
     }
     track('feed_retake');
     verbUsed('retake');
+    if (snd()) snd().retake();
   }
   retakeBtn.addEventListener('click', retake);
 
@@ -352,7 +387,7 @@
 
   /* ---------- DOLLY parallax: BG ×0.2, MID ×0.6 (declared once) ---------- */
 
-  var ticking = false;
+  var ticking = false, lastDollyY = 0, lastDollyT = 0;
   window.addEventListener('scroll', function () {
     if (ticking) return;
     ticking = true;
@@ -360,7 +395,15 @@
       ticking = false;
       updateCurrent();
       /* a CUT/WIPE jump also scrolls — only hand-driven scroll is a DOLLY */
-      if (performance.now() - lastJump > 400) verbUsed('dolly');
+      var now = performance.now();
+      if (now - lastJump > 400) {
+        verbUsed('dolly');
+        if (snd()) {
+          var st0 = scroller.scrollTop;
+          if (lastDollyT) snd().dolly((st0 - lastDollyY) / Math.max(1, now - lastDollyT));
+          lastDollyY = st0; lastDollyT = now;
+        }
+      }
       if (RM) return; /* slate tracking always; parallax only with motion */
       var st = scroller.scrollTop, vh = window.innerHeight;
       frames().forEach(function (f) {

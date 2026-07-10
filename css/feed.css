@@ -275,6 +275,25 @@ html[data-key="overnight"] { --img-grade: sepia(.38) saturate(.62) contrast(1.1)
 .hud-top { top: 0; background: color-mix(in srgb, var(--paper) 86%, transparent); }
 .hud-bottom { bottom: 0; padding-bottom: max(10px, env(safe-area-inset-bottom)); background: color-mix(in srgb, var(--paper) 86%, transparent); }
 
+.hud-top-right { display: inline-flex; align-items: center; gap: 8px; }
+
+/* mute chip — Rule 2 chrome, same tokens as everything else */
+.snd {
+  pointer-events: auto;
+  min-height: 44px;
+  min-width: 44px;
+  border: 1px solid var(--rule-mid);
+  background: transparent;
+  color: var(--ink-60);
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 10.5px;
+  letter-spacing: .12em;
+  padding: 0 10px;
+  cursor: pointer;
+}
+.snd[aria-pressed="false"] { color: var(--rule-soft); }
+@media (prefers-reduced-motion: reduce) { .snd { display: none; } } /* sound is fully silent under RM */
+
 .textfeed {
   pointer-events: auto;
   min-height: 44px;
