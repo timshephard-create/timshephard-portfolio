@@ -57,8 +57,10 @@
      Derived from scroll position (the shot under the gate line at
      mid-viewport) — no observers, verifiable everywhere. */
 
+  var scroller = document.scrollingElement || document.documentElement;
+
   function updateCurrent() {
-    var mid = reel.scrollTop + reel.clientHeight / 2;
+    var mid = scroller.scrollTop + window.innerHeight / 2;
     var list = frames(), next = list[0];
     for (var i = 0; i < list.length; i++) {
       if (list[i].offsetTop <= mid) next = list[i]; else break;
@@ -75,7 +77,9 @@
 
   function jumpTo(frame) {
     if (!frame) return;
-    frame.scrollIntoView({ behavior: 'auto', block: 'start' });
+    /* 'instant', not 'auto': the root carries scroll-behavior:smooth,
+       and a CUT is 0ms by contract */
+    frame.scrollIntoView({ behavior: 'instant', block: 'start' });
     updateCurrent();
   }
 
@@ -327,14 +331,14 @@
   /* ---------- DOLLY parallax: BG ×0.2, MID ×0.6 (declared once) ---------- */
 
   var ticking = false;
-  reel.addEventListener('scroll', function () {
+  window.addEventListener('scroll', function () {
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(function () {
       ticking = false;
       updateCurrent();
       if (RM) return; /* slate tracking always; parallax only with motion */
-      var st = reel.scrollTop, vh = reel.clientHeight;
+      var st = scroller.scrollTop, vh = window.innerHeight;
       frames().forEach(function (f) {
         var top = f.offsetTop - st;
         if (top > vh || top < -f.offsetHeight) return;

@@ -6,25 +6,26 @@
    every readable glyph below is real DOM text.
    ============================================================ */
 
-.feed-body {
-  overflow: hidden;
-  height: 100dvh;
-}
+/* ---------- the reel ----------
+   DOLLY = the document's own scroll (body scroll, not an inner
+   container) so iOS momentum, rubber-band, and toolbar behavior stay
+   fully native. Snap at slate boundaries only; never intercepted.
+   feed.css loads only on /feed, so :root styling is safe here. */
 
-/* ---------- the reel (DOLLY = native scroll; snap at slates only) ---------- */
-
-.reel {
-  height: 100dvh;
-  overflow-y: auto;
-  overscroll-behavior-y: contain;
+html {
   scroll-snap-type: y proximity;
   scrollbar-width: none;
 }
-.reel::-webkit-scrollbar { display: none; }
+html::-webkit-scrollbar { display: none; }
+
+.feed-body { margin: 0; }
+
+.reel { display: block; }
 
 .frame {
   min-height: 100dvh;
   scroll-snap-align: start;
+  scroll-margin-top: 0; /* frames are slates, not anchored sections */
   position: relative;
   display: flex;
   align-items: center;
