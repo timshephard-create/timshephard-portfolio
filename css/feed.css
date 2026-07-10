@@ -36,6 +36,16 @@ html::-webkit-scrollbar { display: none; }
 
 /* ---------- two planes per shot (RACK's adjacent tags) ---------- */
 
+/* ---------- the grade — one rule, keyed by the clock ----------
+   Day = the printed edition (ink-leaning, slightly dry).
+   Overnight = live rushes (tungsten warmth, crushed a stop). */
+
+:root { --img-grade: grayscale(.06) saturate(.85) contrast(1.03); }
+html[data-key="overnight"] { --img-grade: sepia(.38) saturate(.62) contrast(1.1) brightness(.8) hue-rotate(-8deg); }
+.bw-img, .strip img, .beat img { filter: var(--img-grade); }
+/* the light table is self-lit: frames on it always read as the print */
+.table { --img-grade: grayscale(.06) saturate(.85) contrast(1.03); }
+
 /* BG plane — parallax tag ×0.2; soft by default, 85%, never disappears */
 .backwall {
   position: absolute;
@@ -50,6 +60,29 @@ html::-webkit-scrollbar { display: none; }
   filter: blur(3px);
   transition: opacity .7s linear, filter .7s linear;
 }
+
+/* the work itself, mounted full-bleed on the BG plane; oversized so the
+   ×0.2 ride never exposes a seam inside the frame */
+.bw-img {
+  position: absolute;
+  inset: -45% 0;
+  width: 100%;
+  height: 190%;
+  object-fit: cover;
+}
+
+/* scrim keeps live type readable over the work (token-driven, all keys) */
+.backwall::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top,
+    var(--paper) 16%,
+    color-mix(in srgb, var(--paper) 62%, transparent) 52%,
+    color-mix(in srgb, var(--paper) 18%, transparent) 100%);
+  transition: opacity .35s linear;
+}
+.frame.racked .backwall::after { opacity: .35; transition-duration: .7s; } /* racking pulls the work itself sharp */
 .bw-word {
   font-family: 'Big Shoulders', 'Arial Narrow', sans-serif;
   font-weight: 900;
@@ -151,6 +184,7 @@ html::-webkit-scrollbar { display: none; }
   gap: 12px;
   padding: 72px 20px 88px;
 }
+.table[hidden] { display: none; } /* author display:flex must not defeat the hidden attribute */
 .table a { color: #6E2C1F; border-bottom-color: rgba(110, 44, 31, .4); }
 .table .org-label { color: rgba(36, 27, 16, .6); border-color: rgba(36, 27, 16, .3); }
 .table .fr-note, .table .tag { color: rgba(36, 27, 16, .6); }
@@ -163,26 +197,47 @@ html::-webkit-scrollbar { display: none; }
   align-self: flex-start;
 }
 
-/* leader strip = TOC; CUT a frame to play that chapter */
-.strip { display: flex; gap: 8px; }
+/* leader strip = TOC; real frames from the engagement, CUT one to play it */
+.strip { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
+.strip::-webkit-scrollbar { display: none; }
 .strip button {
-  min-width: 52px;
-  min-height: 48px;
+  flex: 0 0 auto;
+  width: 92px;
+  min-height: 74px;
+  padding: 0;
   border: 2px solid #241B10;
   background: transparent;
   color: #241B10;
   font-family: 'Courier Prime', 'Courier New', monospace;
   font-weight: 700;
-  font-size: 13px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2px;
   cursor: pointer;
 }
-.strip button small { font-weight: 400; font-size: 8.5px; letter-spacing: .12em; }
+.strip button img {
+  width: 100%;
+  height: 52px;
+  object-fit: cover;
+  display: block;
+}
+.strip button span {
+  display: block;
+  font-size: 9px;
+  letter-spacing: .1em;
+  padding: 4px 4px 5px;
+  text-align: left;
+}
 .strip button[aria-current="true"] { background: #241B10; color: #F7F0DF; }
+
+/* frames inside the beats — the actual pulled material */
+.beat figure { margin: 0; display: flex; flex-direction: column; gap: 5px; }
+.beat figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid rgba(36, 27, 16, .3);
+}
+.beat figcaption { font-size: 10px; letter-spacing: .12em; color: rgba(36, 27, 16, .6); }
 
 .beats {
   flex: 1;
