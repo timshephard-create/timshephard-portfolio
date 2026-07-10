@@ -422,6 +422,45 @@ html[data-key="overnight"] { --img-grade: sepia(.38) saturate(.62) contrast(1.1)
 }
 .clapper.on { display: flex; }
 
+/* ---------- the 8-second opening: the shot teaches itself ---------- */
+
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .3s linear;
+}
+.intro[hidden] { display: none; }
+.intro.clear { background: transparent; } /* after the clap: captions over the live shot */
+.intro-caption {
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-weight: 700;
+  font-size: clamp(22px, 6vw, 40px);
+  letter-spacing: .18em;
+  color: #F4E9D3;
+  background: rgba(0, 0, 0, .55);
+  padding: 10px 18px;
+}
+.intro-caption:empty { display: none; }
+.intro-skip {
+  position: absolute;
+  bottom: max(20px, env(safe-area-inset-bottom));
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: .2em;
+  color: rgba(244, 233, 211, .55);
+}
+
+/* HUD hidden until it stamps on at the handover */
+.introing .hud, .introing .wipe-rail { opacity: 0; pointer-events: none; }
+.hud, .wipe-rail { transition: opacity .4s linear; }
+
 /* film-gate meter — brass, never a ring */
 .gate {
   position: fixed;

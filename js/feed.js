@@ -423,7 +423,88 @@
      events; the slate must re-register regardless */
   setInterval(updateCurrent, 300);
 
+  /* ---------- the 8-second opening: the shot teaches itself ----------
+     First visit only; one tap skips; arriving from the paper (same-origin
+     referrer) skips; omitted entirely under prefers-reduced-motion. */
+
+  var INTRO_KEY = 'feed-intro-seen';
+  var introEl = document.getElementById('intro');
+  var introCap = document.getElementById('intro-caption');
+  var introActive = false;
+  var introTimers = [];
+
+  function introSeen() {
+    try { return localStorage.getItem(INTRO_KEY) === '1'; } catch (e) { return true; }
+  }
+  function markIntroSeen() {
+    try { localStorage.setItem(INTRO_KEY, '1'); } catch (e) {}
+  }
+
+  function endIntro(skipped) {
+    if (!introActive) return;
+    introActive = false;
+    introTimers.forEach(clearTimeout);
+    introTimers = [];
+    if (current) current.classList.remove('racked');
+    gate.classList.remove('on', 'drain');
+    jumpTo(frames()[0]);
+    introEl.hidden = true;
+    introEl.classList.remove('clear');
+    introCap.textContent = '';
+    document.body.classList.remove('introing'); /* the HUD stamps on */
+    markIntroSeen();
+    track(skipped ? 'feed_intro_skip' : 'feed_intro_done');
+  }
+
+  function runIntro(force) {
+    if (introActive) return;
+    if (!force) {
+      if (RM || introSeen()) return;
+      if (document.referrer && document.referrer.indexOf(location.origin) === 0) return;
+    }
+    introActive = true;
+    document.body.classList.add('introing');
+    introEl.hidden = false;
+    var at = function (ms, fn) { introTimers.push(setTimeout(fn, ms)); };
+    scroller.scrollTop = 0;
+    /* 0.0s — black; the slate */
+    introCap.textContent = 'NIGHT CREW · TAKE ' + take;
+    /* 1.1s — clap out to the wide master */
+    at(1100, function () { introEl.classList.add('clear'); introCap.textContent = ''; });
+    /* 2.3s — the shot cuts */
+    at(2300, function () { introCap.textContent = 'CUT.'; cutTo(frames()[1]); });
+    /* 3.5s — the shot dollies */
+    at(3500, function () {
+      introCap.textContent = 'DOLLY.';
+      window.scrollBy({ top: Math.round(window.innerHeight * 0.35), behavior: 'smooth' });
+    });
+    at(4400, function () {
+      window.scrollBy({ top: -Math.round(window.innerHeight * 0.35), behavior: 'smooth' });
+    });
+    /* 5.1s — the shot racks focus */
+    at(5100, function () {
+      introCap.textContent = 'RACK FOCUS.';
+      updateCurrent();
+      if (current) { current.classList.add('racked'); gateOn(); }
+      if (snd()) snd().rackStart();
+    });
+    at(6100, function () {
+      if (current) current.classList.remove('racked');
+      gateDrain();
+      if (snd()) snd().rackRelease();
+    });
+    /* 6.6s — back to one; the HUD stamps on; controls handed over */
+    at(6600, function () { introCap.textContent = ''; endIntro(false); });
+  }
+
+  introEl.addEventListener('pointerdown', function (e) {
+    e.stopPropagation();
+    endIntro(true); /* one tap skips */
+  });
+
+  runIntro(false);
+
   /* text feed + QA hooks */
   textfeed.addEventListener('click', function () { track('feed_textfeed'); });
-  window.__feed = { cutTo: cutTo, wipe: wipe, retake: retake, frames: frames, applySeed: applySeed, state: function () { return { take: take, seed: seed, chapter: current && current.dataset.chapter }; } };
+  window.__feed = { cutTo: cutTo, wipe: wipe, retake: retake, frames: frames, applySeed: applySeed, introRun: runIntro, state: function () { return { take: take, seed: seed, chapter: current && current.dataset.chapter, intro: introActive }; } };
 })();
