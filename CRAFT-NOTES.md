@@ -37,4 +37,19 @@ Sources: Codrops breakdowns of Corentin Bernadou's SOTD portfolio (Swiss grid + 
 
 ## Craft loop log
 
-(cycles appended below as they happen)
+**Cycle 1** — First shots (Playwright, 375/768/1440, top + scrolled). Verdict: shader field, HUD, proof line all read; **hero name entirely missing**. Diagnosed via DOM probe: not a timing issue — chars frozen at their offset.
+
+**Cycle 2** — Root causes found and fixed:
+- *GSAP/CSS transform ownership bug:* the CSS `translateY(115%)` initial state was parsed by GSAP as a pixel `y`, so `yPercent` tweens were no-ops. GSAP now owns `.c` transforms exclusively (set + tween both in JS); CSS only gates visibility pre-split.
+- *Images never loaded:* Chrome defers `loading="lazy"` images inside a fully clipped ancestor indefinitely. Local art-directed assets → eager fetch + `decoding="async"`.
+- *Ghost-line bleed:* the velocity RGB-split text-shadows sat at 0-offset behind the transparent-fill stroked "SHEPHARD" and showed through as muddy fill. Shadow **alpha** now rides velocity too — fully transparent at rest.
+- AA: buttons and HUD hire chip switched to ink-on-hot-orange (5.9:1 at mono sizes). Name scaled to 16.2vw. Custom cursor hidden until first real mousemove.
+
+**Cycle 3** — Typography + chrome:
+- *"TIM" chars mashed:* inherited `letter-spacing` computes against the **parent's** font-size (-6.5px meant for 233px type applied to the 135px line). Re-declared locally on the smaller line.
+- HUD nav/logo got ink backdrop pills — legible over passing content instead of colliding with it.
+- REC indicator hidden ≤900px (collided with nav on mobile).
+
+**Cycle 4** — Full-page verification: PSA count-up lands exactly on 160,000+; channel HUD tracks CH 01→04; off-air SMPTE bars & footer composed at all 3 breakpoints. Fallback battery: reduced-motion = full static composed page (loader skipped, counters final); no-WebGL = CSS scanline field, content intact; keyboard order = skip-link → HUD → CTAs → slates, orange focus rings. Portrait re-encoded 865→419KB.
+
+**Cycle 5** — Hover interference glitch on monitor frames (steps() transform jump — the signal reacts to touch). Full-scroll exercise across every trigger: **zero JS errors, zero failed requests**. Final screenshots committed to `review-shots/`.
