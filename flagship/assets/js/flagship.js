@@ -141,7 +141,6 @@
   function splitEl(el) {
     var text = el.textContent;
     el.setAttribute('aria-label', text);
-    el.setAttribute('data-armed', '');
     var frag = document.createDocumentFragment();
     text.split(' ').forEach(function (word, wi, arr) {
       var w = document.createElement('span');
@@ -170,14 +169,13 @@
     var chars = splitTargets[el.getAttribute('data-sid')];
     if (!chars) return;
     gsap.to(chars, {
-      y: 0, duration: 1.1, ease: 'power4.out',
+      yPercent: 0, duration: 1.1, ease: 'power4.out',
       stagger: 0.032, delay: delay || 0, overwrite: true
     });
   }
-  /* gsap reads translateY(115%) initial from CSS; set via gsap for control */
-  if (!reduced && window.gsap) {
+  /* initial offset set by gsap only, after wrapping — data-sid then reveals the parent */
+  if (!reduced) {
     Object.keys(splitTargets).forEach(function (k) { gsap.set(splitTargets[k], { yPercent: 115 }); });
-    document.querySelectorAll('[data-split]').forEach(function (el) { el.removeAttribute('data-armed'); });
   }
 
   /* ────────────────────────────────────────────────
@@ -257,11 +255,12 @@
       drawGL(10.0);
     }
 
-    /* velocity → type rgb-split (display type only) */
+    /* velocity → type rgb-split (offset AND alpha ride velocity) */
     if (!reduced) {
       gsap.ticker.add(function () {
         var s = Math.min(Math.abs(sig.vel) * 6, 7);
         doc.style.setProperty('--split', s.toFixed(2));
+        doc.style.setProperty('--splita', Math.min(s * 0.09, 0.45).toFixed(3));
       });
     }
 
@@ -379,7 +378,10 @@
     var cur = document.getElementById('cursor');
     var tag = cur.querySelector('.tag');
     var cx = innerWidth / 2, cy = innerHeight / 2, tx = cx, ty = cy;
-    document.addEventListener('mousemove', function (e) { tx = e.clientX; ty = e.clientY; }, { passive: true });
+    document.addEventListener('mousemove', function (e) {
+      tx = e.clientX; ty = e.clientY;
+      cur.classList.add('is-live');
+    }, { passive: true });
     gsap.ticker.add(function () {
       cx += (tx - cx) * 0.22; cy += (ty - cy) * 0.22;
       cur.style.transform = 'translate(' + (cx - 22) + 'px,' + (cy - 22) + 'px)';

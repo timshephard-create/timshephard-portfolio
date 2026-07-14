@@ -168,12 +168,12 @@ a:focus-visible, button:focus-visible {
 .hud-link:hover, .hud-link:focus-visible { color: var(--paper); }
 .hud-hire {
   margin-left: 8px; padding: 13px 20px;
-  background: var(--orange); color: var(--paper);
+  background: var(--orange-hi); color: var(--ink);
   font-weight: 500; letter-spacing: 0.14em;
-  transition: background 0.25s ease;
+  transition: background 0.25s ease, color 0.25s ease;
   will-change: transform;
 }
-.hud-hire:hover, .hud-hire:focus-visible { background: var(--orange-hi); }
+.hud-hire:hover, .hud-hire:focus-visible { background: var(--paper); color: var(--ink); }
 
 /* channel readout */
 .hud-ch { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
@@ -238,15 +238,16 @@ main { position: relative; z-index: 10; }
 .id-kicker::before { content: ''; width: 34px; height: 1px; background: var(--orange); }
 
 .id-name {
-  font: italic 900 clamp(4.6rem, 14.5vw, 15rem)/0.84 var(--disp);
+  font: italic 900 clamp(5rem, 16.2vw, 16.5rem)/0.84 var(--disp);
   text-transform: uppercase; letter-spacing: -0.028em;
   color: var(--paper);
   margin-left: -0.04em;
   margin-bottom: clamp(22px, 3.5vh, 40px);
 }
 .id-name .ln { display: block; overflow: hidden; padding-right: 0.08em; }
-.id-name .ln + .ln { margin-top: -0.02em; }
-.id-name .ln--ghost { color: transparent; -webkit-text-stroke: 2px rgba(248,247,244,0.9); }
+.id-name .ln:first-child { font-size: 0.58em; }
+.id-name .ln + .ln { margin-top: -0.015em; }
+.id-name .ln--ghost { color: transparent; -webkit-text-stroke: 2.5px rgba(248,247,244,0.92); }
 
 .id-sub {
   display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
@@ -285,9 +286,10 @@ main { position: relative; z-index: 10; }
 }
 .btn .arr { transition: transform 0.35s var(--e-out); }
 .btn:hover .arr, .btn:focus-visible .arr { transform: translateX(5px); }
-.btn--solid { background: var(--orange); color: var(--paper); }
+/* ink-on-hot-orange: 5.9:1 — AA even at mono sizes */
+.btn--solid { background: var(--orange-hi); color: var(--ink); font-weight: 500; }
 .btn--solid::before {
-  content: ''; position: absolute; inset: 0; background: var(--orange-hi);
+  content: ''; position: absolute; inset: 0; background: var(--paper);
   transform: translateY(101%); transition: transform 0.45s var(--e-out);
 }
 .btn--solid:hover::before, .btn--solid:focus-visible::before { transform: translateY(0); }
@@ -327,11 +329,13 @@ main { position: relative; z-index: 10; }
   100% { transform: scaleY(0); transform-origin: bottom; }
 }
 
-/* velocity-reactive display type (JS sets --split) */
+/* velocity-reactive display type (JS sets --split px and --splita alpha).
+   Alpha rides the velocity too — at rest the shadows are fully transparent,
+   so they can never show through ghost-stroked (transparent-fill) glyphs. */
 .vsplit {
   text-shadow:
-    calc(var(--split, 0) * -1px) 0 rgba(255, 40, 40, 0.45),
-    calc(var(--split, 0) *  1px) 0 rgba(40, 220, 255, 0.35);
+    calc(var(--split, 0) * -1px) 0 rgb(255 40 40 / var(--splita, 0)),
+    calc(var(--split, 0) *  1px) 0 rgb(40 220 255 / calc(var(--splita, 0) * 0.8));
 }
 
 /* ── CH 02 — THE REEL ── */
@@ -365,7 +369,7 @@ main { position: relative; z-index: 10; }
 .mon-tick--bl { bottom: -1px; left: -1px; transform: scaleY(-1); }
 .mon-tick--br { bottom: -1px; right: -1px; transform: scale(-1); }
 
-.mon-img-wrap { overflow: hidden; position: relative; }
+.mon-img-wrap { overflow: hidden; position: relative; display: block; }
 .mon-img {
   width: 100%; aspect-ratio: 16 / 10; object-fit: cover;
   transform: scale(1.06);
@@ -605,7 +609,10 @@ main { position: relative; z-index: 10; }
   width: 44px; height: 44px;
   transform: translate(-50%, -50%);
   display: none;
+  opacity: 0;                       /* hidden until first real mousemove */
+  transition: opacity 0.3s ease;
 }
+#cursor.is-live { opacity: 1; }
 .js.fine-pointer #cursor { display: block; }
 #cursor .dot {
   position: absolute; top: 50%; left: 50%;
@@ -641,8 +648,8 @@ main { position: relative; z-index: 10; }
 /* ── SPLIT TYPE (JS wraps; initial states gated on .js) ── */
 .split .w { display: inline-block; overflow: hidden; vertical-align: top; }
 .split .c { display: inline-block; will-change: transform; }
-.js .split[data-armed] .c { transform: translateY(115%); }
-/* no flash between parse and split: hide until JS has wrapped chars */
+/* GSAP owns .c transforms exclusively — never set them in CSS.
+   No flash between parse and split: hide until JS has wrapped + offset chars. */
 .js .split { opacity: 0; }
 .js .split[data-sid] { opacity: 1; }
 
