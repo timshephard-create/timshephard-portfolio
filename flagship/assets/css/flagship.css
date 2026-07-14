@@ -140,7 +140,19 @@ a:focus-visible, button:focus-visible {
   letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--paper-60);
 }
-.hud--tl { top: var(--hud); left: var(--hud); display: flex; align-items: center; gap: 14px; }
+/* top chrome gets an ink backdrop so it stays legible over passing content */
+.hud--tl {
+  top: var(--hud); left: var(--hud);
+  display: flex; align-items: center; gap: 14px;
+  padding: 8px 12px 8px 0;
+}
+.hud--tl::before, .hud--tr::before {
+  content: ''; position: absolute; inset: -2px -10px;
+  background: rgba(10,9,8,0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: -1;
+}
 .hud--tr { top: calc(var(--hud) - 6px); right: var(--hud); }
 .hud--bl { bottom: var(--hud); left: var(--hud); font-variant-numeric: tabular-nums; }
 .hud--br { bottom: var(--hud); right: var(--hud); font-variant-numeric: tabular-nums; text-align: right; }
@@ -245,7 +257,9 @@ main { position: relative; z-index: 10; }
   margin-bottom: clamp(22px, 3.5vh, 40px);
 }
 .id-name .ln { display: block; overflow: hidden; padding-right: 0.08em; }
-.id-name .ln:first-child { font-size: 0.58em; }
+/* letter-spacing re-declared: inherited value computes against the parent's
+   font-size and over-tightens the smaller line */
+.id-name .ln:first-child { font-size: 0.58em; letter-spacing: -0.02em; }
 .id-name .ln + .ln { margin-top: -0.015em; }
 .id-name .ln--ghost { color: transparent; -webkit-text-stroke: 2.5px rgba(248,247,244,0.92); }
 
@@ -659,6 +673,7 @@ main { position: relative; z-index: 10; }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
+  .hud-rec { display: none; }
   .slate, .slate--flip { display: block; }
   .slate-media, .slate-body { grid-column: auto; }
   .slate-media { margin-bottom: 28px; }
