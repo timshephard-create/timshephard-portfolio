@@ -29,12 +29,12 @@ body {
 }
 
 /* ── REVEAL ── */
+/* content is visible at first paint; the reveal is transform-only */
 .reveal {
-  opacity: 0;
   transform: translateY(18px);
-  transition: opacity 0.75s var(--ease), transform 0.75s var(--ease);
+  transition: transform 0.75s var(--ease);
 }
-.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal.visible { transform: translateY(0); }
 .reveal-d1 { transition-delay: 0.08s; }
 .reveal-d2 { transition-delay: 0.16s; }
 .reveal-d3 { transition-delay: 0.24s; }
@@ -86,8 +86,7 @@ body {
   align-items: center;
   gap: 10px;
   margin-bottom: 20px;
-  opacity: 0;
-  animation: fadeUp 0.7s var(--ease) 0.15s forwards;
+  animation: riseIn 0.7s var(--ease) 0.15s both;
 }
 .hero-label::before {
   content: '';
@@ -107,8 +106,7 @@ body {
   line-height: 0.87;
   color: var(--white);
   margin-bottom: 28px;
-  opacity: 0;
-  animation: fadeUp 0.9s var(--ease) 0.25s forwards;
+  animation: riseIn 0.9s var(--ease) 0.25s both;
 }
 
 .hero-desc {
@@ -117,8 +115,12 @@ body {
   line-height: 1.75;
   color: rgba(248,247,244,0.65);
   max-width: 520px;
-  opacity: 0;
-  animation: fadeUp 0.8s var(--ease) 0.4s forwards;
+  animation: riseIn 0.8s var(--ease) 0.4s both;
+}
+
+@keyframes riseIn {
+  from { transform: translateY(14px); }
+  to   { transform: none; }
 }
 
 @keyframes fadeUp {
@@ -302,6 +304,13 @@ body {
 @media (max-width: 600px) {
   .project-card   { padding: 30px 24px; }
   .card-name      { font-size: clamp(1.8rem, 8vw, 2.4rem); }
+}
+
+/* ── REDUCED MOTION ── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal { transform: none; }
 }
   </style>
 </head>
