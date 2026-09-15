@@ -18,12 +18,12 @@
   </script>
   <style>
 /* ── PAGE HEADER ── */
-#ts-header{padding:96px 48px 40px;position:relative;z-index:1;border-bottom:1px solid var(--border);}
+#ts-header{padding:60px 48px 32px;position:relative;z-index:1;border-bottom:1px solid var(--border);}
 .page-eyebrow{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.22em;text-transform:uppercase;color:var(--orange)!important;display:flex;align-items:center;gap:10px;margin-bottom:16px;}
 .page-eyebrow::before{content:'';width:24px;height:1px;background:var(--orange);}
-.page-title{font-family:var(--font-disp);font-size:clamp(4rem,9vw,9rem);font-weight:900;font-style:italic;text-transform:uppercase;letter-spacing:-0.03em;line-height:0.85;color:var(--ink)!important;}
+.page-title{font-family:var(--font-disp);font-size:clamp(3.25rem,6.5vw,6rem);font-weight:900;font-style:italic;text-transform:uppercase;letter-spacing:-0.03em;line-height:0.85;color:var(--ink)!important;}
 .page-title em{color:transparent!important;-webkit-text-stroke:2px var(--ink);}
-.page-stats{display:flex;gap:48px;margin-top:32px;padding-top:24px;border-top:1px solid var(--border);flex-wrap:wrap;}
+.page-stats{display:flex;gap:48px;margin-top:26px;padding-top:22px;border-top:1px solid var(--border);flex-wrap:wrap;}
 .page-stat{display:flex;flex-direction:column;gap:3px;}
 .page-stat-num{font-family:var(--font-disp);font-size:2rem;font-weight:900;color:var(--orange)!important;line-height:1;}
 .page-stat-label{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(10,9,8,0.6)!important;}
@@ -81,6 +81,11 @@
 .card-stat-num{font-family:var(--font-disp);font-size:2.4rem;font-weight:900;line-height:1;display:block;text-shadow:0 2px 12px rgba(0,0,0,.5);transition:transform .4s var(--ease);}
 .work-card:hover .card-stat-num{transform:scale(1.06);transform-origin:left center;}
 .card-stat-label{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(248,247,244,.65)!important;display:block;margin-top:3px;text-shadow:0 1px 4px rgba(0,0,0,.7);}
+.card-stat-label{max-width:150px;line-height:1.35;}
+.card-stat-label{text-shadow:0 1px 4px rgba(0,0,0,.85),0 0 10px rgba(0,0,0,.6);}
+/* citation on dark card imagery */
+.cite-dark{color:inherit!important;border-bottom-color:rgba(248,247,244,0.45);}
+.cite-dark:hover{color:var(--orange)!important;border-bottom-color:var(--orange);}
 .c-nonprofit .card-stat-num{color:var(--c-nonprofit)!important;}
 .c-film .card-stat-num{color:var(--c-film)!important;}
 .c-gov .card-stat-num{color:var(--c-gov)!important;}
@@ -150,7 +155,7 @@
   .span-v2{grid-row:span 1;}
   .span-h2{grid-column:span 2;}
   #ts-filter{padding:0 20px;}
-  #ts-header{padding:80px 24px 32px;}
+  #ts-header{padding:48px 24px 28px;}
   #ts-footer{padding:22px 24px;flex-direction:column;gap:14px;text-align:center;}
 }
 @media(max-width:560px){
@@ -159,8 +164,83 @@
   .span-h2 .card-content{grid-template-columns:1fr;}
 }
 
+/* == LEAD CASES - the three to open first == */
+#ts-lead{padding:44px 48px 8px;position:relative;z-index:1;}
+.lead-intro{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.18em;text-transform:uppercase;color:var(--orange)!important;display:flex;align-items:center;gap:10px;margin-bottom:26px;}
+.lead-intro::before{content:'';width:24px;height:1px;background:var(--orange);}
+.lead-case{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;padding:0 0 56px;margin-bottom:56px;border-bottom:1px solid var(--border);scroll-margin-top:118px;}
+.lead-case:last-of-type{border-bottom:none;}
+.lc-index{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.lc-index::before{content:'';width:14px;height:1px;background:currentColor;}
+.lc-kab .lc-index{color:#1d8a4c!important;}
+.lc-dhs .lc-index{color:#8a7318!important;}
+.lc-ecrion .lc-index{color:#0091b3!important;}
+.lc-title{font-family:var(--font-disp);font-weight:900;font-style:italic;text-transform:uppercase;letter-spacing:-.025em;line-height:.9;font-size:clamp(2.1rem,3.6vw,3.4rem);color:var(--ink)!important;margin-bottom:12px;}
+.lc-role{font-family:var(--font-mono);font-size:0.72rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(10,9,8,0.55)!important;margin-bottom:18px;}
+.lc-outcome{font-family:var(--font-mono);font-size:0.875rem;line-height:1.8;color:rgba(10,9,8,0.82)!important;margin-bottom:24px;max-width:560px;}
+.lc-link{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:0.75rem;letter-spacing:.06em;color:var(--ink)!important;border:1.5px solid var(--border-hi);padding:13px 26px;transition:gap .3s var(--ease),background .3s var(--ease),color .3s var(--ease),border-color .3s var(--ease);}
+.lc-link:hover{gap:18px;background:var(--ink);color:var(--white)!important;border-color:var(--ink);}
+.lc-visual{position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--ink2);}
+.lc-visual img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease);}
+.lead-case:hover .lc-visual img{transform:scale(1.03);}
+.lc-visual::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;z-index:2;}
+.lc-kab .lc-visual::before{background:var(--c-nonprofit);}
+.lc-dhs .lc-visual::before{background:var(--c-gov);}
+.lc-ecrion .lc-visual::before{background:var(--c-tech);}
+
+/* == CITATION == */
+.cite{color:inherit;border-bottom:1px dotted rgba(10,9,8,0.42);transition:color .2s ease,border-color .2s ease;}
+.cite:hover{color:var(--orange)!important;border-bottom-color:var(--orange);}
+
+/* == BUILDER SECTION == */
+#ts-builder{background:var(--ink);padding:64px 48px 68px;position:relative;z-index:1;border-top:3px solid var(--orange);}
+.builder-head{font-family:var(--font-disp);font-weight:900;font-style:italic;text-transform:uppercase;letter-spacing:-.025em;line-height:.9;font-size:clamp(2rem,3.4vw,3rem);color:var(--white)!important;margin-bottom:12px;}
+.builder-intro{font-family:var(--font-mono);font-size:0.875rem;line-height:1.7;color:rgba(248,247,244,0.62)!important;margin-bottom:38px;max-width:520px;}
+.builder-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(248,247,244,0.10);border:1px solid rgba(248,247,244,0.10);}
+.builder-card{background:var(--ink);padding:26px 26px 24px;display:flex;flex-direction:column;gap:10px;position:relative;transition:background .3s var(--ease);}
+.builder-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--orange);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);}
+.builder-card:hover{background:var(--ink2);}
+.builder-card:hover::after{transform:scaleX(1);}
+.bc-name{font-family:var(--font-disp);font-weight:900;font-style:italic;text-transform:uppercase;font-size:1.6rem;letter-spacing:-.01em;line-height:1;color:var(--white)!important;}
+.bc-desc{font-family:var(--font-mono);font-size:0.75rem;line-height:1.6;color:rgba(248,247,244,0.52)!important;flex:1;}
+.bc-link{font-family:var(--font-mono);font-size:0.72rem;letter-spacing:.06em;color:var(--orange)!important;display:inline-flex;align-items:center;gap:8px;transition:gap .3s var(--ease);}
+.builder-card:hover .bc-link{gap:14px;}
+
+/* == ARCHIVE == */
+#ts-archive-head{padding:64px 48px 28px;position:relative;z-index:1;}
+.archive-title{font-family:var(--font-disp);font-weight:900;font-style:italic;text-transform:uppercase;letter-spacing:-.025em;line-height:.9;font-size:clamp(1.8rem,3vw,2.6rem);color:var(--ink)!important;margin-bottom:10px;}
+.archive-sub{font-family:var(--font-mono);font-size:0.8rem;line-height:1.7;color:rgba(10,9,8,0.5)!important;}
+.page-sub{font-family:var(--font-mono);font-size:0.9rem;line-height:1.75;color:rgba(10,9,8,0.62)!important;margin-top:22px;max-width:600px;}
+
+/* Filter strip wrapper - sticky + mobile edge fade */
+.filter-wrap{position:sticky;top:52px;z-index:9000;}
+
+/* Archive cards carry less visual weight than the lead three */
+#ts-grid .work-card{min-height:250px;}
+
   /* readability overrides */
   .card-outcome { font-size: 0.875rem !important; }
+
+/* -- LEAD / BUILDER / ARCHIVE MOBILE -- */
+@media(max-width:900px){
+  #ts-lead{padding:56px 24px 8px;}
+  .lead-case{grid-template-columns:1fr;gap:28px;padding-bottom:44px;margin-bottom:44px;}
+  .lc-visual{order:-1;aspect-ratio:16/9;}
+  #ts-builder{padding:52px 24px 56px;}
+  .builder-grid{grid-template-columns:1fr;}
+  #ts-archive-head{padding:52px 24px 22px;}
+}
+@media(max-width:700px){
+  /* category strip: horizontal scroll with a visible edge affordance */
+  .filter-wrap::after{content:'';position:absolute;top:0;right:0;bottom:0;width:44px;pointer-events:none;background:linear-gradient(to right,rgba(10,9,8,0),rgba(10,9,8,0.96));}
+}
+
+/* -- REDUCED MOTION -- */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{animation:none!important;transition:none!important;}
+  .work-card{opacity:1;transform:none;}
+}
   </style>
 </head>
 <body>
@@ -168,26 +248,104 @@
 <!-- NAV -->
 
 
-<!-- FILTER BAR -->
-<div id="ts-filter">
-  <button class="filter-btn active" data-cat="all">All Work</button>
-  <div class="filter-divider"></div>
-  <button class="filter-btn" data-cat="nonprofit">Nonprofit</button>
-  <button class="filter-btn" data-cat="film">Film &amp; TV</button>
-  <button class="filter-btn" data-cat="gov">Gov</button>
-  <button class="filter-btn" data-cat="tech">Tech &amp; SaaS</button>
-</div>
 
 <!-- PAGE HEADER -->
 <div id="ts-header">
   <div class="page-eyebrow">Selected Work</div>
   <h1 class="page-title">My<br><em>Work.</em></h1>
+  <p class="page-sub">Open these three first. Then what I'm building. Then everything else.</p>
   <div class="page-stats">
     <div class="page-stat"><span class="page-stat-num">15+</span><span class="page-stat-label">Years</span></div>
     <div class="page-stat"><span class="page-stat-num">5</span><span class="page-stat-label">Verticals</span></div>
-    <div class="page-stat"><span class="page-stat-num">$300M</span><span class="page-stat-label">Org. Impact</span></div>
+    <div class="page-stat"><span class="page-stat-num">11.9M</span><span class="page-stat-label">Participants (<a class="cite" href="https://kab.org/annual-reviews-financial-reports/" target="_blank" rel="noopener">org-reported</a><!-- KAB_SOURCE_URL -->)</span></div>
+    <div class="page-stat"><span class="page-stat-num">NAGC</span><span class="page-stat-label">Blue Pencil &amp; Gold Screen</span></div>
     <div class="page-stat"><span class="page-stat-num">160K+</span><span class="page-stat-label">PSA Airings</span></div>
-    <div class="page-stat"><span class="page-stat-num">NAGC</span><span class="page-stat-label">1st Place</span></div>
+  </div>
+</div>
+
+
+<!-- == LEAD CASES - open these three first == -->
+<section id="ts-lead">
+  <div class="lead-intro">// open these three first</div>
+
+  <article class="lead-case lc-kab" id="case-kab">
+    <div class="lc-text">
+      <div class="lc-index">Case 01 &mdash; Nonprofit / Social Impact</div>
+      <h2 class="lc-title">Keep America Beautiful</h2>
+      <div class="lc-role">Creative Director</div>
+      <p class="lc-outcome">The PSA campaign ran 160K+ times and earned $77.5M in media. The movement it served reached 11.9M participants (<a class="cite" href="https://kab.org/annual-reviews-financial-reports/" target="_blank" rel="noopener">org-reported</a><!-- KAB_SOURCE_URL -->).</p>
+      <a href="/nonprofit/#kab" class="lc-link">open the case <span>&rarr;</span></a>
+    </div>
+    <div class="lc-visual">
+      <img src="https://images.squarespace-cdn.com/content/v1/55e18f35e4b09e18596261bb/8fce1f92-d6f8-4d0c-8b61-dc4693fb5181/KAB+2023+National+Conference+Illustration_complete.jpg" alt="Keep America Beautiful - 2023 National Conference illustration" width="1200" height="900">
+    </div>
+  </article>
+
+  <article class="lead-case lc-dhs" id="case-dhs">
+    <div class="lc-text">
+      <div class="lc-index">Case 02 &mdash; Government / Public Sector</div>
+      <h2 class="lc-title">DHS Science &amp; Technology</h2>
+      <div class="lc-role">Creative Director, 10-person team &mdash; via Loch Harbour Group</div>
+      <p class="lc-outcome">Award-winning federal creative under multi-tier review. NAGC Blue Pencil &amp; Gold Screen Award. Section 508 throughout.</p>
+      <a href="/gov/#dhs" class="lc-link">open the case <span>&rarr;</span></a>
+    </div>
+    <div class="lc-visual">
+      <img src="https://images.squarespace-cdn.com/content/v1/55e18f35e4b09e18596261bb/1558124146250-WVGH3X91KDCR3KH6OVOV/ST_tabletop.jpg" alt="DHS S&amp;T - Mobilizing Innovation interactive annual report" width="1200" height="900" loading="lazy">
+    </div>
+  </article>
+
+  <article class="lead-case lc-ecrion" id="case-ecrion">
+    <div class="lc-text">
+      <div class="lc-index">Case 03 &mdash; Tech &amp; SaaS</div>
+      <h2 class="lc-title">Ecrion Software</h2>
+      <div class="lc-role">Marketing Director, full GTM ownership</div>
+      <p class="lc-outcome">A European SaaS repositioned for North American enterprise. Brand, messaging, web, demand gen &mdash; rebuilt.</p>
+      <a href="/tech/#ecrion" class="lc-link">open the case <span>&rarr;</span></a>
+    </div>
+    <div class="lc-visual">
+      <img src="https://images.squarespace-cdn.com/content/v1/55e18f35e4b09e18596261bb/1558019827276-BMXOWCXIOQUG6I6DZ31H/schita.jpg" alt="Ecrion Software - brand system" width="1200" height="900" loading="lazy">
+    </div>
+  </article>
+</section>
+
+<!-- == BUILDER == -->
+<section id="ts-builder">
+  <h2 class="builder-head">Also shipping.</h2>
+  <p class="builder-intro">Live AI products. For teams that want a CD who builds, too.</p>
+  <div class="builder-grid">
+    <a class="builder-card" href="https://lab.timshephard.co" target="_blank" rel="noopener">
+      <span class="bc-name">The Lab</span>
+      <span class="bc-desc">Interactive AI &times; story experiments</span>
+      <span class="bc-link">see it live <span>&rarr;</span></span>
+    </a>
+    <a class="builder-card" href="https://ai-digest.timshephard.co" target="_blank" rel="noopener">
+      <span class="bc-name">AI Daily Digest</span>
+      <span class="bc-desc">Daily editorial AI brief</span>
+      <span class="bc-link">see it live <span>&rarr;</span></span>
+    </a>
+    <a class="builder-card" href="https://www.kindora.world" target="_blank" rel="noopener">
+      <span class="bc-name">Kindora</span>
+      <span class="bc-desc">Family decisions, not decision fatigue</span>
+      <span class="bc-link">see it live <span>&rarr;</span></span>
+    </a>
+  </div>
+</section>
+
+<!-- == ARCHIVE == -->
+<div id="ts-archive-head">
+  <h2 class="archive-title">Everything else.</h2>
+  <p class="archive-sub">The rest of the record &mdash; filter by vertical.</p>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-wrap">
+  <div id="ts-filter" role="group" aria-label="Filter categories">
+    <button class="filter-btn active" data-cat="all">All Work</button>
+    <div class="filter-divider"></div>
+    <button class="filter-btn" data-cat="nonprofit">Nonprofit</button>
+    <button class="filter-btn" data-cat="film">Film &amp; TV</button>
+    <button class="filter-btn" data-cat="gov">Gov</button>
+    <button class="filter-btn" data-cat="tech">Tech &amp; SaaS</button>
   </div>
 </div>
 
@@ -207,7 +365,7 @@
     <div class="card-content">
       <div class="card-tag">Nonprofit / Social Impact</div>
       <div class="card-title">Keep America Beautiful</div>
-      <p class="card-outcome">70-year national rebrand. 20K+ affiliates. $300M documented economic impact. All 50 states.</p>
+      <p class="card-outcome">70-year national rebrand. 20K+ affiliates. $300M documented economic impact (<a class="cite cite-dark" href="https://kab.org/annual-reviews-financial-reports/" target="_blank" rel="noopener">org-reported</a><!-- KAB_SOURCE_URL -->). All 50 states.</p>
     </div>
   </a>
 
@@ -235,7 +393,7 @@
     <div class="card-scrim"></div>
     <div class="card-stat">
       <span class="card-stat-num">NAGC</span>
-      <span class="card-stat-label">1st Place</span>
+      <span class="card-stat-label">Blue Pencil</span>
     </div>
     <div class="card-arrow">→</div>
     <div class="card-content">
@@ -304,14 +462,14 @@
     <div class="card-shine"></div>
     <div class="card-scrim"></div>
     <div class="card-stat">
-      <span class="card-stat-num">Blue</span>
-      <span class="card-stat-label">Pencil Award</span>
+      <span class="card-stat-num">Gold</span>
+      <span class="card-stat-label">Screen Award</span>
     </div>
     <div class="card-arrow">→</div>
     <div class="card-content">
       <div class="card-tag">Gov / Interactive</div>
       <div class="card-title">Mobilizing Innovation</div>
-      <p class="card-outcome">NAGC 1st Place. Interactive digital annual report for DHS S&T. Ambitious design inside federal compliance.</p>
+      <p class="card-outcome">NAGC Blue Pencil &amp; Gold Screen Award. Interactive digital annual report for DHS S&T. Ambitious design inside federal compliance.</p>
     </div>
   </a>
 
@@ -340,14 +498,10 @@
     <div class="card-arrow">→</div>
     <div class="card-content">
       <div>
-        <div class="card-stat" style="position:relative;top:auto;left:auto;margin-bottom:10px;">
-          <span class="card-stat-num">8 Yrs</span>
-          <span class="card-stat-label">Field Storytelling</span>
-        </div>
         <div class="card-tag">Nonprofit / Documentary</div>
-        <div class="card-title">One Thousand Voices</div>
+        <div class="card-title">One Thousand Voices (ISCS)</div>
       </div>
-      <p class="card-outcome">Founded 2014. Syrian and Iraqi refugee crisis documentation. Creative direction as advocacy — built to move donors, policymakers, and the public.</p>
+      <p class="card-outcome">Founded &middot; communication strategy &amp; field storytelling &middot; 2014&ndash;2022</p>
     </div>
   </a>
 
