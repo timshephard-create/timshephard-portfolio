@@ -213,6 +213,11 @@ Taken verbatim from the existing `/hire/` markup; used in Lane 1 and on the home
 
 1. **`/hire/` H1 gap.** Visible gap between "BUILD" and "THIS." caused by a `<br>` after the `display: block` `<em>Build</em>` at [hire/index.html:297](hire/index.html:297). Pre-existing, not introduced by this branch. One-line fix.
 2. **`shared/adventure.js` still names an audit platform in Explore copy.** Lines 45, 48 and 56 describe Creative Mind Ventures as building "an automated audit platform" / "a website audit platform" / "an AI audit platform". No link, no price, no card — but it's the last audit-offer language outside `/projects/`.
+3. **Eight "Senior Creative Director" mentions contradict the settled title.** The title was ruled "Creative Director" on 2026-09-16 (`FACTS.md` §2), but these still say Senior:
+   - **[api/personalize.js:40](api/personalize.js:40) — do this one first.** It's the system prompt for the live `/explore/` personalisation endpoint, so it is actively generating new visitor-facing copy from the stale title on every request, not just displaying it.
+   - [nonprofit/index.html](nonprofit/index.html) — lines 294 and 298 (ticker), 313 (pull-quote attribution), 318 (body copy)
+   - [entertainment/index.html:614](entertainment/index.html:614) — KAB scene role line
+   - [shared/adventure.js](shared/adventure.js) — lines 173 and 233 (Explore UI labels)
 
 ### Also noted (Ship 4)
 
