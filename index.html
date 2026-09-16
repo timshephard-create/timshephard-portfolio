@@ -641,9 +641,22 @@ body { background: var(--ink); }
 }
 @media (max-width: 700px) {
   body { overflow-x: hidden; }
-  .identity { padding: 52px 24px 48px; }
+  .identity { padding: 36px 24px 48px; }
   .id-chips { grid-template-columns: 1fr; margin: 32px 0 44px; }
   .id-ctas { gap: 12px; }
+
+  /* Mobile first screen = identity + contact action; proof chips are the
+     first scroll. Visual reorder only — DOM order is untouched, so the
+     static first paint is identical and desktop keeps chips → line → CTAs. */
+  .id-label { display: none; }
+  .id-inner { display: flex; flex-direction: column; }
+  .id-name, .id-role, .id-sub, .id-avail { order: 0; }
+  .id-ctas        { order: 1; }
+  .id-chips       { order: 2; }
+  .identity .dual-track { order: 3; margin-bottom: 0; }  /* travels with the chips */
+  .hero-case      { order: 4; }
+  .id-tertiary    { order: 5; align-self: flex-start; }
+  .id-contact     { order: 6; }
   .btn { flex: 1 1 auto; justify-content: center; }
   .split-container {
     flex-direction: column;
