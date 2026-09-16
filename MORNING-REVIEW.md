@@ -1,8 +1,25 @@
 # MORNING REVIEW — Ship 1, "Callback critical"
 
-**Branch:** `ship-1-callback` (from `main` @ `96ff882`) · **Reflects:** `5ff0c30` · **Not merged, not deployed to production.**
+**Branch:** `ship-1-callback` (from `main` @ `96ff882`) · **Reflects:** `5ff0c30` · **Merged to `main` with `--no-ff` on 2026-09-16 and deployed to production** — rollback target below.
 
-Everything below happened on that branch only. `main` is untouched. `rebuild` was read from (`git show`) and never modified.
+All Ship 1 work was done on that branch and reviewed there before the merge. `rebuild` was read from (`git show`) and never modified.
+
+## Rollback
+
+If Ship 1 needs to come out of production, this is the last known-good state:
+
+| | |
+|---|---|
+| **Commit** | `96ff882` — "Projects: add The Lab — live card for lab.timshephard.co" (`main` before the Ship 1 merge) |
+| **Production deployment** | https://timshephard-portfolio-o3c3mnes7-timshephard-creates-projects.vercel.app |
+| **Vercel deployment ID** | `9cbpjPE9RSaKCmQXpC5qP9n6ghE7` — [dashboard](https://vercel.com/timshephard-creates-projects/timshephard-portfolio/9cbpjPE9RSaKCmQXpC5qP9n6ghE7) |
+| **Deployed** | 2026-09-03 16:10 UTC |
+
+**Fastest path — no git:** in the Vercel dashboard, open that deployment and use **Promote to Production** (Instant Rollback). Vercel points `timshephard.co` back at the existing build in seconds; nothing is rebuilt and nothing in git changes. Note that the next push to `main` will deploy again and supersede the rollback.
+
+**Git path:** the merge is a `--no-ff` merge commit, so `git revert -m 1 <merge-commit>` backs out all of Ship 1 in one commit. Each Ship 1 commit also stays individually revertible.
+
+---
 
 > **Refreshed 2026-09-16** to match `5ff0c30`. The first version of this file was written at `c352cd2`, before four homepage commits changed the fold. If you are reviewing an older deployment, see §6 for which URL serves which commit.
 
