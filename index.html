@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tim Shephard — Creative Director</title>
+  <meta name="description" content="Tim Shephard — Creative Director. Brand, campaigns, creative systems. I also ship AI products. Dallas–Fort Worth. Fractional &amp; contract first.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,700;0,900;1,700;1,900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -48,83 +49,304 @@ body::before {
   z-index: 1;
 }
 
-/* ── MAIN SPLIT ── */
-.split-container {
-  position: fixed;
-  top: 132px; left: 0; right: 0;   /* sits below the Start Here band */
-  bottom: 90px;                    /* leaves room for the third strip */
-  display: flex;
-  z-index: 9000;
-}
+body { background: var(--ink); }
 
-/* ── THIRD STRIP: WHAT I'M BUILDING ── */
-.third-strip {
-  position: fixed;
-  bottom: 0; left: 0; right: 0;
-  height: 90px;
+/* ══════════════════════════════════════════════════════════════
+   IDENTITY / PROOF — first in DOM, static text, no JS required
+   ══════════════════════════════════════════════════════════════ */
+.identity {
+  position: relative;
+  z-index: 20;
   background: var(--ink);
-  border-top: 1px solid rgba(248,247,244,0.07);
+  padding: 52px 56px 56px;
+  border-bottom: 1px solid rgba(248,247,244,0.08);
+}
+.id-inner { max-width: 1400px; margin: 0 auto; }
+
+.id-label {
+  font-family: var(--font-mono);
+  font-size: 0.69rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--orange);
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 28px;
-  text-decoration: none;
-  cursor: pointer;
-  z-index: 9100;
-  overflow: hidden;
-  animation: fadeIn 0.8s ease 0.4s both;
-  transition: background 0.3s var(--ease);
+  gap: 10px;
+  margin-bottom: 22px;
 }
-.third-strip::before {
+.id-label::before {
+  content: '';
+  width: 24px; height: 1px;
+  background: var(--orange);
+  flex-shrink: 0;
+}
+
+.id-name {
+  font-family: var(--font-disp);
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 0.86;
+  font-size: clamp(3.25rem, 7vw, 6.5rem);
+  color: var(--white);
+}
+.id-role {
+  font-family: var(--font-disp);
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 0.86;
+  font-size: clamp(2rem, 3.6vw, 3.4rem);
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--orange);
+  margin-bottom: 22px;
+}
+.id-sub {
+  font-family: var(--font-mono);
+  font-size: clamp(0.82rem, 1.3vw, 1rem);
+  line-height: 1.7;
+  color: rgba(248,247,244,0.78);
+  max-width: 640px;
+  margin-bottom: 12px;
+}
+.id-avail {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(248,247,244,0.50);
+}
+.id-avail strong { color: var(--white); font-weight: 500; }
+
+/* ── PROOF CHIPS ── */
+.id-chips {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(248,247,244,0.10);
+  border: 1px solid rgba(248,247,244,0.10);
+  margin: 34px 0 38px;
+}
+.chip {
+  background: var(--ink);
+  padding: 22px 22px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  transition: background 0.3s var(--ease);
+  position: relative;
+}
+.chip::after {
   content: '';
   position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 3px;
+  top: 0; left: 0; right: 0;
+  height: 2px;
   background: var(--orange);
-  transform: scaleY(0);
-  transform-origin: bottom;
+  transform: scaleX(0);
+  transform-origin: left;
   transition: transform 0.4s var(--ease);
 }
-.third-strip:hover { background: var(--ink2); }
-.third-strip:hover::before { transform: scaleY(1); }
+.chip:hover { background: var(--ink2); }
+.chip:hover::after { transform: scaleX(1); }
+.chip-name {
+  font-family: var(--font-disp);
+  font-weight: 700;
+  font-size: 1.32rem;
+  letter-spacing: 0.005em;
+  line-height: 1.05;
+  color: var(--white);
+  text-transform: uppercase;
+}
+.chip-sub {
+  font-family: var(--font-mono);
+  font-size: 0.69rem;
+  letter-spacing: 0.04em;
+  line-height: 1.55;
+  color: rgba(248,247,244,0.52);
+}
 
-.strip-label {
+/* ── HERO CASE ── */
+.hero-case {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: center;
+  border-top: 1px solid rgba(248,247,244,0.10);
+  padding-top: 36px;
+  margin-top: 40px;
+}
+.hc-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.69rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 16px;
+}
+.hc-title {
+  font-family: var(--font-disp);
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+  line-height: 0.9;
+  font-size: clamp(2.25rem, 3.4vw, 3.25rem);
+  color: var(--white);
+  margin-bottom: 14px;
+}
+.hc-role {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(248,247,244,0.55);
+  margin-bottom: 18px;
+}
+.hc-outcome {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.8;
+  color: rgba(248,247,244,0.82);
+  max-width: 560px;
+  margin-bottom: 22px;
+}
+.hc-visual {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--ink2);
+  border: 1px solid rgba(248,247,244,0.10);
+}
+.hc-visual img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s var(--ease);
+}
+.hero-case:hover .hc-visual img { transform: scale(1.03); }
+.hc-caption {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 14px 16px;
+  background: linear-gradient(to top, rgba(10,9,8,0.9), transparent);
   font-family: var(--font-mono);
   font-size: 0.69rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(248,247,244,0.38);
+  color: rgba(248,247,244,0.7);
 }
-.strip-divider {
-  width: 1px;
-  height: 20px;
-  background: rgba(248,247,244,0.12);
-  flex-shrink: 0;
+
+/* ── CITATION ── */
+.cite {
+  color: rgba(248,247,244,0.62);
+  border-bottom: 1px dotted rgba(248,247,244,0.45);
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
-.strip-headline {
-  font-family: var(--font-disp);
-  font-weight: 900;
-  font-style: italic;
-  font-size: clamp(1.5rem, 2.2vw, 2.25rem);
-  letter-spacing: -0.02em;
-  line-height: 1;
+.cite:hover { color: var(--orange-hi); border-bottom-color: var(--orange-hi); }
+
+/* ── CTAs ── */
+.id-ctas {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px 20px;
+  margin-top: 34px;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  padding: 14px 28px;
+  position: relative;
+  overflow: hidden;
+  transition: gap 0.3s var(--ease), color 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  transition: transform 0.4s var(--ease);
+  z-index: -1;
+}
+.btn:hover { gap: 18px; }
+.btn:hover::before { transform: translateX(0); }
+.btn-primary {
   color: var(--white);
-  text-transform: uppercase;
+  background: var(--orange);
 }
-.strip-cta {
+.btn-primary::before { background: var(--orange-hi); }
+.btn-ghost {
+  color: var(--white);
+  border: 1.5px solid rgba(248,247,244,0.25);
+}
+.btn-ghost::before { background: var(--orange); }
+.btn-ghost:hover { border-color: var(--orange); }
+.btn span { position: relative; z-index: 1; }
+
+.id-secondary {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: rgba(248,247,244,0.62);
+  border-bottom: 1px solid rgba(248,247,244,0.22);
+  padding-bottom: 3px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.id-secondary:hover { color: var(--orange-hi); border-bottom-color: var(--orange-hi); }
+
+/* ── TERTIARY (demoted Explore) ── */
+.id-tertiary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 22px;
   font-family: var(--font-mono);
   font-size: 0.72rem;
   letter-spacing: 0.06em;
-  color: var(--orange);
+  color: rgba(248,247,244,0.42);
+  transition: color 0.2s ease, gap 0.3s var(--ease);
+}
+.id-tertiary:hover { color: var(--orange-hi); gap: 14px; }
+
+/* ── CONTACT LINE ── */
+.id-contact {
   display: flex;
   align-items: center;
-  gap: 8px;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  margin-top: 34px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(248,247,244,0.10);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: rgba(248,247,244,0.45);
 }
-.strip-arrow {
-  display: inline-block;
-  transition: transform 0.3s var(--ease);
+.id-contact a {
+  color: rgba(248,247,244,0.78);
+  border-bottom: 1px solid rgba(248,247,244,0.18);
+  padding-bottom: 2px;
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
-.third-strip:hover .strip-arrow { transform: translateX(5px); }
+.id-contact a:hover { color: var(--orange-hi); border-bottom-color: var(--orange-hi); }
+.id-contact .sep { color: rgba(248,247,244,0.22); }
+
+/* ══════════════════════════════════════════════════════════════
+   FIRST SCROLL — pathway panels + strip
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── MAIN SPLIT ── */
+.split-container {
+  position: relative;
+  display: flex;
+  min-height: clamp(420px, 66vh, 760px);
+  z-index: 10;
+}
 
 /* ── DIVIDER ── */
 .divider {
@@ -150,46 +372,6 @@ body::before {
   box-shadow: 0 0 0 4px rgba(232,66,10,0.15);
   transition: box-shadow 0.3s ease;
 }
-
-/* ── TIER 1: START HERE — primary guided entry point (full-width top band) ── */
-.start-here {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  height: 132px;
-  z-index: 9200;
-  background: var(--orange);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 28px;
-  text-decoration: none;
-  cursor: pointer;
-  overflow: hidden;
-  animation: fadeIn 0.7s ease both;
-  transition: background 0.3s var(--ease);
-}
-.start-here:hover { background: var(--orange-hi); }
-.sh-head {
-  font-family: var(--font-disp);
-  font-weight: 900;
-  font-style: italic;
-  text-transform: uppercase;
-  letter-spacing: -0.025em;
-  line-height: 0.9;
-  font-size: clamp(2rem, 3.4vw, 2.85rem);
-  color: var(--white);
-}
-.sh-sub {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  color: var(--ink);
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  transition: gap 0.3s var(--ease);
-}
-.start-here:hover .sh-sub { gap: 16px; }
 
 /* ── PANEL BASE ── */
 .panel {
@@ -258,9 +440,6 @@ body::before {
   -webkit-text-stroke: 1.5px rgba(10,9,8,0.11);
   transform: translate(-50%, -50%) translateX(20px);
 }
-
-/* ── CORNER INDEX ── */
-
 
 /* ── ORANGE TOP BAR ── */
 .panel::after {
@@ -343,64 +522,258 @@ body::before {
 }
 .panel-cta:hover .cta-arrow { transform: translateX(4px); }
 
-/* ── INTRO ANIMATION ── */
-@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
-@keyframes slideLeft  { from { opacity: 0; transform: translateX(-24px); } to { opacity: 1; transform: translateX(0); } }
-@keyframes slideRight { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: translateX(0); } }
+/* ── DUAL-TRACK LINE ── */
+.dual-track {
+  position: relative;
+  z-index: 10;
+  background: var(--ink);
+  border-top: 1px solid rgba(248,247,244,0.07);
+  padding: 30px 56px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.dt-label {
+  font-family: var(--font-mono);
+  font-size: 0.69rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--orange);
+  flex-shrink: 0;
+}
+.dt-line {
+  font-family: var(--font-disp);
+  font-weight: 700;
+  font-size: clamp(1.15rem, 2.1vw, 1.75rem);
+  letter-spacing: 0.005em;
+  line-height: 1.2;
+  color: rgba(248,247,244,0.88);
+  text-transform: uppercase;
+}
 
-.panel-show { animation: slideLeft  0.9s var(--ease) 0.15s both; }
-.panel-tell  { animation: slideRight 0.9s var(--ease) 0.25s both; }
+/* inside the identity block: same type, no full-bleed band chrome */
+.identity .dual-track {
+  z-index: auto;
+  background: transparent;
+  border-top: 0;
+  padding: 0;
+  margin: -16px 0 34px;
+}
 
-/* ── MOBILE: static vertical stack, page scrolls (Start Here → Work → Story → Building) ── */
+/* ── THIRD STRIP: WHAT I'M BUILDING ── */
+.third-strip {
+  position: relative;
+  min-height: 90px;
+  background: var(--ink);
+  border-top: 1px solid rgba(248,247,244,0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 10;
+  overflow: hidden;
+  transition: background 0.3s var(--ease);
+}
+.third-strip::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--orange);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.4s var(--ease);
+}
+.third-strip:hover { background: var(--ink2); }
+.third-strip:hover::before { transform: scaleY(1); }
+
+.strip-label {
+  font-family: var(--font-mono);
+  font-size: 0.69rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(248,247,244,0.38);
+}
+.strip-divider {
+  width: 1px;
+  height: 20px;
+  background: rgba(248,247,244,0.12);
+  flex-shrink: 0;
+}
+.strip-headline {
+  font-family: var(--font-disp);
+  font-weight: 900;
+  font-style: italic;
+  font-size: clamp(1.5rem, 2.2vw, 2.25rem);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--white);
+  text-transform: uppercase;
+}
+.strip-cta {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--orange);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.strip-arrow {
+  display: inline-block;
+  transition: transform 0.3s var(--ease);
+}
+.third-strip:hover .strip-arrow { transform: translateX(5px); }
+
+/* ── ENTRANCE MOTION — transform-only on already-visible text ── */
+@keyframes riseIn { from { transform: translateY(14px); } to { transform: none; } }
+.panel-content { animation: riseIn 0.8s var(--ease) both; }
+.panel-tell .panel-content { animation-delay: 0.1s; }
+
+/* ── MOBILE ── */
+@media (max-width: 1000px) {
+  .id-chips { grid-template-columns: repeat(2, 1fr); }
+  .hero-case { grid-template-columns: 1fr; gap: 32px; }
+  .hc-visual { order: -1; aspect-ratio: 16 / 9; }
+}
 @media (max-width: 700px) {
   body { overflow-x: hidden; }
-  /* stacked full-width blocks: drop the horizontal slide-in (caused transient x-overflow) */
-  .panel-show, .panel-tell { animation: fadeIn 0.6s ease both; }
-  /* TIER 1 */
-  .start-here {
-    position: static;
-    height: auto;
-    min-height: 104px;
-    flex-direction: column;
-    gap: 10px;
-    padding: 30px 24px;
-    text-align: center;
-  }
-  /* TIER 2 */
+  .identity { padding: 36px 24px 48px; }
+  .id-chips { grid-template-columns: 1fr; margin: 32px 0 44px; }
+  .id-ctas { gap: 12px; }
+
+  /* Mobile: DOM order IS the visual order (and the tab order):
+     identity → CTAs → dual-track line → chips → KAB case → Explore → contact.
+     The line introduces the chips, so chip 4 never appears without it. */
+  .id-label { display: none; }
+  .identity .dual-track { margin: 32px 0 0; }
+  .id-chips { margin: 20px 0 0; }
+  .btn { flex: 1 1 auto; justify-content: center; }
   .split-container {
-    position: static;
     flex-direction: column;
-    bottom: auto;
-    z-index: auto;
+    min-height: 0;
   }
   .panel { min-height: 46vh; padding: 44px 28px 48px; }
   .divider { display: none; }
   .panel-headline { font-size: clamp(3rem, 10vw, 5rem); }
-  /* TIER 3 */
+  .dual-track { padding: 26px 24px; gap: 12px; }
   .third-strip {
-    position: static;
     height: auto;
     min-height: 88px;
     padding: 22px 24px;
     gap: 16px;
+    flex-wrap: wrap;
   }
-  .strip-label, .strip-divider:first-of-type { display: none; }
+  .strip-label, .strip-divider { display: none; }
+}
+
+/* ── DESKTOP (>700px): visual order chips → line → CTAs → KAB case ──
+   DOM puts the CTAs first (mobile + tab order). Flex items don't collapse
+   margins, so the CTA row drops its top margin to keep the 34px gap the
+   block flow gave it. */
+@media (min-width: 701px) {
+  .id-inner { display: flex; flex-direction: column; }
+  .id-chips             { order: 1; }
+  .identity .dual-track { order: 2; }
+  .id-ctas              { order: 3; margin-top: 0; }
+  .hero-case            { order: 4; }
+  .id-tertiary          { order: 5; align-self: flex-start; margin-bottom: 1px; } /* = the 16px line box it had in block flow */
+  .id-contact           { order: 6; }
+}
+
+/* ── REDUCED MOTION — content starts visible, nothing moves ── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .panel-content { transform: none; }
 }
   </style>
 </head>
 <body>
 <div id="cursor"></div>
 
+<!-- ══ IDENTITY / PROOF — first in DOM, static, visible without JS ══ -->
+<section class="identity">
+  <div class="id-inner">
 
+    <div class="id-label">// creative director &mdash; dallas&ndash;fort worth</div>
 
-<!-- TIER 1: START HERE — primary guided entry point (full-width top band) -->
-<a href="/explore/" class="start-here" id="start-here" aria-label="Start here — not sure where to go? Explore interactively.">
-  <span class="sh-head">Start Here.</span>
-  <span class="sh-sub">not sure where to go? →</span>
-</a>
+    <h1 class="id-name">Tim Shephard</h1>
+    <div class="id-role">Creative Director</div>
 
-<!-- TIER 2: MY WORK + MY STORY -->
+    <p class="id-sub">Brand, campaigns, creative systems. I also ship AI products.</p>
+    <p class="id-avail">Dallas&ndash;Fort Worth <span>&middot;</span> <strong>Fractional &amp; contract first</strong> <span>&middot;</span> Full-time welcome</p>
+
+    <!-- PRIMARY CTAs -->
+    <div class="id-ctas">
+      <a href="/work/" class="btn btn-primary"><span>see the work &rarr;</span></a>
+      <a href="/hire/" class="btn btn-ghost"><span>let's talk &rarr;</span></a>
+      <a href="/about/" class="id-secondary">my story &rarr;</a>
+    </div>
+
+    <!-- DUAL-TRACK LINE — frames the chips (above them on mobile, below on desktop) -->
+    <div class="dual-track">
+      <span class="dt-label">// two tracks</span>
+      <p class="dt-line">I lead creative teams. I also ship AI products. Same bar for both.</p>
+    </div>
+
+    <!-- PROOF CHIPS -->
+    <div class="id-chips">
+      <a class="chip" href="/work/#case-kab">
+        <span class="chip-name">Keep America Beautiful</span>
+        <span class="chip-sub">Rebrand + PSA system &middot; 160K+ airings</span>
+      </a>
+      <a class="chip" href="/work/#case-dhs">
+        <span class="chip-name">DHS S&amp;T</span>
+        <span class="chip-sub">Led a team of 10 &middot; NAGC Blue Pencil &amp; Gold Screen</span>
+      </a>
+      <a class="chip" href="/work/#case-ecrion">
+        <span class="chip-name">Ecrion Software</span>
+        <span class="chip-sub">Full GTM rebuild &middot; North American enterprise</span>
+      </a>
+      <a class="chip" href="/projects/">
+        <span class="chip-name">Currently shipping</span>
+        <span class="chip-sub">The Lab &middot; Kindora &middot; AI Daily Digest</span>
+      </a>
+    </div>
+
+    <!-- HERO CASE -->
+    <div class="hero-case">
+      <div class="hc-text">
+        <div class="hc-eyebrow">// open this one first</div>
+        <h2 class="hc-title">Keep America Beautiful</h2>
+        <div class="hc-role">Creative Director. National rebrand and PSA system.</div>
+        <p class="hc-outcome">160K+ PSA airings and $77.5M in earned media on the campaign I led. Behind it, a movement of 11.9M participants and $300M in economic impact (<a class="cite" href="https://kab.org/annual-reviews-financial-reports/" target="_blank" rel="noopener">org-reported</a><!-- KAB_SOURCE_URL -->).</p>
+        <a href="/work/#case-kab" class="btn btn-ghost"><span>open the case &rarr;</span></a>
+      </div>
+      <div class="hc-visual">
+        <img src="https://images.squarespace-cdn.com/content/v1/55e18f35e4b09e18596261bb/4e0278bf-a1b4-4733-ac66-732eba709ca5/23-Sep-KAB--GAC-Brand-Image-V2.3-01.jpg" alt="Keep America Beautiful — Greatest American Cleanup brand image" width="1200" height="900">
+        <div class="hc-caption">Greatest American Cleanup &mdash; Brand Image</div>
+      </div>
+    </div>
+
+    <!-- TERTIARY — demoted Explore -->
+    <a href="/explore/" class="id-tertiary">not sure where to go? start here &rarr;</a>
+
+    <!-- CONTACT LINE — static markup, not nav.js -->
+    <div class="id-contact">
+      <a href="mailto:tim@timshephard.co">tim@timshephard.co</a>
+      <span class="sep">&middot;</span>
+      <a href="https://www.linkedin.com/in/tim-shephard" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <span class="sep">&middot;</span>
+      <a href="/hire/">hire &rarr;</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- FIRST SCROLL — MY WORK + MY STORY -->
 <div class="split-container" id="ts-split">
 
   <div class="divider"></div>
@@ -447,7 +820,7 @@ document.addEventListener('mousemove', e => {
   cursor.style.left = mx + 'px';
   cursor.style.top  = my + 'px';
 });
-document.querySelectorAll('.panel, .panel-cta, .start-here, .third-strip').forEach(el => {
+document.querySelectorAll('.panel, .panel-cta, .third-strip, .chip, .btn, .id-secondary, .id-tertiary, .hc-visual, .id-contact a').forEach(el => {
   el.addEventListener('mouseenter', () => cursor.classList.add('expanded'));
   el.addEventListener('mouseleave', () => cursor.classList.remove('expanded'));
 });

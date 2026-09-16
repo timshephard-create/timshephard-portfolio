@@ -81,7 +81,7 @@ p{color:var(--ink)!important}
 #gate-1{transition:opacity 0.4s ease,transform 0.4s var(--ease)}
 #gate-1.exiting{opacity:0;transform:translateX(-24px);pointer-events:none}
 
-.form-header{margin-bottom:48px}
+.form-header{margin-bottom:30px}
 .form-eyebrow{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)!important;display:block;margin-bottom:12px}
 .form-title{font-family:var(--font-disp);font-size:clamp(2.5rem,3.5vw,3.5rem);font-weight:900;font-style:italic;line-height:0.9;letter-spacing:-0.02em;text-transform:uppercase;color:var(--ink)!important}
 .form-title em{color:var(--orange)!important;font-style:italic}
@@ -234,6 +234,43 @@ p{color:var(--ink)!important}
   .left-desc{display:none}
 }
 
+/* == TWO-LANE LAYOUT == */
+.right-col{justify-content:flex-start!important}
+.lane{position:relative;z-index:1}
+.lane-1{padding-bottom:34px;margin-bottom:38px;border-bottom:1px solid var(--border-hi)}
+.lane-eyebrow{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--orange)!important;display:block;margin-bottom:12px}
+.lane-title{font-family:var(--font-disp);font-size:clamp(1.9rem,2.6vw,2.6rem);font-weight:900;font-style:italic;line-height:0.95;letter-spacing:-0.02em;text-transform:uppercase;color:var(--ink)!important;margin-bottom:10px}
+.lane-body{font-size:0.95rem;font-weight:300;color:rgba(10,9,8,0.72)!important;line-height:1.7;margin-bottom:22px;max-width:420px}
+.contact-row{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--off);border:1px solid transparent}
+.contact-row .contact-link-label,.contact-row .contact-link-val{color:var(--muted)!important}
+.contact-row .contact-link-val{color:var(--ink)!important}
+.avail-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.avail-pill{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:0.1em;text-transform:uppercase;padding:8px 14px;border:1px solid var(--border-hi);color:var(--ink)!important;white-space:nowrap}
+.avail-pill--first{border-color:var(--orange);color:var(--orange)!important}
+.entity-note{font-family:var(--font-mono);font-size:0.69rem;letter-spacing:0.08em;color:var(--muted)!important;margin-top:18px}
+.left-sub{font-family:var(--font-mono);font-size:0.78rem;letter-spacing:0.04em;line-height:1.7;color:var(--ink)!important;margin-bottom:22px;max-width:380px}
+
+/* first paint: hero text is visible immediately; motion is transform-only */
+.left-label,.left-h1,.left-desc,.left-bottom,.left-sub{opacity:1!important}
+@keyframes riseIn{from{transform:translateY(12px)}to{transform:none}}
+.left-label{animation:riseIn 0.7s var(--ease) 0.05s both!important}
+.left-h1{animation:riseIn 0.8s var(--ease) 0.1s both!important}
+.left-sub,.left-desc{animation:riseIn 0.8s var(--ease) 0.16s both!important}
+.reveal{opacity:1;transform:translateY(12px)}
+.reveal.visible{transform:translateY(0)}
+
+@media(max-width:900px){
+  .lane-1{padding-bottom:28px;margin-bottom:30px}
+}
+
+/* == REDUCED MOTION == */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+  .left-label,.left-h1,.left-sub,.left-desc{transform:none}
+}
+
   /* readability overrides */
   .left-desc { color: rgba(10,9,8,0.72) !important; }
   .left-desc strong { color: var(--ink) !important; }
@@ -260,24 +297,16 @@ p{color:var(--ink)!important}
         <em>Build</em><br>
         <span class="orange">This.</span>
       </h1>
+      <p class="left-sub">Fractional and contract first. Full-time, let&rsquo;s talk.</p>
       <p class="left-desc">
-        Full-time or fractional. I build creative systems that turn strategy into results — across nonprofit, tech, government, entertainment, and brand. Drop your details and I’ll come back with something useful.
+        I build creative systems that turn strategy into results — across nonprofit, tech, government, entertainment, and brand.
       </p>
     </div>
     <div class="left-bottom">
-      <div class="avail-strip">
-        <div class="avail-cell"><span class="avail-label">Status</span><span class="avail-val green">Available</span></div>
-        <div class="avail-cell"><span class="avail-label">Full-Time</span><span class="avail-val">Open</span></div>
-        <div class="avail-cell"><span class="avail-label">Fractional</span><span class="avail-val">Open</span></div>
-      </div>
       <div class="left-contact-links">
-        <a href="mailto:tim@timshephard.co" class="contact-link">
-          <span class="contact-link-label">Email</span>
-          <span class="contact-link-val">tim@timshephard.co &rarr;</span>
-        </a>
-        <a href="https://www.linkedin.com/in/tim-shephard" target="_blank" rel="noopener noreferrer" class="contact-link">
-          <span class="contact-link-label">LinkedIn</span>
-          <span class="contact-link-val">linkedin.com/in/tim-shephard &rarr;</span>
+        <a href="/work/" class="contact-link">
+          <span class="contact-link-label">Work</span>
+          <span class="contact-link-val">selected cases &rarr;</span>
         </a>
         <a href="/" class="contact-link">
           <span class="contact-link-label">Portfolio</span>
@@ -290,11 +319,41 @@ p{color:var(--ink)!important}
   <!-- RIGHT — two gates stacked -->
   <div class="right-col" id="right-col">
 
-    <!-- ══ GATE 1: Fast Contact ══ -->
-    <div id="gate-1">
-      <div class="form-header reveal">
-        <span class="form-eyebrow">60 seconds. No commitment.</span>
-        <h2 class="form-title">Tell me what you’re working on.</h2>
+    <!-- ══ LANE 1: Recruiters & hiring managers — no form ══ -->
+    <section class="lane lane-1">
+      <span class="lane-eyebrow">// lane 01</span>
+      <h2 class="lane-title">Recruiters &amp; hiring managers</h2>
+      <p class="lane-body">Email or LinkedIn works. No form.</p>
+
+      <div class="left-contact-links">
+        <a href="mailto:tim@timshephard.co" class="contact-link">
+          <span class="contact-link-label">Email</span>
+          <span class="contact-link-val">tim@timshephard.co &rarr;</span>
+        </a>
+        <a href="https://www.linkedin.com/in/tim-shephard" target="_blank" rel="noopener noreferrer" class="contact-link">
+          <span class="contact-link-label">LinkedIn</span>
+          <span class="contact-link-val">linkedin.com/in/tim-shephard &rarr;</span>
+        </a>
+        <div class="contact-row">
+          <span class="contact-link-label">Location</span>
+          <span class="contact-link-val">Dallas&ndash;Fort Worth</span>
+        </div>
+      </div>
+
+      <div class="avail-pills">
+        <span class="avail-pill avail-pill--first">// fractional &amp; contract &mdash; first</span>
+        <span class="avail-pill">// full-time &mdash; open</span>
+      </div>
+
+      <p class="entity-note">Engagements via Creative Mind Ventures LLC</p>
+    </section>
+
+    <!-- ══ LANE 2: Clients & project inquiries — the intake form ══ -->
+    <div id="gate-1" class="lane lane-2">
+      <div class="form-header">
+        <span class="lane-eyebrow">// lane 02 &mdash; 60 seconds. No commitment.</span>
+        <h2 class="lane-title">Clients &amp; project inquiries</h2>
+        <p class="lane-body">Drop your details and I&rsquo;ll come back with something useful.</p>
       </div>
 
       <div id="hire-form">
@@ -519,7 +578,7 @@ p{color:var(--ink)!important}
 <div class="bottom-bar">
   <div class="bottom-bar-left">
     <span class="bottom-bar-dot"></span>
-    Available for Full-Time &amp; Fractional Engagements &mdash; Dallas / Fort Worth, TX
+    Available for Fractional, Contract &amp; Full-Time Engagements &mdash; Dallas&ndash;Fort Worth
   </div>
   <span class="bottom-bar-right">Tim Shephard &mdash; Creative Director</span>
 </div>
