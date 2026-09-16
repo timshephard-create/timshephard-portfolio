@@ -16,12 +16,14 @@
 ## Copy and attribution
 
 9. **`FACTS.md` is copy law.** Every reader-facing claim must trace to it. Anything unconfirmed is omitted, never guessed — open items live in its PENDING VERIFICATION section and stay there until Tim rules.
-10. **KAB attribution is two-tier.**
-    - **Tier A — Tim's, stated plainly, no hedging:** 160K+ PSA airings, $77.5M earned media, 4.5M+ GIF views.
-    - **Tier B — the organization's, never Tim's personal result:** 11.9M participants, $300M economic impact, 20K+ affiliates. Always carries the org-reported citation, hardcoded in markup with the marker comment on the same line so it can be found by grep:
+10. **KAB attribution turns on outcome vs. scope — not on a list of numbers.** `FACTS.md` §7 records the tier of every figure; this is the reasoning behind it.
+    - **Tier A — Tim's own results, stated plainly, no hedging:** what the campaign he led produced. Today: 160K+ PSA airings, $77.5M earned media, 4.5M+ GIF views.
+    - **Tier A — organizational scope, stated plainly, no citation:** facts that *describe the organization*, not results anyone produced. Today: 20K+ affiliate organizations, the 70-year-old brand. They are the organization's, not Tim's achievement — but they aren't performance claims, so they carry no citation.
+    - **Tier B — organizational outcomes, always cited:** results of the movement Tim's work supported that are measured at the organization level. Today: 11.9M participants, $300M economic impact. Always framed as the organization's, never as Tim's personal result, and always followed by the org-reported citation, hardcoded in markup with the marker comment on the same line so it can be found by grep:
       ```html
       <a class="cite" href="https://kab.org/annual-reviews-financial-reports/" target="_blank" rel="noopener">org-reported</a><!-- KAB_SOURCE_URL -->
       ```
+    - **Placing a new figure:** if it measures a result that a campaign or program produced, it's an outcome — Tim's (Tier A) only if it came from work he led, otherwise the organization's (Tier B, cited). If it describes what the organization is — its age, or how many affiliates it has — it's scope (Tier A, no citation). Add it to `FACTS.md` §7 before it goes into copy.
     - **Banned, always:** the 745M impressions figure in any phrasing; attributing any KAB work to National CleanUp Day (the PSA is KAB's "Recycle Like Everyone's Watching").
 11. **No fictional provenance.** No visit counters, edition numbers, archive counts or any number implying real history unless it is literally true and backed by real data.
 12. **Never repeat the same stat sentence verbatim on two pages.** Reword it per page.
