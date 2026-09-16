@@ -336,7 +336,7 @@ body { background: var(--ink); }
 .id-contact .sep { color: rgba(248,247,244,0.22); }
 
 /* ══════════════════════════════════════════════════════════════
-   FIRST SCROLL — pathway panels + dual-track line + strip
+   FIRST SCROLL — pathway panels + strip
    ══════════════════════════════════════════════════════════════ */
 
 /* ── MAIN SPLIT ── */
@@ -551,6 +551,15 @@ body { background: var(--ink); }
   text-transform: uppercase;
 }
 
+/* inside the identity block: same type, no full-bleed band chrome */
+.identity .dual-track {
+  z-index: auto;
+  background: transparent;
+  border-top: 0;
+  padding: 0;
+  margin: -16px 0 34px;
+}
+
 /* ── THIRD STRIP: WHAT I'M BUILDING ── */
 .third-strip {
   position: relative;
@@ -699,6 +708,12 @@ body { background: var(--ink); }
       </a>
     </div>
 
+    <!-- DUAL-TRACK LINE — frames the chips, chip 4 especially -->
+    <div class="dual-track">
+      <span class="dt-label">// two tracks</span>
+      <p class="dt-line">I lead creative teams. I also ship AI products. Same bar for both.</p>
+    </div>
+
     <!-- HERO CASE -->
     <div class="hero-case">
       <div class="hc-text">
@@ -764,12 +779,6 @@ body { background: var(--ink); }
     </div>
   </div>
 
-</div>
-
-<!-- DUAL-TRACK LINE -->
-<div class="dual-track">
-  <span class="dt-label">// two tracks</span>
-  <p class="dt-line">I lead creative teams. I also ship AI products. Same bar for both.</p>
 </div>
 
 <!-- THIRD STRIP: WHAT I'M BUILDING -->
