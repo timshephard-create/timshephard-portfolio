@@ -1,4 +1,8 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/(.*)\\.md", "destination": "/", "permanent": true },
+    { "source": "/build\\.py", "destination": "/", "permanent": true }
+  ]
 }
