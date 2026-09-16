@@ -645,18 +645,12 @@ body { background: var(--ink); }
   .id-chips { grid-template-columns: 1fr; margin: 32px 0 44px; }
   .id-ctas { gap: 12px; }
 
-  /* Mobile first screen = identity + contact action; proof chips are the
-     first scroll. Visual reorder only — DOM order is untouched, so the
-     static first paint is identical and desktop keeps chips → line → CTAs. */
+  /* Mobile: DOM order IS the visual order (and the tab order):
+     identity → CTAs → dual-track line → chips → KAB case → Explore → contact.
+     The line introduces the chips, so chip 4 never appears without it. */
   .id-label { display: none; }
-  .id-inner { display: flex; flex-direction: column; }
-  .id-name, .id-role, .id-sub, .id-avail { order: 0; }
-  .id-ctas        { order: 1; }
-  .id-chips       { order: 2; }
-  .identity .dual-track { order: 3; margin-bottom: 0; }  /* travels with the chips */
-  .hero-case      { order: 4; }
-  .id-tertiary    { order: 5; align-self: flex-start; }
-  .id-contact     { order: 6; }
+  .identity .dual-track { margin: 32px 0 0; }
+  .id-chips { margin: 20px 0 0; }
   .btn { flex: 1 1 auto; justify-content: center; }
   .split-container {
     flex-direction: column;
@@ -674,6 +668,20 @@ body { background: var(--ink); }
     flex-wrap: wrap;
   }
   .strip-label, .strip-divider { display: none; }
+}
+
+/* ── DESKTOP (>700px): visual order chips → line → CTAs → KAB case ──
+   DOM puts the CTAs first (mobile + tab order). Flex items don't collapse
+   margins, so the CTA row drops its top margin to keep the 34px gap the
+   block flow gave it. */
+@media (min-width: 701px) {
+  .id-inner { display: flex; flex-direction: column; }
+  .id-chips             { order: 1; }
+  .identity .dual-track { order: 2; }
+  .id-ctas              { order: 3; margin-top: 0; }
+  .hero-case            { order: 4; }
+  .id-tertiary          { order: 5; align-self: flex-start; margin-bottom: 1px; } /* = the 16px line box it had in block flow */
+  .id-contact           { order: 6; }
 }
 
 /* ── REDUCED MOTION — content starts visible, nothing moves ── */
@@ -702,6 +710,19 @@ body { background: var(--ink); }
     <p class="id-sub">Brand, campaigns, creative systems. I also ship AI products.</p>
     <p class="id-avail">Dallas&ndash;Fort Worth <span>&middot;</span> <strong>Fractional &amp; contract first</strong> <span>&middot;</span> Full-time welcome</p>
 
+    <!-- PRIMARY CTAs -->
+    <div class="id-ctas">
+      <a href="/work/" class="btn btn-primary"><span>see the work &rarr;</span></a>
+      <a href="/hire/" class="btn btn-ghost"><span>let's talk &rarr;</span></a>
+      <a href="/about/" class="id-secondary">my story &rarr;</a>
+    </div>
+
+    <!-- DUAL-TRACK LINE — frames the chips (above them on mobile, below on desktop) -->
+    <div class="dual-track">
+      <span class="dt-label">// two tracks</span>
+      <p class="dt-line">I lead creative teams. I also ship AI products. Same bar for both.</p>
+    </div>
+
     <!-- PROOF CHIPS -->
     <div class="id-chips">
       <a class="chip" href="/work/#case-kab">
@@ -720,19 +741,6 @@ body { background: var(--ink); }
         <span class="chip-name">Currently shipping</span>
         <span class="chip-sub">The Lab &middot; Kindora &middot; AI Daily Digest</span>
       </a>
-    </div>
-
-    <!-- DUAL-TRACK LINE — frames the chips, chip 4 especially -->
-    <div class="dual-track">
-      <span class="dt-label">// two tracks</span>
-      <p class="dt-line">I lead creative teams. I also ship AI products. Same bar for both.</p>
-    </div>
-
-    <!-- PRIMARY CTAs -->
-    <div class="id-ctas">
-      <a href="/work/" class="btn btn-primary"><span>see the work &rarr;</span></a>
-      <a href="/hire/" class="btn btn-ghost"><span>let's talk &rarr;</span></a>
-      <a href="/about/" class="id-secondary">my story &rarr;</a>
     </div>
 
     <!-- HERO CASE -->
